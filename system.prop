@@ -92,6 +92,9 @@ ro.telephony.call_ring.multiple=0
 # fastbootd
 ro.fastbootd.available=true
 
+# Recovery
+persist.vendor.recovery_update=false
+
 # Sensors
 debug.sensors=1
 
