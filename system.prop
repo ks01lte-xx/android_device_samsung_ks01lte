@@ -48,6 +48,7 @@ dalvik.vm.heapmaxfree=8m
 persist.graphics.vulkan.disable=true
 ro.qualcomm.cabl=1
 debug.hwui.use_buffer_age=false
+debug.renderengine.backend=threaded
 debug.sf.disable_backpressure=1
 debug.sf.latch_unsignaled=1
 debug.sf.hw=1
