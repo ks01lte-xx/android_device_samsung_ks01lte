@@ -33,6 +33,9 @@ vendor.voice.path.for.pcm.voip=false
 bluetooth.enable_timeout_ms=12000
 ro.bt.bdaddr_path=/mnt/vendor/efs/bluetooth/bt_addr
 
+# BPF
+ro.kernel.ebpf.supported=false
+
 # Camera
 camera2.portability.force_api=1
 
