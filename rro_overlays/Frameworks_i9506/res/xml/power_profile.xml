@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <device name="Android">
-    <item name="screen.on">131.3</item>
+    <item name="screen.on.display0">65</item>
     <item name="bluetooth.active">116</item>
     <item name="bluetooth.on">0.4</item>
-    <item name="screen.full">131</item>
+    <item name="screen.full.display0">131</item>
     <item name="wifi.on">0.5</item>
     <item name="wifi.active">185</item>
     <item name="wifi.scan">112</item>
@@ -18,8 +18,10 @@
     </array>
     <!-- Different CPU speeds as reported in
          /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies -->
-    <item name="cpu.clusters.cores">4</item>
-    <array name="cpu.core_speeds.cluster0">
+    <array name="cpu.clusters.cores">
+        <value>4</value>
+    </array>
+    <array name="cpu.speeds.cluster0">
         <value>300000</value> <!-- 300 MHz CPU speed -->
         <value>422400</value> <!-- 422 MHz CPU speed -->
         <value>652800</value> <!-- 652 MHz CPU speed -->
@@ -35,9 +37,12 @@
         <value>1958400</value> <!-- 1958 MHz CPU speed -->
         <value>2265600</value> <!-- 2265 MHz CPU speed -->
     </array>
-    <item name="cpu.suspend">4</item>
+    <item name="cpu.idle">4</item>
     <!-- Additional power used by CPUs when running at different speeds. -->
-    <array name="cpu.core_power.cluster0">
+    <array name="cpu.active">
+        <value>3.5</value>
+    </array>
+    <array name="cpu.active.cluster0">
         <value>51</value> <!-- 300 MHz CPU speed -->
         <value>78</value> <!-- 422 MHz CPU speed -->
         <value>97</value> <!-- 652 MHz CPU speed -->
