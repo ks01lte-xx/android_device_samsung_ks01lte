@@ -73,6 +73,7 @@ ro.qc.sdk.izat.service_mask=0x0
 # Disable media transcoding
 persist.sys.fuse.transcode_user_control=true
 persist.sys.fuse.transcode_enabled=false
+debug.stagefright.ccodec=0
 
 # Memory optimizations
 ro.vendor.qti.am.reschedule_service=true
