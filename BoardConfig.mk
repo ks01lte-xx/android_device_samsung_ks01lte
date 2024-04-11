@@ -103,9 +103,6 @@ TARGET_NO_SENSOR_PERMISSION_CHECK := true
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_kltekor
 
-# NFC
-include $(DEVICE_PATH)/nfc/pn547/board.mk
-
 # Radio/RIL
 include $(DEVICE_PATH)/radio/single/board.mk
 
