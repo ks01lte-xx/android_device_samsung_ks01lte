@@ -100,9 +100,6 @@ include $(DEVICE_PATH)/sepolicy/sepolicy.mk
 # Sensors
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
-# Fingerprint
-include $(DEVICE_PATH)/fingerprint/board.mk
-
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_kltekor
 
