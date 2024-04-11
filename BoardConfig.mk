@@ -18,16 +18,18 @@ include device/samsung/msm8974-common/BoardConfigCommon.mk
 
 COMMON_PATH := device/samsung/klte-common
 
-TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
+TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
 BUILD_FINGERPRINT := samsung/kltexx/klte:6.0.1/MMB29M/G900FXXU1CRH1:user/release-keys
+
+TARGET_OTA_ASSERT_DEVICE := klte,kltekor,kltektt,kltelgt,klteskt
 
 # Audio
 USE_CUSTOM_AUDIO_POLICY := 1
 
 # Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(COMMON_PATH)/bluetooth
-BOARD_CUSTOM_BT_CONFIG := $(COMMON_PATH)/bluetooth/vnd_klte.txt
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
+BOARD_CUSTOM_BT_CONFIG := $(DEVICE_PATH)/bluetooth/vnd_klte.txt
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_HAVE_SAMSUNG_BLUETOOTH := true
 
@@ -35,10 +37,10 @@ BOARD_HAVE_SAMSUNG_BLUETOOTH := true
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
 
 # Filesystem
-TARGET_FS_CONFIG_GEN += $(COMMON_PATH)/config.fs
+TARGET_FS_CONFIG_GEN += $(DEVICE_PATH)/config.fs
 
 # HIDL
-DEVICE_MANIFEST_FILE += $(COMMON_PATH)/manifest.xml
+DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
 
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
@@ -51,6 +53,7 @@ BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
 BOARD_RAMDISK_USE_XZ := true
 TARGET_KERNEL_SOURCE := kernel/samsung/msm8974
+TARGET_KERNEL_CONFIG := lineage_kltekor_defconfig
 
 # Legacy BLOB Support
 TARGET_LD_SHIM_LIBS += \
@@ -76,26 +79,38 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 # Properties
-TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # Radio
 BOARD_PROVIDES_LIBRIL := true
 
 # Recovery
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../$(COMMON_PATH)/recovery/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../$(DEVICE_PATH)/recovery/recovery_keys.c
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
 TARGET_RECOVERY_DENSITY := xhdpi
-TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 
 # SELinux
-include $(COMMON_PATH)/sepolicy/sepolicy.mk
+include $(DEVICE_PATH)/sepolicy/sepolicy.mk
 
 # Sensors
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
+
+# Fingerprint
+include $(DEVICE_PATH)/fingerprint/board.mk
+
+# Init
+TARGET_INIT_VENDOR_LIB := libinit_kltekor
+
+# NFC
+include $(DEVICE_PATH)/nfc/pn547/board.mk
+
+# Radio/RIL
+include $(DEVICE_PATH)/radio/single/board.mk
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI := true
@@ -114,4 +129,4 @@ WIFI_DRIVER_FW_PATH_AP      := "/vendor/etc/wifi/bcmdhd_apsta.bin"
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 
 # inherit from the proprietary version
-include vendor/samsung/klte-common/BoardConfigVendor.mk
+include vendor/samsung/klte/BoardConfigVendor.mk

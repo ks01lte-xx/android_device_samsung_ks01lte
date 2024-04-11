@@ -112,7 +112,7 @@ PRODUCT_COPY_FILES += \
    $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
 
 # Get non-open-source specific aspects
-$(call inherit-product, vendor/samsung/klte-common/klte-common-vendor.mk)
+$(call inherit-product, vendor/samsung/klte/klte-vendor.mk)
 
 # common msm8974
 $(call inherit-product, device/samsung/msm8974-common/msm8974.mk)

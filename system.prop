@@ -51,6 +51,10 @@ rild.libpath=/system/vendor/lib/libsec-ril.so
 ro.telephony.mms_data_profile=5
 ro.ril.telephony.qan_resp_strings=6
 
+# GSM Properties
+telephony.lteOnGsmDevice=1
+ro.telephony.default_network=9
+
 # Ril sends only one RIL_UNSOL_CALL_RING, so set call_ring.multiple to false
 ro.telephony.call_ring.multiple=0
 

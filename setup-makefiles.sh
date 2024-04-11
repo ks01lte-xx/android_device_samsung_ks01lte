@@ -1,19 +1,16 @@
 #!/bin/bash
 #
 # Copyright (C) 2016 The CyanogenMod Project
-# Copyright (C) 2017-2021 The LineageOS Project
+# Copyright (C) 2021 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
 set -e
 
-if [ -z "${DEVICE_COMMON}" ]; then
-    echo ""
-    echo "error: This is a script in a common tree. Please execute" $(basename $0) "from a device tree."
-    echo ""
-    exit 1
-fi
+export DEVICE=kltekor
+export DEVICE_COMMON=klte-common
+export VENDOR=samsung
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
@@ -28,25 +25,17 @@ if [ ! -f "${HELPER}" ]; then
 fi
 source "${HELPER}"
 
-# Initialize the helper for common
-setup_vendor "${DEVICE_COMMON}" "${VENDOR}" "${ANDROID_ROOT}" true
+# Initialize the helper
+setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}"
 
 # Warning headers and guards
-write_headers "klte klteactivexx klteaio kltechn kltechnduo klteduos kltedv kltekdi kltekor"
+write_headers
 
-# The standard common blobs
-write_makefiles "${MY_DIR}/common-proprietary-files.txt" true
+for BLOB_LIST in "${MY_DIR}"/device-proprietary-files*.txt; do
+    write_makefiles "${BLOB_LIST}" true
+done
 
 # Finish
 write_footers
 
-# This is the "common" M radio/QC framework stack. Most variants will inherit
-# this file. If they cannot then they will ship their own stack
-PRODUCTMK="$(echo $PRODUCTMK | sed -e 's|-vendor.mk|-vendor-ril-m.mk|g')"
-write_makefile_header "$PRODUCTMK"
-parse_file_list "${MY_DIR}/common-proprietary-files-ril-m.txt"
-write_product_copy_files true
-
-export BOARD_COMMON=msm8974-common
-
-"./../../${VENDOR}/${BOARD_COMMON}/setup-makefiles.sh" "$@"
+"./../../${VENDOR}/${DEVICE_COMMON}/setup-makefiles.sh" "$@"
