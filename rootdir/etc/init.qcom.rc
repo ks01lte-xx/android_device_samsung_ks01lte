@@ -68,12 +68,9 @@ on post-fs-data
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
 
     # for WIFI TRP/TIS
+    write /data/.psm.info 1
     chown system root /data/.psm.info
     chmod 0664 /data/.psm.info
-
-    # for WIFI Antena Selection
-    chown system root /data/.ant.info
-    chmod 0664 /data/.ant.info
 
     # for WIFI Version
     write /data/.wifiver.info 0
@@ -91,16 +88,11 @@ on post-fs-data
     chown system system /data/.cid.info
     chmod 0664 /data/.cid.info
 
-    chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
-    chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
-    chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
-    chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
-
     # Chown polling nodes as needed from UI running on system server
-    chown system system /sys/devices/platform/msm_sdcc.1/polling
-    chown system system /sys/devices/platform/msm_sdcc.2/polling
-    chown system system /sys/devices/platform/msm_sdcc.3/polling
-    chown system system /sys/devices/platform/msm_sdcc.4/polling
+    chown system system /sys/devices/msm_sdcc.1/polling
+    chown system system /sys/devices/msm_sdcc.2/polling
+    chmod 0664 /sys/devices/msm_sdcc.1/polling
+    chmod 0664 /sys/devices/msm_sdcc.2/polling
 
     # For disabling softkeys *FIXME*
     chown root system /sys/class/sec/sec_touchkey/max_brightness
@@ -126,7 +118,6 @@ on post-fs-data
 
     # create directory for ril data
     mkdir /data/misc/radio 0775 radio radio
-    mkdir /data/misc/radio/hatp 0775 radio system
 
     # drm and related files in EFS
     mkdir /efs/drm 0774 drm system
@@ -150,11 +141,6 @@ on post-fs-data
     # wifi
     mkdir /efs/wifi 0775 system system
 
-    # for TRP/TIS
-    write /data/.psm.info 1
-    chown system root /data/.psm.info
-    chmod 0660 /data/.psm.info
-
     # Permissions for svc led
     chown system system /sys/class/sec/led/led_r
     chown system system /sys/class/sec/led/led_g
@@ -166,10 +152,6 @@ on post-fs-data
     # IR_LED
     chown system radio /sys/class/sec/sec_ir/ir_send
     chown system radio /sys/class/sec/sec_ir/ir_send_result
-
-    # Flash
-    chown system camera /sys/class/flash/flash/flash_power
-    chmod 660 /sys/class/flash/flash/flash_power
 
     # Create directories for perfd
     mkdir /data/misc/perfd 2755 root system
