@@ -243,3 +243,13 @@ subsystem msm_camera
 /sys/devices/f9967000.spi/spi_master/spi11/spi11.0/iio:device*   buffer/enable 0660   system    system
 /sys/devices/f9967000.spi/spi_master/spi11/spi11.0/iio:device*   buffer/length 0660   system    system
 /sys/devices/f9924000.i2c/i2c-2/2-0020/input/input*   enabled     0660  system  system
+
+# sys-fs display
+/sys/class/graphics/fb1     vendor_name              0664    system  graphics
+/sys/class/graphics/fb1     product_description      0664    system  graphics
+/sys/class/graphics/fb1     connected                0664    system  graphics
+/sys/class/graphics/fb1     edid_modes               0664    system  graphics
+/sys/class/graphics/fb1     hpd                      0664    system  graphics
+/sys/class/graphics/fb0     idle_time                0664    system  graphics
+/sys/class/graphics/fb0     dynamic_fps              0664    system  graphics
+/sys/class/graphics/fb0     csc_cfg                  0660    system  media_rw
