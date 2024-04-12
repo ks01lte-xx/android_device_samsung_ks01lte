@@ -68,9 +68,6 @@ TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
     /system/vendor/bin/mm-qcamera-daemon=22 \
     /system/vendor/bin/hw/rild=27
 
-# NFC
-BOARD_NFC_HAL_SUFFIX := msm8974
-
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 20971520
 BOARD_CACHEIMAGE_PARTITION_SIZE := 367001600
@@ -83,7 +80,6 @@ BOARD_ROOT_EXTRA_FOLDERS := efs firmware firmware-modem
 BOARD_ROOT_EXTRA_SYMLINKS := \
     /data/tombstones:/tombstones
 TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
