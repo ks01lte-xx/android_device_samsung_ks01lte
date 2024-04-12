@@ -562,6 +562,7 @@ on boot
     chown wifi wifi /sys/module/dhd/parameters/firmware_path
     chown wifi wifi /sys/module/dhd/parameters/nvram_path
 
+    # Disable serial console notification
     stop console
 
 # Services begin here
@@ -621,6 +622,7 @@ service vendor.macloader /vendor/bin/macloader
     oneshot
     user system
     group system wifi
+    disabled
     seclabel u:r:macloader:s0
 
 on property:wlan.driver.status=ok
