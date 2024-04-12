@@ -23,6 +23,9 @@ vendor.voice.path.for.pcm.voip=false
 audio.offload.disable=true
 vendor.audio.offload.gapless.enabled=true
 
+# Bluetooth
+ro.bt.bdaddr_path=/efs/bluetooth/bt_addr
+
 # Camera
 camera2.portability.force_api=1
 
