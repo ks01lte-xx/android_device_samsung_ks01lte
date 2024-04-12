@@ -1,16 +1,15 @@
 #!/bin/bash
 #
 # Copyright (C) 2016 The CyanogenMod Project
-# Copyright (C) 2021 The LineageOS Project
+# Copyright (C) 2017-2021 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
 set -e
 
-export DEVICE=kltekor
-export DEVICE_COMMON=klte-common
-export VENDOR=samsung
+DEVICE=ks01ltexx
+VENDOR=samsung
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
@@ -25,17 +24,15 @@ if [ ! -f "${HELPER}" ]; then
 fi
 source "${HELPER}"
 
-# Initialize the helper
-setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}"
+# Initialize the helper for device
+setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" false
 
 # Warning headers and guards
+# Copyright headers and guards
 write_headers
 
-for BLOB_LIST in "${MY_DIR}"/device-proprietary-files*.txt; do
-    write_makefiles "${BLOB_LIST}" true
-done
+# The standard device blobs
+write_makefiles "${MY_DIR}/proprietary-files.txt" true
 
 # Finish
 write_footers
-
-"./../../${VENDOR}/${DEVICE_COMMON}/setup-makefiles.sh" "$@"

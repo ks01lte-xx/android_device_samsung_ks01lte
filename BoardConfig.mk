@@ -1,5 +1,5 @@
 # Copyright (C) 2016 The CyanogenMod Project
-# Copyright (C) 2017,2021 The LineageOS Project
+# Copyright (C) 2017-2021 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,22 +16,19 @@
 # inherit from common msm8974
 include device/samsung/msm8974-common/BoardConfigCommon.mk
 
-COMMON_PATH := device/samsung/klte-common
+DEVICE_PATH := device/samsung/ks01ltexx
 
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
-BUILD_FINGERPRINT := samsung/kltexx/klte:6.0.1/MMB29M/G900FXXU1CRH1:user/release-keys
-
-TARGET_OTA_ASSERT_DEVICE := klte,kltekor,kltektt,kltelgt,klteskt
+TARGET_OTA_ASSERT_DEVICE := ks01lte,ks01ltexx,GT-I9506
 
 # Audio
 USE_CUSTOM_AUDIO_POLICY := 1
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
-BOARD_CUSTOM_BT_CONFIG := $(DEVICE_PATH)/bluetooth/vnd_klte.txt
+BOARD_CUSTOM_BT_CONFIG := $(DEVICE_PATH)/bluetooth/vnd_ks01ltexx.txt
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_HAVE_SAMSUNG_BLUETOOTH := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
@@ -52,8 +49,14 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
 BOARD_RAMDISK_USE_XZ := true
+TARGET_KERNEL_CONFIG := lineage_ks01lte_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/msm8974
-TARGET_KERNEL_CONFIG := lineage_kltekor_defconfig
+
+# Enable SVELTE memory configuration
+MALLOC_SVELTE := true
+
+# Encryption
+TARGET_KEYMASTER_SKIP_WAITING_FOR_QSEE := true
 
 # Legacy BLOB Support
 TARGET_LD_SHIM_LIBS += \
@@ -61,15 +64,19 @@ TARGET_LD_SHIM_LIBS += \
     /system/vendor/lib/libperipheral_client.so|libshim_binder.so
 TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
     /system/bin/mediaserver=22 \
+    /system/vendor/bin/hw/android.hardware.sensors@1.0-service.samsung8974=22 \
     /system/vendor/bin/mm-qcamera-daemon=22 \
     /system/vendor/bin/hw/rild=27
 
+# NFC
+BOARD_NFC_HAL_SUFFIX := msm8974
+
 # Partitions
-BOARD_BOOTIMAGE_PARTITION_SIZE := 13631488
-BOARD_CACHEIMAGE_PARTITION_SIZE := 157286400
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 15728640
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2411724800
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 2411724800
+BOARD_BOOTIMAGE_PARTITION_SIZE := 20971520
+BOARD_CACHEIMAGE_PARTITION_SIZE := 367001600
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20971520
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2390753280
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 12528352256 # 12528368640 - 16384
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_ROOT_EXTRA_FOLDERS := efs firmware firmware-modem
@@ -85,26 +92,20 @@ TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 BOARD_PROVIDES_LIBRIL := true
 
 # Recovery
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../$(DEVICE_PATH)/recovery/recovery_keys.c
-BOARD_USES_MMCUTILS := true
+BOARD_HAS_DOWNLOAD_MODE := true
 BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
-TARGET_RECOVERY_DENSITY := xhdpi
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
+BOARD_SUPPRESS_SECURE_ERASE := true
+BOARD_USES_MMCUTILS := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 
 # SELinux
 include $(DEVICE_PATH)/sepolicy/sepolicy.mk
 
 # Sensors
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
-
-# Init
-TARGET_INIT_VENDOR_LIB := libinit_kltekor
-
-# Radio/RIL
-include $(DEVICE_PATH)/radio/single/board.mk
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI := true
@@ -123,4 +124,4 @@ WIFI_DRIVER_FW_PATH_AP      := "/vendor/etc/wifi/bcmdhd_apsta.bin"
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 
 # inherit from the proprietary version
-include vendor/samsung/klte/BoardConfigVendor.mk
+include vendor/samsung/ks01ltexx/BoardConfigVendor.mk

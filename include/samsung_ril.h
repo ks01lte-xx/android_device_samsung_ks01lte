@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
 /*
-** Copyright 2018, The Android Open Source Project
+**
+** Copyright 2018, The LineageOS Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -15,11 +14,13 @@
 ** See the License for the specific language governing permissions and
 ** limitations under the License.
 */
--->
 
-<!-- These resources are around just to allow their values to be customized
-     for different hardware and product builds.  Do not translate. -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Do not translate. Default access point SSID used for tethering -->
-    <string name="wifi_tether_configure_ssid_default" translatable="false">S4 LTE-A</string>
-</resources>
+#define RIL_UNSOL_ON_SS_LL 11055
+
+static inline void remapUnsol(int *unsol) {
+    switch(*unsol) {
+        case RIL_UNSOL_ON_SS_LL:
+            *unsol = RIL_UNSOL_ON_SS;
+        return;
+    }
+}

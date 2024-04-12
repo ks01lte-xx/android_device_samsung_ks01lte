@@ -1,6 +1,6 @@
 #
 # Copyright (C) 2014-2016 The CyanogenMod Project
-# Copyright (C) 2017-2018 The LineageOS Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,16 @@
 # Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-$(call inherit-product, device/samsung/kltekor/full_kltekor.mk)
+$(call inherit-product, device/samsung/ks01ltexx/full_ks01ltexx.mk)
 
-PRODUCT_DEVICE := kltekor
-PRODUCT_NAME := lineage_kltekor
+PRODUCT_DEVICE := ks01ltexx
+PRODUCT_NAME := lineage_ks01ltexx
+
+PRODUCT_MODEL := GT-I9506
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_NAME=ks01ltexx \
+    TARGET_DEVICE=ks01lte \
+    PRIVATE_BUILD_DESC="ks01ltexx-user 5.0.1 LRX22C I9506XXSDPL2 release-keys"
+
+BUILD_FINGERPRINT := samsung/ks01ltexx/ks01lte:5.0.1/LRX22C/I9506XXSDPL2:user/release-keys

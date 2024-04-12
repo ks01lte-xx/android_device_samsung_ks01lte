@@ -24,6 +24,6 @@
     <dimen name="rectangular_window_top">0px</dimen>
     <dimen name="rectangular_window_left">60px</dimen>
     <dimen name="rectangular_window_width">960px</dimen>
-    <dimen name="rectangular_window_height">960px</dimen>
+    <dimen name="rectangular_window_height">480px</dimen>
 
 </resources>
