@@ -98,13 +98,6 @@ on post-fs-data
 
     # Backlight
     chown system system /sys/devices/virtual/lcd/panel/panel/backlight
-
-    mkdir /tombstones/modem 0771 system system
-    mkdir /tombstones/lpass 0771 system system
-    mkdir /tombstones/wcnss 0771 system system
-    mkdir /tombstones/dsps 0771 system system
-    mkdir /tombstones/mdm 0771 system system
-
     # create directory for ril data
     mkdir /data/misc/radio 0775 radio radio
 
@@ -406,10 +399,8 @@ on boot
     chown system radio /sys/class/sensors/ssp_sensor/mcu_update_ums
     chown system radio /sys/class/sensors/ssp_sensor/mcu_dump
     chown system radio /sys/class/sensors/ssp_sensor/mcu_sleep_test
-    chown system radio /sys/class/sensors/ssp_sensor/ori_poll_delay
     chown system radio /sys/class/sensors/ssp_sensor/mag_poll_delay
     chown system radio /sys/class/sensors/ssp_sensor/uncal_mag_poll_delay
-    chown system radio /sys/class/sensors/ssp_sensor/temp_humi_poll_delay
     chown system radio /sys/class/sensors/ssp_sensor/accel_poll_delay
     chown system radio /sys/class/sensors/ssp_sensor/rot_poll_delay
     chown system radio /sys/class/sensors/ssp_sensor/game_rot_poll_delay
@@ -417,7 +408,6 @@ on boot
     chown system radio /sys/class/sensors/ssp_sensor/gyro_poll_delay
     chown system radio /sys/class/sensors/ssp_sensor/uncalib_gyro_poll_delay
     chown system radio /sys/class/sensors/ssp_sensor/ssp_flush
-    chown system radio /sys/class/sensors/ssp_sensor/shake_cam
 
     # Gesture_sensor
     chown system radio /sys/class/sensors/gesture_sensor/vendor
@@ -500,12 +490,6 @@ on boot
     write /proc/sys/net/core/rmem_max 2097152
     write /proc/sys/net/core/wmem_max 2097152
 
-    # HDCP 2.x
-    mkdir /data/system/hdcp2 0775 system system
-
-    # h2k permission
-    mkdir /data/misc/radio/hatp 0775 radio system
-
     # Vibrator
     chmod 0660 /sys/class/timed_output/vibrator/pwm_value
     chown system system /sys/class/timed_output/vibrator/pwm_value
@@ -544,7 +528,6 @@ on boot
     chmod 0660 /sys/devices/f995e000.uart/clock
 
     # permissions for bluetooth.
-    setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
     chown bluetooth bluetooth ro.bt.bdaddr_path
     chown radio bluetooth /efs/bluetooth/bt_addr
     chmod 0640 /efs/bluetooth/bt_addr
@@ -578,6 +561,8 @@ on boot
     # Set permissions for firmware path control
     chown wifi wifi /sys/module/dhd/parameters/firmware_path
     chown wifi wifi /sys/module/dhd/parameters/nvram_path
+
+    stop console
 
 # Services begin here
 
