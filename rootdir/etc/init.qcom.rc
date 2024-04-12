@@ -87,11 +87,11 @@ on post-fs-data
     chmod 0664 /sys/devices/msm_sdcc.1/polling
     chmod 0664 /sys/devices/msm_sdcc.2/polling
 
-    # For disabling softkeys *FIXME*
+    # For disabling softkeys
     chown root system /sys/class/sec/sec_touchkey/max_brightness
     chmod 0664 /sys/class/sec/sec_touchkey/max_brightness
     chown root system /sys/class/sec/sec_touchkey/brightness
-    chmod 0664  sys/class/sec/sec_touchkey/brightness
+    chmod 0664 sys/class/sec/sec_touchkey/brightness
 
     # Torch
     chmod 0660 /sys/class/leds/torch-sec1/brightness
@@ -99,6 +99,7 @@ on post-fs-data
 
     # Backlight
     chown system system /sys/devices/virtual/lcd/panel/panel/backlight
+
     # create directory for ril data
     mkdir /data/misc/radio 0775 radio radio
 
@@ -265,7 +266,7 @@ on boot
 
     # Auto Brightness
     chown system system /sys/class/backlight/panel/auto_brightness
-    chmod 0660 /sys/class/backlight/panel/auto_brightness
+    chmod 0664 /sys/class/backlight/panel/auto_brightness
 
     chown system system /sys/class/leds/keyboard-backlight/brightness
     chown system system /sys/class/leds/lcd-backlight/brightness
@@ -498,8 +499,8 @@ on boot
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /proc/bluetooth/sleep/proto
-    chown system system /sys/module/sco/parameters/disable_esco
     chmod 0660 /proc/bluetooth/sleep/proto
+    chown system system /sys/module/sco/parameters/disable_esco
 
     # bluetooth LPM
     chmod 0660 /proc/bluetooth/sleep/lpm
