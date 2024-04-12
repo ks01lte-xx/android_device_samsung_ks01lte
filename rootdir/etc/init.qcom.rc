@@ -147,6 +147,7 @@ on post-fs-data
     chown system system /sys/class/sec/led/led_b
     chown system system /sys/class/sec/led/led_pattern
     chown system system /sys/class/sec/led/led_blink
+    chown system system /sys/class/sec/led/led_br_lev
     chown system system /sys/class/sec/led/led_lowpower
 
     # IR_LED
@@ -242,9 +243,6 @@ on boot
     chown radio system /sys/class/sec/switch/apo_factory
     chown system radio /sys/class/sec/switch/adc
     chown system radio /sys/class/sec/switch/otg_test
-
-    # Fingerprint
-    mkdir /dev/validity 0775 system system
 
     chown radio system /sys/devices/system/cpu/kernel_max
     chmod 664 /sys/devices/system/cpu/kernel_max
@@ -344,20 +342,18 @@ on boot
     chown system system /sys/class/sec/sec_touchkey/brightness
 
     # Permissions for Camera
-    chown root system /sys/class/camera/rear/rear_camantibanding
     chown system system /sys/class/camera/rear/rear_camfw
     chown system system /sys/class/camera/rear/rear_camfw_full
     chown system system /sys/class/camera/rear/rear_camfw_load
     chown system radio /sys/class/camera/rear/rear_latest_module_check
     chown system system /sys/class/camera/rear/rear_camtype
-    chown system system /sys/class/camera/rear/rear_corever
     chown system system /sys/class/camera/rear/rear_companionfw_full
     chown system system /sys/class/camera/rear/rear_calcheck
     chown system system /sys/class/camera/rear/rear_fwcheck
     chown system system /sys/class/camera/rear/isp_core
-    chown system radio /sys/class/camera/flash/rear_flash
     chown system system /sys/class/camera/front/front_camfw
     chown system system /sys/class/camera/front/front_camtype
+    chown system radio  /sys/class/camera/flash/rear_flash
 
     # Accelerometer_sensor
     chown system radio /sys/class/sensors/accelerometer_sensor/raw_data
@@ -407,16 +403,18 @@ on boot
     chown system radio /sys/class/sensors/magnetic_sensor/status
 
     # Temphumidity_sensor
+    chown system radio /sys/class/sensors/temphumidity_sensor/cp_temperature
+    chown system radio /sys/class/sensors/temphumidity_sensor/crc_check
     chown system radio /sys/class/sensors/temphumidity_sensor/vendor
     chown system radio /sys/class/sensors/temphumidity_sensor/name
     chown system radio /sys/class/sensors/temphumidity_sensor/engine_ver
     chown system radio /sys/class/sensors/temphumidity_sensor/engine_ver2
     chown system radio /sys/class/sensors/temphumidity_sensor/cp_thm
     chown system radio /sys/class/sensors/temphumidity_sensor/send_accuracy
-    chown system radio /sys/class/sensors/temphumidity_sensor/batt_temperature
 
     # SensorHub
     chown system radio /sys/class/sensors/ssp_sensor/enable
+    chown system radio /sys/class/sensors/ssp_sensor/enable_irq
     chown system radio /sys/class/sensors/ssp_sensor/mcu_rev
     chown system radio /sys/class/sensors/ssp_sensor/mcu_name
     chown system radio /sys/class/sensors/ssp_sensor/mcu_test
@@ -447,9 +445,9 @@ on boot
     chown system radio /sys/class/sensors/gesture_sensor/selftest
 
     # Permissions for SSRM
+    chown radio system /sys/devices/platform/sec-thermistor/temperature
     chmod 0664 /sys/devices/platform/sec-thermistor/temperature
     chmod 0664 /sys/class/power_supply/battery/siop_level
-    chmod 0664 /sys/class/power_supply/battery/test_charge_current
     chown radio system /sys/devices/platform/sec-thermistor/temperature
     chown radio system /sys/class/power_supply/battery/siop_level
     chown radio system /sys/class/power_supply/battery/test_charge_current
@@ -457,6 +455,8 @@ on boot
     # MOBEAM
     chown system radio /sys/class/sec/sec_barcode_emul/vendor
     chown system radio /sys/class/sec/sec_barcode_emul/name
+    chown system radio /sys/class/sec/sec_barcode_emul/barcode_fw_update
+    chown system radio /sys/class/sec/sec_barcode_emul/barcode_test_send
     chown system radio /sys/class/sec/sec_barcode_emul/barcode_send
     chown system radio /sys/class/sec/sec_barcode_emul/barcode_led_status
     chown system radio /sys/class/sec/sec_barcode_emul/barcode_ver_check
@@ -482,7 +482,7 @@ on boot
     chown system radio /sys/class/power_supply/battery/batt_reset_soc
     chown system radio /sys/class/power_supply/battery/update
     chown system radio /sys/class/power_supply/battery/factory_mode
-    chown system radio /sys/class/power_supply/battery/batt_slate_mode
+    chown system system /sys/class/power_supply/battery/batt_slate_mode
     chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/call
     chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/video
     chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/music
@@ -538,10 +538,6 @@ on boot
     chmod 0440 /sys/class/timed_output/vibrator/pwm_threshold
     chown system system /sys/class/timed_output/vibrator/pwm_threshold
     chown system system /sys/class/timed_output/vibrator/enable
-
-    # Panel color temperature
-    chmod 0660 /sys/class/lcd/panel/panel_colors
-    chown system system /sys/class/lcd/panel/panel_colors
 
     # Key Enabler
     chown system system /sys/devices/virtual/sec/sec_touchkey/keypad_enable
