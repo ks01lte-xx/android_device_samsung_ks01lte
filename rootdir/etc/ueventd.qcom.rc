@@ -98,18 +98,10 @@
 /dev/msm_evrc_in          0660   system     audio
 /dev/msm_amrnb_in         0660   system     audio
 /dev/msm_amrwb_in         0660   system     audio
-/dev/msm_a2dp_in          0660   system     audio
-/dev/msm_ac3              0660   system     audio
 /dev/msm_acdb             0660   system     audio
-/dev/msm_cad              0660   system     audio
-/dev/msm_fm               0660   system     audio
 /dev/msm_mp3              0660   system     audio
-/dev/msm_mvs              0660   system     audio
-/dev/msm_pcm_lp_dec       0660   system     audio
-/dev/msm_preproc_ctl      0660   system     audio
 /dev/msm_rtac             0660   system     audio
 /dev/snd/*                0660   system     audio
-/dev/msm_mp3              0660   system     audio
 /dev/msm_sps              0660   system     audio
 /dev/voice_svc            0660   system     audio
 /dev/avtimer              0660   system     audio
@@ -117,7 +109,6 @@
 /dev/i2c-5                0660   media      media
 /dev/smd3                 0660   bluetooth  bluetooth
 /dev/smd2                 0660   bluetooth  bluetooth
-/dev/ttyHSL1              0660   system     system
 /dev/ttyHSL0              0660   radio      system
 /dev/ttyGS0               0660   system     system
 /sys/devices/virtual/smdpkt/smdcntl*       open_timeout   0664 radio radio
@@ -139,7 +130,6 @@
 
 # sensorhub
 /dev/ssp_sensorhub        0660   system     system
-/dev/iio:device*          0660   system system
 
 # interactive governor parameters
 /sys/devices/system/cpu     cpufreq/interactive/timer_rate     0660 system system
