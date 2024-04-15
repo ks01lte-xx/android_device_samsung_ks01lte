@@ -49,6 +49,12 @@ function blob_fixup() {
 	vendor/lib/mediadrm/libwvdrmengine.so)
             "${PATCHELF}" --replace-needed libprotobuf-cpp-lite.so libprotobuf-cpp-lite-v29.so "${2}"
             ;;
+	vendor/lib/hw/camera.vendor.msm8974.so)
+            grep -q "libshim_camera.so" "${2}" || "${PATCHELF}" --add-needed "libshim_camera.so" "$2"
+            ;;
+	vendor/lib/libperipheral_client.so)
+            grep -q "libshim_binder.so" "${2}" || "${PATCHELF}" --add-needed "libshim_binder.so" "$2"
+            ;;
     esac
 }
 
