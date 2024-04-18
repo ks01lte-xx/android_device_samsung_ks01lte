@@ -13,10 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Overlays
-DEVICE_PACKAGE_OVERLAYS += \
-    device/samsung/msm8974-common/overlay \
-    device/samsung/msm8974-common/overlay-lineage
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -37,13 +33,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml
 
-# Advanced Display
-PRODUCT_PACKAGES += \
-    AdvancedDisplay
-
-# APEX
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/ld.config.txt:$(TARGET_COPY_OUT_SYSTEM)/etc/swcodec/ld.config.txt
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -83,7 +72,6 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
-    camera.device@1.0-impl \
     camera.msm8974 \
     libxml2 \
     Snap
@@ -207,9 +195,3 @@ PRODUCT_PACKAGES += \
     wificond \
     wpa_supplicant \
     wpa_supplicant.conf
-
-# Get non-open-source specific aspects
-$(call inherit-product, vendor/samsung/msm8974-common/msm8974-common-vendor.mk)
-
-# common msm8974
-$(call inherit-product, device/samsung/qcom-common/qcom-common.mk)

@@ -15,11 +15,8 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-lineage
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1920
@@ -54,10 +51,6 @@ PRODUCT_AAPT_PREBUILT_DPI := xxhdpi xhdpi hdpi mdpi
 # Doze
 PRODUCT_PACKAGES += \
     SamsungDoze
-
-# FlipFlap
-PRODUCT_PACKAGES += \
-    FlipFlap
 
 # Input device
 PRODUCT_COPY_FILES += \
@@ -113,10 +106,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl
 
-# Wifi
-PRODUCT_PACKAGES += \
-    macloader
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
@@ -127,6 +116,3 @@ PRODUCT_PACKAGES += com.android.tethering.inprocess
 
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/samsung/ks01ltexx/ks01ltexx-vendor.mk)
-
-# Inherit from msm8974-common
-$(call inherit-product, device/samsung/msm8974/msm8974-common/msm8974.mk)
