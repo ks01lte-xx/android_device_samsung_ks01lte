@@ -20,7 +20,16 @@
 
 <!-- These resources are around just to allow their values to be customized
      for different hardware and product builds. -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Whether to allow process with media UID to access CameraServiceProxy -->
+    <bool name="config_allowMediaUidForCameraServiceProxy">true</bool>
+
+    <!-- Disable rounded corners on windows to improve graphics performance -->
+    <bool name="config_supportsRoundedCornersOnWindows">false</bool>
+
+     <!-- AOSP WFD -->
+    <bool name="config_enableWifiDisplay">true</bool>
 
     <bool name="config_deskDockEnablesAccelerometer">false</bool>
 
@@ -245,4 +254,10 @@
          2 - The device DOES NOT have a permanent menu key; ignore autodetection. -->
     <integer name="config_overrideHasPermanentMenuKey">2</integer>
 
+    <!-- Flag indicating whether we should enable the automatic brightness in Settings.
+         config_hardware_automatic_brightness_available is not set, so we will use software implementation -->
+    <bool name="config_automatic_brightness_available">true</bool>
+
+    <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
+    <bool name="config_unplugTurnsOnScreen">true</bool>
 </resources>

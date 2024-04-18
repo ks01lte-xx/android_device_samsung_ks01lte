@@ -121,3 +121,24 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 
 # inherit from the proprietary version
 include vendor/samsung/ks01ltexx/BoardConfigVendor.mk
+BOARD_VENDOR := samsung
+
+# Bootloader
+TARGET_NO_BOOTLOADER := true
+
+# Architecture
+TARGET_ARCH := arm
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH_VARIANT := armv7-a-neon
+
+# Graphics
+TARGET_USES_C2D_COMPOSITION := true
+TARGET_USES_ION := true
+# Qualcomm support
+BOARD_USES_QCOM_HARDWARE := true
+
+# Recovery
+TARGET_RECOVERY_DEVICE_DIRS += device/samsung/qcom-common
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+BOARD_HAS_DOWNLOAD_MODE := true
