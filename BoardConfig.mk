@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-BOARD_VENDOR := samsung
-
 DEVICE_PATH := device/samsung/ks01ltexx
 
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
@@ -26,14 +24,13 @@ TARGET_BOARD_PLATFORM := msm8974
 
 # Architecture
 TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := generic
 TARGET_CPU_VARIANT_RUNTIME := krait
 
 # Audio
-USE_CUSTOM_AUDIO_POLICY := 1
 AUDIO_FEATURE_ENABLED_COMPRESS_VOIP := true
 AUDIO_FEATURE_ENABLED_EXTN_FORMATS := true
 AUDIO_FEATURE_ENABLED_EXTN_POST_PROC := true
@@ -41,13 +38,15 @@ AUDIO_FEATURE_ENABLED_FLUENCE := true
 AUDIO_FEATURE_ENABLED_HFP := true
 AUDIO_FEATURE_ENABLED_PROXY_DEVICE := true
 BOARD_USES_ALSA_AUDIO := true
+USE_CUSTOM_AUDIO_POLICY := 1
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
-BOARD_CUSTOM_BT_CONFIG := $(DEVICE_PATH)/bluetooth/vnd_ks01ltexx.txt
 BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_CUSTOM_BT_CONFIG := $(DEVICE_PATH)/bluetooth/vnd_ks01ltexx.txt
 
 # Bootloader
+BOARD_VENDOR := samsung
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
 TARGET_NO_BOOTLOADER := true
 
@@ -86,7 +85,7 @@ TARGET_FS_CONFIG_GEN += $(DEVICE_PATH)/config.fs
 
 # HIDL
 DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := device/samsung/msm8974-common/compatibility_matrix.xml
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
 # Legacy memfd
 TARGET_HAS_MEMFD_BACKPORT := true
@@ -132,7 +131,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 12528352256
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_ROOT_EXTRA_FOLDERS := efs firmware firmware-modem
-BOARD_ROOT_EXTRA_SYMLINKS := data/tombstones:/tombstones
+BOARD_ROOT_EXTRA_SYMLINKS := /data/tombstones:/tombstones
 TARGET_USERIMAGES_USE_EXT4 := true
 
 # Properties
@@ -145,7 +144,7 @@ TARGET_USES_INTERACTION_BOOST := true
 BOARD_PROVIDES_LIBRIL := true
 
 # Recovery
-TARGET_RECOVERY_DEVICE_DIRS += device/samsung/qcom-common
+TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)
 BOARD_HAS_DOWNLOAD_MODE := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
