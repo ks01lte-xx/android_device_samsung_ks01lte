@@ -1,0 +1,23 @@
+#Policies for IPv6 tethering
+allow netd netd:capability { setgid setuid };
+dontaudit netd self:capability sys_module;
+binder_use(netd);
+
+allow netd netd:packet_socket create_socket_perms_no_ioctl;
+
+# allow netd to use privileged sock ioctls
+allowxperm netd self: { unix_stream_socket } ioctl priv_sock_ioctls;
+
+# needed for netd to start FST Manager via system property
+set_prop(netd, netd_prop)
+
+allow netd self:capability fsetid;
+
+# Allow netd to chmod dir /data/misc/dhcp
+allow netd dhcp_data_file:dir create_dir_perms;
+
+type_transition netd wifi_data_file:dir wpa_socket "sockets";
+allow netd wpa_socket:dir create_dir_perms;
+
+allow netd hostapd:unix_dgram_socket sendto;
+allow netd wpa_socket:sock_file create_file_perms;

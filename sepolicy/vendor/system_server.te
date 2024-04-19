@@ -1,0 +1,127 @@
+allow system_server self:capability sys_module;
+
+allow system_server self:socket create_socket_perms;
+allowxperm system_server self:socket ioctl msm_sock_ipc_ioctls;
+allow system_server sysfs_sensors:dir search;
+allow system_server sysfs_sensors:file rw_file_perms;
+
+#For ANT tty communication and to set wc_transport prop
+set_prop(system_server, bluetooth_prop)
+set_prop(system_server, alarm_handled_prop)
+set_prop(system_server, alarm_instance_prop)
+
+# For location
+binder_call(system_server, location);
+type_transition system_server location_data_file:sock_file location_socket "location-mq-s";
+type_transition system_server location_data_file:sock_file location_socket "alarm_svc";
+#allow system_server location:unix_stream_socket connectto;
+allow system_server location_data_file:{ file fifo_file } create_file_perms;
+allow system_server location_data_file:dir create_dir_perms;
+#allow system_server location_socket:sock_file create_file_perms;
+set_prop(system_server, location_prop)
+
+#For wifistatemachine
+allow system_server kernel:key search;
+allow system_server wlan_device:chr_file rw_file_perms;
+
+#For ssr
+allow system_server ssr_device:chr_file r_file_perms;
+
+allow system_server {
+    serial_device
+    smd_device
+    # graphics_device, audio_device, tee_device is for WFD
+    graphics_device
+    audio_device
+    tee_device
+}:chr_file rw_file_perms;
+
+#For BT firmware
+r_dir_file(system_server, firmware_file)
+
+get_prop(system_server, xlat_prop)
+
+# For WFD
+allow system_server graphics_device:dir r_dir_perms;
+
+# For shutdown animation
+set_prop(system_server, ctl_bootanim_prop)
+
+# allow tethering to access dhcp leases
+r_dir_file(system_server, dhcp_data_file)
+
+# Allow system server to access fst
+set_prop(system_server, fst_prop)
+get_prop(system_server, fst_prop);
+
+#for Wifi module this is needed
+allow system_server system_file:system module_load;
+
+get_prop(system_server, alarm_boot_prop)
+
+# allow access to low persistence mode sysfs node
+allow system_server sysfs_graphics:file rw_file_perms;
+
+# timerslack_ns
+allow system_server { location_app system_app } :file write;
+allow system_server opengles_prop:file r_file_perms;
+allow system_server graphics_vulkan_prop:file r_file_perms;
+
+allow system_server hwui_prop:file r_file_perms;
+allow system_server bservice_prop:file r_file_perms;
+allow system_server reschedule_service_prop:file r_file_perms;
+allow system_server appdomain:file w_file_perms;
+
+get_prop(system_server, vendor_mpctl_prop)
+
+# IPC call for sensor feed
+binder_call(system_server, hal_camera)
+binder_call(system_server, mm-qcamerad)
+
+# Ant ipc
+hal_client_domain(system_server,hal_bluetooth);
+
+hal_client_domain(system_server, hal_sensors)
+
+#kgsl
+r_dir_file(system_server, kgsl_debugfs);
+
+allow system_server qti_debugfs:file r_file_perms;
+
+allow system_server mpctl_socket:dir r_dir_perms;
+unix_socket_connect(system_server, mpctl, mpdecision)
+unix_socket_send(system_server, mpctl, mpdecision)
+
+qmux_socket(system_server)
+
+allow system_server sensors:unix_stream_socket sendto;
+allow system_server sensors_device:chr_file getattr;
+unix_socket_connect(system_server, sensors, sensors)
+unix_socket_send(system_server, sensors, sensors)
+
+allow system_server location:unix_stream_socket connectto;
+allow system_server location_socket:sock_file create_file_perms;
+
+allow system_server sensors_efs_file:file r_file_perms;
+allow system_server sensors_efs_file:file rw_file_perms;
+
+allow system_server vendor_file:file execmod;
+
+allow system_server {
+    efs_file
+    mpctl_data_file
+}:dir search;
+
+allow system_server {
+    efs_file
+    qti_debugfs
+}:file r_file_perms;
+
+allow system_server proc_last_kmsg:file r_file_perms;
+
+get_prop(system_server, exported_camera_prop);
+get_prop(system_server, userspace_reboot_config_prop);
+get_prop(system_server, userspace_reboot_exported_prop);
+
+# Trust
+get_prop(system_server, vendor_security_patch_level_prop)

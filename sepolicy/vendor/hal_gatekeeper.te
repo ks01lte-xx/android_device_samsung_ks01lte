@@ -1,0 +1,2 @@
+# allow tee to load firmware images
+r_dir_file(hal_gatekeeper, firmware_file)

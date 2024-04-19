@@ -1,0 +1,8 @@
+allow radio { cameraserver_service mediaextractor_service }:service_manager find;
+
+# Talks to qmuxd via the qmux_radio socket
+qmux_socket(radio)
+
+allow radio self:socket create_socket_perms_no_ioctl;
+
+binder_call(radio, gpuservice)

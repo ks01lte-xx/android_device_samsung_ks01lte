@@ -1,0 +1,6 @@
+allow hal_power_default mpctl_socket:dir search;
+allow hal_power_default mpctl_socket:sock_file write;
+
+allow hal_power_default mpdecision:unix_stream_socket connectto;
+
+allow hal_power_default sysfs_hal_pwr:file w_file_perms;

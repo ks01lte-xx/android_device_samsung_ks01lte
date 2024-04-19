@@ -1,0 +1,38 @@
+qmux_socket(bluetooth)
+
+set_prop(bluetooth, bluetooth_prop)
+allow bluetooth sysfs_bluetooth_writable:file w_file_perms;
+
+#Access to /data/media
+allow bluetooth media_rw_data_file:dir create_dir_perms;
+allow bluetooth media_rw_data_file:file create_file_perms;
+#allow proc_sysrq access for crash dump
+allow bluetooth proc_sysrq:file w_file_perms;
+
+allow bluetooth {
+    uhid_device
+    #input_device
+    serial_device
+    #BT needes read and write on smd device node
+    smd_device
+}:chr_file rw_file_perms;
+
+# ioctlcmd=c302
+allow bluetooth self:socket ioctl;
+allowxperm bluetooth self:socket ioctl msm_sock_ipc_ioctls;
+
+#SplitA2dp bluetooth requires binding with audio hal
+binder_call(bluetooth, hal_audio);
+allow bluetooth hal_audio_hwservice:hwservice_manager find;
+
+allow bluetooth bluetooth_device:chr_file rw_file_perms;
+
+allow bluetooth firmware_file:dir r_dir_perms;
+
+allow bluetooth proc_bt_sleep:dir search;
+allow bluetooth proc_bt_sleep:file w_file_perms;
+
+allow bluetooth {
+    bt_fw_file
+    wifi_data_file
+}:file r_file_perms;

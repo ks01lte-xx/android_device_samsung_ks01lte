@@ -1,0 +1,6 @@
+# efsks daemon
+type noefsks, domain;
+type noefsks_exec, exec_type, vendor_file_type, file_type;
+
+# Started by init
+init_daemon_domain(noefsks)
