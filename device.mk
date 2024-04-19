@@ -162,6 +162,19 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw
 
+# rro_overlays
+PRODUCT_PACKAGES += \
+    CarrierConfig_i9506 \
+    Dialer_i9506 \
+    Frameworks_i9506 \
+    Provider_i9506 \
+    SDK_i9506 \
+    Settings_i9506 \
+    Snap_i9506 \
+    TelephonyRes_i9506 \
+    Tethering_i9506 \
+    Wifi_i9506
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
@@ -182,6 +195,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
+
+# Perf
+PRODUCT_PACKAGES += \
+    libqti-perfd-client
 
 # Power HAL
 PRODUCT_PACKAGES += \
