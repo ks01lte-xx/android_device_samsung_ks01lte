@@ -1,6 +1,0 @@
-# qcks daemon
-type noqcks, domain;
-type noqcks_exec, exec_type, vendor_file_type, file_type;
-
-# Started by init
-init_daemon_domain(noqcks)

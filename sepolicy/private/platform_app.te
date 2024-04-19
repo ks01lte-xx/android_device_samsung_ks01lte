@@ -28,8 +28,5 @@
 # Allow LiveDisplay HAL service to be found
 hal_client_domain(platform_app, hal_lineage_livedisplay)
 
-# Allow FastCharge HAL service to be found
-hal_client_domain(platform_app, hal_lineage_fastcharge)
-
 # Allow Touch HAL service to be found
 hal_client_domain(platform_app, hal_lineage_touch)

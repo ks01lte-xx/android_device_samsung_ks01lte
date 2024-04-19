@@ -22,8 +22,10 @@ vendor.voice.path.for.pcm.voip=false
 # Audio (Media)
 audio.offload.disable=true
 vendor.audio.offload.gapless.enabled=true
+#audio.offload.gapless.enabled=false
 
 # Bluetooth
+bluetooth.enable_timeout_ms=12000
 ro.bt.bdaddr_path=/efs/bluetooth/bt_addr
 
 # Camera
@@ -76,14 +78,6 @@ telephony.lteOnGsmDevice=1
 
 # Ril sends only one RIL_UNSOL_CALL_RING, so set call_ring.multiple to false
 ro.telephony.call_ring.multiple=0
-
-# Audio
-audio.offload.buffer.size.kb=32
-audio.offload.gapless.enabled=false
-av.offload.enable=true
-
-# Bluetooth
-bluetooth.enable_timeout_ms=12000
 
 # fastbootd
 ro.fastbootd.available=true

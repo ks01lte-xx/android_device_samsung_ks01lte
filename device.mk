@@ -17,9 +17,9 @@
 
 # Audio
 PRODUCT_PACKAGES += \
-    android.hardware.audio.effect@2.0-impl \
+    android.hardware.audio.service \
     android.hardware.audio@2.0-impl \
-    audio.a2dp.default \
+    android.hardware.audio.effect@2.0-impl \
     audio.primary.msm8974 \
     audio.r_submix.default \
     audio.usb.default \
@@ -43,7 +43,6 @@ PRODUCT_COPY_FILES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
-    android.hardware.bluetooth@1.0-service \
     libbt-vendor
 
 # Bluetooth: prepatch to fix BT/WiFi bus lockups
@@ -58,18 +57,18 @@ TARGET_BOOTANIMATION_HALF_RES := true
 # Camera
 PRODUCT_PACKAGES += \
     Snap \
-    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-impl-legacy \
     camera.msm8974 \
     libshim_camera \
     libxml2
 
 # Display
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-impl:32 \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.1-service \
-    android.hardware.graphics.mapper@2.0-impl-2.1 \
-    android.hardware.memtrack@1.0-impl \
+    android.hardware.graphics.mapper@2.0-impl-2.1:32 \
+    android.hardware.memtrack@1.0-impl:32 \
     android.hardware.memtrack@1.0-service \
     copybit.msm8974 \
     gralloc.msm8974 \
@@ -123,6 +122,9 @@ PRODUCT_PACKAGES += \
 
 # HIDL
 PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true
+PRODUCT_PACKAGES += \
+    libhidltransport \
+    libhwbinder
 
 # IR Blaster
 PRODUCT_PACKAGES += \
@@ -162,7 +164,9 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw
 
-# rro_overlays
+# Overlays
+PRODUCT_ENFORCE_RRO_TARGETS := *
+#
 PRODUCT_PACKAGES += \
     CarrierConfig_i9506 \
     Dialer_i9506 \
@@ -296,5 +300,12 @@ PRODUCT_COPY_FILES += \
    $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
    $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf
 
+# boot jars check
+SKIP_BOOT_JARS_CHECK := true
+
+# Hardware
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.egl=adreno
+
 # Get non-open-source specific aspects
-$(call inherit-product, vendor/samsung/ks01ltexx/ks01ltexx-vendor.mk)
+$(call inherit-product, vendor/samsung/ks01lte/ks01lte-vendor.mk)

@@ -42,9 +42,6 @@ type vendor_mpctl_prop, property_type;
 # Wifi version recorder
 type vendor_wifi_version, property_type;
 
-# Fastcharge
-type sec_fastcharge_prop, property_type;
-
 #Needed for  ubwc support
 type debug_gralloc_prop, property_type;
 

@@ -61,4 +61,3 @@ vendor.lineage.touch::IKeySwapper                                       u:object
 vendor.lineage.touch::IStylusMode                                       u:object_r:hal_lineage_touch_hwservice:s0
 vendor.lineage.touch::ITouchscreenGesture                               u:object_r:hal_lineage_touch_hwservice:s0
 vendor.lineage.trust::IUsbRestrict                                      u:object_r:hal_lineage_trust_hwservice:s0
-vendor.lineage.fastcharge::IFastCharge                                  u:object_r:hal_lineage_fastcharge_hwservice:s0
