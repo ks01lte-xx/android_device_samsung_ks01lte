@@ -151,11 +151,22 @@ BOARD_SUPPRESS_SECURE_ERASE := true
 BOARD_USES_MMCUTILS := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 
+# SELinux
+SELINUX_IGNORE_NEVERALLOWS := true
+# Board specific SELinux policy variable definitions
+SEPOLICY_PATH:= device/samsung/ks01lte/sepolicy
+BOARD_PLAT_PUBLIC_SEPOLICY_DIR := $(SEPOLICY_PATH)/public
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR := $(SEPOLICY_PATH)/private
+BOARD_VENDOR_SEPOLICY_DIRS := $(SEPOLICY_PATH)/vendor
+
 # Sensors
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
 # Dedupe VNDK libraries with identical core variants.
 TARGET_VNDK_USE_CORE_VARIANT := true
+
+# Vendor security patch level
+VENDOR_SECURITY_PATCH := 2016-12-01
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI := true

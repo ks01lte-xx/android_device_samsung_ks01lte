@@ -68,7 +68,7 @@ persist.data.qmi.adb_logmask=0
 persist.radio.apm_sim_not_pwdn=1
 persist.radio.no_wait_for_card=1
 persist.radio.add_power_save=1
-rild.libpath=/system/vendor/lib/libsec-ril.so
+rild.libpath=/vendor/lib/libsec-ril.so
 ro.telephony.default_network=9
 ro.telephony.mms_data_profile=5
 ro.ril.telephony.qan_resp_strings=6
@@ -90,9 +90,6 @@ ro.fastbootd.available=true
 
 # Sensors
 debug.sensors=1
-
-# Vendor security patch level
-ro.lineage.build.vendor_security_patch=2016-12-01
 
 # Wifi
 wifi.interface=wlan0
