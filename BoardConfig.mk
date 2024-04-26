@@ -125,8 +125,11 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 12528352256
 
 # Filesystem
 TARGET_FS_CONFIG_GEN += $(DEVICE_PATH)/config.fs
-BOARD_ROOT_EXTRA_FOLDERS := efs firmware firmware-modem
+BOARD_ROOT_EXTRA_FOLDERS := efs
 BOARD_ROOT_EXTRA_SYMLINKS := /data/tombstones:/tombstones
+BOARD_ROOT_EXTRA_SYMLINKS += \
+    /vendor/firmware-modem:/firmware-modem \
+    /vendor/firmware_mnt:/firmware
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_COPY_OUT_PRODUCT := system/product
