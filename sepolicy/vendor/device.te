@@ -1,5 +1,7 @@
 #device type for smd device nodes, ie /dev/smd*
 type smd_device, dev_type;
+type smd_attach_dev, dev_type;
+type smd_radio_device, dev_type;
 
 #Define thermal-engine devices
 type thermal_device, dev_type;
@@ -52,3 +54,7 @@ type smem_log_device, dev_type;
 type rmnet_device, dev_type;
 
 type diag_device, dev_type, mlstrustedobject;
+
+type cpu_latency_device, dev_type;
+
+type dev_uio_device, dev_type;

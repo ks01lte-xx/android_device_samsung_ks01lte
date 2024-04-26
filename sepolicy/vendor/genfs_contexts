@@ -11,12 +11,9 @@ genfscon proc /last_kmsg     u:object_r:proc_last_kmsg:s0
 genfscon proc /sys/kernel/deny_new_usb     u:object_r:proc_deny_new_usb:s0
 
 # sysfs - battery/charger
-genfscon sysfs /devices/battery.92/power_supply     u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/i2c.87/i2c-13/13-0066/max77803-charger/power_supply     u:object_r:sysfs_batteryinfo:s0
-genfscon sysfs /devices/i2c.88/i2c-19/19-0036/power_supply     u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/msm_dwc3/power_supply/dwc-usb     u:object_r:sysfs_usb_supply:s0
 
-genfscon sysfs /devices/virtual/sec/sec_touchkey    u:object_r:sysfs_sec_touchkey:s0
+genfscon sysfs /devices/virtual/sec/sec_touchkey/keypad_enable    u:object_r:sysfs_sec_touchkey:s0
 
 # CPU/perf
 genfscon sysfs /devices/qcom,cpubw.42/devfreq/qcom,cpubw.42/governor    u:object_r:sysfs_devfreq:s0
@@ -26,11 +23,6 @@ genfscon sysfs /devices/msm_dwc3/f9200000.dwc3/gadget/lun0    u:object_r:sysfs_a
 
 # sysfs - time
 genfscon sysfs /devices/qpnp-rtc-17/rtc/rtc0    u:object_r:sysfs_rtc:s0
-
-# sysfs - leds
-genfscon sysfs /devices/i2c.90/i2c-21/21-0030/leds    u:object_r:sysfs_leds:s0
-genfscon sysfs /devices/i2c.91/i2c-22/22-0020/leds    u:object_r:sysfs_leds:s0
-genfscon sysfs /devices/i2c.87/i2c-13/13-0066/max77803-led/leds    u:object_r:sysfs_leds:s0
 
 # Block/storage
 genfscon sysfs /devices/msm_sdcc.1/mmc_host/mmc1/mmc1:0001/block/mmcblk0/stat  u:object_r:sysfs_disk_stat:s0
@@ -47,55 +39,6 @@ genfscon sysfs /devices/fdb00000.qcom,kgsl-3d0/kgsl/kgsl-3d0  u:object_r:sysfs_k
 genfscon sysfs /devices/fdb00000.qcom,kgsl-3d0/devfreq/fdb00000.qcom,kgsl-3d0  u:object_r:sysfs_kgsl:s0
 
 genfscon sysfs /devices/fdb00000.qcom,kgsl-3d0/kgsl/kgsl-3d0/gpuclk  u:object_r:sysfs_kgsl_gpuclk:s0
-
-# sysfs - graphics
-######genfscon sysfs /devices/virtual/graphics    u:object_r:sysfs_graphics:s0
-
-# sysfs - graphics
-genfscon sysfs /devices/virtual/graphics/fb0/csc_cfg    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb0/idle_time    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/idle_time    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb2/idle_time    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb0/dynamic_fps    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/product_description    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/vendor_name    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/hdcp/tp    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/hpd    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb0/msm_fb_panel_info   u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/msm_fb_panel_info   u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb2/msm_fb_panel_info   u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb0/msm_fb_type    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/msm_fb_type    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb2/msm_fb_type    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb0/msm_fb_split    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/msm_fb_split    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb2/msm_fb_split    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb0/show_blank_event    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/show_blank_event    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb2/show_blank_event    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb0/vsync_event    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/vsync_event    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb2/vsync_event    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb0/idle_notify    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/idle_notify    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb2/idle_notify    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb0/mode    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/mode    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb2/mode    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb0/name    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/name    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb2/name    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/connected    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/edid_modes    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/scan_info    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/edid_3d_modes    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb0/modes    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/modes    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb2/modes    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/edid_raw_data    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb0/ad    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb1/ad    u:object_r:sysfs_graphics:s0
-genfscon sysfs /devices/virtual/graphics/fb2/ad    u:object_r:sysfs_graphics:s0
 
 # sysfs
 genfscon sysfs /devices/f995e000.uart    u:object_r:sysfs_msmuart_file:s0
@@ -144,9 +87,6 @@ genfscon sysfs /devices/soc/qpnp-vadc-18    u:object_r:sysfs_vadc_dev:s0
 genfscon sysfs /class/graphics/fb0/mdp/caps    u:object_r:sysfs_graphics:s0
 genfscon sysfs /class/graphics/fb1/mdp/caps    u:object_r:sysfs_graphics:s0
 genfscon sysfs /class/graphics/fb2/mdp/caps    u:object_r:sysfs_graphics:s0
-genfscon sysfs /class/thermal    u:object_r:sysfs_thermal:s0
-genfscon sysfs /class/sensors    u:object_r:sysfs_sensors:s0
-genfscon sysfs /class/uio    u:object_r:sysfs_uio:s0
 
 genfscon sysfs /bus/spmi/devices    u:object_r:sysfs_spmi_dev:s0
 
@@ -154,14 +94,8 @@ genfscon sysfs /devices/virtual/thermal    u:object_r:sysfs_thermal:s0
 genfscon sysfs /module/msm_thermal    u:object_r:sysfs_thermal:s0
 genfscon sysfs /module/msm_thermal/core_control/cpus_offlined    u:object_r:sysfs_mpdecision:s0
 
-genfscon sysfs /bus/msm_subsys    u:object_r:sysfs_ssr:s0
-
-genfscon sysfs /bus/msm_subsys/devices/subsys0/restart_level    u:object_r:sysfs_ssr_toggle:s0
-genfscon sysfs /bus/msm_subsys/devices/subsys1/restart_level    u:object_r:sysfs_ssr_toggle:s0
-genfscon sysfs /bus/msm_subsys/devices/subsys2/restart_level    u:object_r:sysfs_ssr_toggle:s0
-
 genfscon sysfs /firmware/devicetree/base/cpus    u:object_r:sysfs_devices_system_cpu:s0
-genfscon sysfs /devices/virtual/xt_idletimer/timers    u:object_r:sysfs_data:s0
+genfscon sysfs /devices/virtual/xt_idletimer/timers    u:object_r:sysfs_data_idletimer:s0
 
 genfscon sysfs /module/cpu_boost    u:object_r:sysfs_cpu_boost:s0
 genfscon sysfs /module/msm_performance    u:object_r:sysfs_msm_perf:s0
@@ -171,7 +105,6 @@ genfscon sysfs /kernel/boot_adsp/boot    u:object_r:sysfs_boot_adsp:s0
 genfscon sysfs /kernel/debug/ipc_logging    u:object_r:qti_debugfs:s0
 
 # Graphics
-genfscon sysfs /devices/mdp.0/qcom,mdss_fb_primary.182/leds/lcd-backlight    u:object_r:sysfs_graphics:s0
 genfscon sysfs /devices/mdp.0/caps    u:object_r:sysfs_graphics:s0
 
 # Subsys restart

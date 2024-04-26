@@ -1,0 +1,4 @@
+# rfs_access - tee_qseecomd daemon
+type tee_qseecomd, domain;
+type tee_qseecomd_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(tee_qseecomd)

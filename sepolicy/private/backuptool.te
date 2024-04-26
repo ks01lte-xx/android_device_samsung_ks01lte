@@ -6,4 +6,6 @@ neverallow {
     -update_engine
 } backuptool:process transition;
 
-permissive backuptool;
+userdebug_or_eng(`
+    permissive backuptool;
+')

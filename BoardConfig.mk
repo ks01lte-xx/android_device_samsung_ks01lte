@@ -158,7 +158,6 @@ BOARD_USES_MMCUTILS := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 
 # SELinux
-SELINUX_IGNORE_NEVERALLOWS := true
 # Board specific SELinux policy variable definitions
 SEPOLICY_PATH:= device/samsung/ks01lte/sepolicy
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR := $(SEPOLICY_PATH)/public
