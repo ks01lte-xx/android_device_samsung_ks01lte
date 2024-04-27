@@ -28,9 +28,6 @@ vendor/lib/libacdbrtac.so
 vendor/lib/libadiertac.so
 vendor/lib/libaudcal.so
 vendor/lib/libaudioalsa.so
-vendor/lib/soundfx/libqcbassboost.so
-vendor/lib/soundfx/libqcreverb.so
-vendor/lib/soundfx/libqcvirt.so
 
 # Bluetooth firmware (g2-common)
 vendor/firmware/bcm4335B0_002.001.006.0191.0201_ORC.hcd
@@ -290,27 +287,12 @@ vendor/lib/libscale.so|b44f44c633fa404d10e76aaa23593b516e08e2b8
 bin/irsc_util:vendor/bin/irsc_util
 etc/sec_config:vendor/etc/sec_config
 
-# IR
-lib/hw/consumerir.default.so:vendor/lib/hw/consumerir.msm8974.so
-
 # Media
-vendor/lib/libDivxDrm.so
-vendor/lib/libI420colorconvert.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAmrwbplusDec.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libOmxWmaDec.so
-vendor/lib/libSHIMDivxDrm.so
-vendor/lib/libmm-color-convertor.so
-vendor/lib/libmmosal.so
-
-# NFC
-vendor/firmware/bcm2079xB4_firmware.ncd
-vendor/firmware/bcm2079xB4_pre_firmware.ncd
-
-# Perf
-vendor/lib/libqti-perfd-client.so
 
 # Qualcomm
 vendor/lib/libxml.so
@@ -345,15 +327,9 @@ lib/libsec-ril.so:vendor/lib/libsec-ril.so
 vendor/lib/libril-qcril-hook-oem.so
 
 # Sensors
-bin/sensorhubservice:vendor/bin/sensorhubservice
-lib/hw/sensorhubs.msm8974.so:vendor/lib/hw/sensorhubs.msm8974.so
 lib/hw/sensors.msm8974.so:vendor/lib/hw/sensors.vendor.msm8974.so
-lib/libgnustl_shared.so:vendor/lib/libgnustl_shared.so
 lib/libsam.so:vendor/lib/libsam.so
 lib/libsensirion_ks01_eur.so:vendor/lib/libsensirion_ks01_eur.so
-lib/libsensorhub.so:vendor/lib/libsensorhub.so
-lib/libsensorhubcontext.so:vendor/lib/libsensorhubcontext.so
-lib/libsensorhubservice.so:vendor/lib/libsensorhubservice.so
 vendor/lib/libqcgesture.so
 vendor/lib/libqcsyncgesture.so
 
