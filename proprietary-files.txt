@@ -34,7 +34,7 @@ vendor/firmware/bcm4335B0_002.001.006.0191.0201_ORC.hcd
 
 # Camera
 -bin/mm-qcamera-daemon:vendor/bin/mm-qcamera-daemon
--lib/hw/camera.msm8974.so:vendor/lib/hw/camera.vendor.msm8974.so
+-lib/hw/camera.msm8974.so:vendor/lib/hw/camera.vendor.msm8974.so|8ffc00ff5158298ded774e20b1b06d40758c7c6f
 -lib/libarcsoft_nighthawk.so:vendor/lib/libarcsoft_nighthawk.so
 -lib/libliveframework.so:vendor/lib/libliveframework.so
 -lib/libmmcamera2_stats_algorithm.so:vendor/lib/libmmcamera2_stats_algorithm.so
@@ -61,11 +61,11 @@ vendor/firmware/bcm4335B0_002.001.006.0191.0201_ORC.hcd
 -vendor/lib/libmmcamera2_imglib_modules.so
 -vendor/lib/libmmcamera2_isp_modules.so
 -vendor/lib/libmmcamera2_pproc_modules.so
--vendor/lib/libmmcamera2_sensor_modules.so
+-vendor/lib/libmmcamera2_sensor_modules.so|b957fab98cf43c44fbb118ce0acaa075bacaba27
 -vendor/lib/libmmcamera2_stats_modules.so
 -vendor/lib/libmmcamera2_vpe_module.so
 -vendor/lib/libmmcamera2_wnr_module.so
--vendor/lib/libmmcamera_faceproc.so
+-vendor/lib/libmmcamera_faceproc.so|ac49bcc1aa20ff9f2c118f6c233b658f93543202
 -vendor/lib/libmmcamera_image_stab.so
 -vendor/lib/libmmcamera_imglib.so
 -vendor/lib/libmmcamera_imx135.so
@@ -239,8 +239,8 @@ etc/firmware/cpp_firmware_v1_2_0.fw:vendor/firmware/cpp_firmware_v1_2_0.fw
 -vendor/lib/libmmjpeg.so|2b0bf12bbb7b63c84db77f922d18a4a335634930
 
 # CPU - pinned blobs from G900FXXU1CRA2_G900FOXA1CRA2_BTU
--bin/thermal-engine:vendor/bin/thermal-engine
--vendor/bin/mpdecision
+-bin/thermal-engine:vendor/bin/thermal-engine|9e1c65d1ebb2f508851bd9f9eac544e1316c811a
+-vendor/bin/mpdecision|23a26552ac134cdd67529429003b4c305fd1bd59
 -vendor/lib/libthermalclient.so
 -vendor/lib/libthermalioctl.so
 
@@ -309,7 +309,7 @@ etc/sec_config:vendor/etc/sec_config
 -vendor/lib/libdsutils.so
 -vendor/lib/libidl.so
 -vendor/lib/libnetmgr.so
--vendor/lib/libperipheral_client.so
+-vendor/lib/libperipheral_client.so|45e4ff1ee7fe07e92183c6dc0a29c3aa6b3d35dd
 -vendor/lib/libqcci_legacy.so
 -vendor/lib/libqdi.so|6bd79ba4dc4b4af654cda666e829312ba07a22e9
 -vendor/lib/libqmi.so
@@ -327,12 +327,12 @@ etc/sec_config:vendor/etc/sec_config
 -bin/qmuxd:vendor/bin/qmuxd
 -bin/rfs_access:vendor/bin/rfs_access
 -bin/rmt_storage:vendor/bin/rmt_storage
--lib/libsec-ril.so:vendor/lib/libsec-ril.so
+-lib/libsec-ril.so:vendor/lib/libsec-ril.so|66b70a6eb065d66a34867a103f2c1b4973499f3e
 -vendor/lib/libril-qcril-hook-oem.so
 
 # Sensors
 -lib/hw/sensors.msm8974.so:vendor/lib/hw/sensors.vendor.msm8974.so
--lib/libsam.so:vendor/lib/libsam.so
+-lib/libsam.so:vendor/lib/libsam.so|f771f0a41b61d9bb3c22834d74a5c3970af2d19e
 -lib/libsensirion_ks01_eur.so:vendor/lib/libsensirion_ks01_eur.so
 -vendor/lib/libqcgesture.so
 -vendor/lib/libqcsyncgesture.so
