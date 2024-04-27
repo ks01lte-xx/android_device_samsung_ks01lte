@@ -15,6 +15,12 @@
 -system_ext/lib/libaptX_encoder.so
 
 # Audio
+-vendor/lib/libacdbloader.so|27ceba70917afc0e9b26877354c8404dae5af09c
+-vendor/lib/libacdbmapper.so
+-vendor/lib/libacdbrtac.so
+-vendor/lib/libadiertac.so
+-vendor/lib/libaudcal.so
+-vendor/lib/libaudioalsa.so
 etc/Bluetooth_cal.acdb:vendor/etc/acdbdata/Bluetooth_cal.acdb
 etc/General_cal.acdb:vendor/etc/acdbdata/General_cal.acdb
 etc/Global_cal.acdb:vendor/etc/acdbdata/Global_cal.acdb
@@ -22,12 +28,6 @@ etc/Handset_cal.acdb:vendor/etc/acdbdata/Handset_cal.acdb
 etc/Hdmi_cal.acdb:vendor/etc/acdbdata/Hdmi_cal.acdb
 etc/Headset_cal.acdb:vendor/etc/acdbdata/Headset_cal.acdb
 etc/Speaker_cal.acdb:vendor/etc/acdbdata/Speaker_cal.acdb
--vendor/lib/libacdbloader.so|27ceba70917afc0e9b26877354c8404dae5af09c
--vendor/lib/libacdbmapper.so
--vendor/lib/libacdbrtac.so
--vendor/lib/libadiertac.so
--vendor/lib/libaudcal.so
--vendor/lib/libaudioalsa.so
 
 # Bluetooth firmware (g2-common)
 vendor/firmware/bcm4335B0_002.001.006.0191.0201_ORC.hcd
@@ -73,10 +73,6 @@ vendor/firmware/bcm4335B0_002.001.006.0191.0201_ORC.hcd
 -vendor/lib/libsensor1.so
 
 # Camera chromatix
-etc/C13QL_s5k3l2xx_module_info.xml:vendor/etc/C13QL_s5k3l2xx_module_info.xml
-etc/C13QS_imx135_module_info.xml:vendor/etc/C13QS_imx135_module_info.xml
-etc/D13QL_s5k3l2xx_module_info.xml:vendor/etc/D13QL_s5k3l2xx_module_info.xml
-etc/D13QS_imx135_module_info.xml:vendor/etc/D13QS_imx135_module_info.xml
 -lib/C13QL_libTsAe.so:vendor/lib/C13QL_libTsAe.so
 -lib/C13QL_libTsAf.so:vendor/lib/C13QL_libTsAf.so
 -lib/C13QL_libTs_J_Accm.so:vendor/lib/C13QL_libTs_J_Accm.so
@@ -227,6 +223,10 @@ etc/D13QS_imx135_module_info.xml:vendor/etc/D13QS_imx135_module_info.xml
 -vendor/lib/libchromatix_imx135_vt_hd.so
 -vendor/lib/libchromatix_s5k3l2xx_vt.so
 -vendor/lib/libchromatix_s5k3l2xx_vt_hd.so
+etc/C13QL_s5k3l2xx_module_info.xml:vendor/etc/C13QL_s5k3l2xx_module_info.xml
+etc/C13QS_imx135_module_info.xml:vendor/etc/C13QS_imx135_module_info.xml
+etc/D13QL_s5k3l2xx_module_info.xml:vendor/etc/D13QL_s5k3l2xx_module_info.xml
+etc/D13QS_imx135_module_info.xml:vendor/etc/D13QS_imx135_module_info.xml
 
 # Camera firmware
 cameradata/datapattern_420sp.yuv:vendor/cameradata/datapattern_420sp.yuv
@@ -240,17 +240,21 @@ etc/firmware/cpp_firmware_v1_2_0.fw:vendor/firmware/cpp_firmware_v1_2_0.fw
 
 # CPU - pinned blobs from G900FXXU1CRA2_G900FOXA1CRA2_BTU
 -bin/thermal-engine:vendor/bin/thermal-engine
--vendor/bin/mpdecision|bf788461981e8b593db5bb224e6e8059ef5adb57
+-vendor/bin/mpdecision
 -vendor/lib/libthermalclient.so
 -vendor/lib/libthermalioctl.so
 
 # DRM
 -bin/qseecomd:vendor/bin/qseecomd
 -vendor/lib/libQSEEComAPI.so
+-vendor/lib/libSecureUILib.so
 -vendor/lib/libdrmdiag.so
 -vendor/lib/libdrmfs.so
 -vendor/lib/libdrmtime.so
 -vendor/lib/librpmb.so
+-vendor/lib/libsecureui.so
+-vendor/lib/libsecureui_svcsock.so
+-vendor/lib/libsecureuisvc_jni.so
 -vendor/lib/libssd.so
 
 # GPS (OnePlus bacon - lineage-14.1-20170807-nightly-bacon-signed.zip)
