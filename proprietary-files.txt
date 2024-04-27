@@ -1,14 +1,11 @@
+# Activity recognition
+-vendor/lib/libsensor1.so
+
 # ADSP
 -bin/adsprpcd:vendor/bin/adsprpcd
 -vendor/lib/libadsprpc.so
 -vendor/lib/libfastcvadsp_stub.so
 -vendor/lib/libfastcvopt.so
--vendor/lib/libscve.so
--vendor/lib/libscve_stub.so
--vendor/lib/rfsa/adsp/libdspCV_skel.so
--vendor/lib/rfsa/adsp/libfastcvadsp.so
--vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
--vendor/lib/rfsa/adsp/libscveT2T_skel.so
 
 # aptX
 -system_ext/lib/libaptXHD_encoder.so
@@ -70,7 +67,6 @@ vendor/firmware/bcm4335B0_002.001.006.0191.0201_ORC.hcd
 -vendor/lib/libmmcamera_imglib.so
 -vendor/lib/libmmcamera_imx135.so
 -vendor/lib/liboemcamera.so
--vendor/lib/libsensor1.so
 
 # Camera chromatix
 -lib/C13QL_libTsAe.so:vendor/lib/C13QL_libTsAe.so
@@ -348,23 +344,14 @@ etc/sec_config:vendor/etc/sec_config
 
 # Wi-Fi
 etc/wifi/bcmdhd_apsta.bin:vendor/etc/wifi/bcmdhd_apsta.bin
-etc/wifi/bcmdhd_apsta.bin_a0:vendor/etc/wifi/bcmdhd_apsta.bin_a0
 etc/wifi/bcmdhd_ibss.bin:vendor/etc/wifi/bcmdhd_ibss.bin
 etc/wifi/bcmdhd_mfg.bin:vendor/etc/wifi/bcmdhd_mfg.bin
-etc/wifi/bcmdhd_mfg.bin_a0:vendor/etc/wifi/bcmdhd_mfg.bin_a0
 etc/wifi/bcmdhd_sta.bin:vendor/etc/wifi/bcmdhd_sta.bin
-etc/wifi/bcmdhd_sta.bin_a0:vendor/etc/wifi/bcmdhd_sta.bin_a0
 etc/wifi/nvram_mfg.txt:vendor/etc/wifi/nvram_mfg.txt
 etc/wifi/nvram_mfg.txt_a0:vendor/etc/wifi/nvram_mfg.txt_a0
-etc/wifi/nvram_mfg.txt_murata_a0:vendor/etc/wifi/nvram_mfg.txt_murata_a0
-etc/wifi/nvram_mfg.txt_muratafem1:vendor/etc/wifi/nvram_mfg.txt_muratafem1
-etc/wifi/nvram_mfg.txt_muratafem2:vendor/etc/wifi/nvram_mfg.txt_muratafem2
+etc/wifi/nvram_mfg.txt_muratafem1:vendor/etc/wifi/nvram_mfg.txt_murata
 etc/wifi/nvram_mfg.txt_semco3rd:vendor/etc/wifi/nvram_mfg.txt_semco3rd
-etc/wifi/nvram_mfg.txt_semcosh:vendor/etc/wifi/nvram_mfg.txt_semcosh
 etc/wifi/nvram_net.txt:vendor/etc/wifi/nvram_net.txt
 etc/wifi/nvram_net.txt_a0:vendor/etc/wifi/nvram_net.txt_a0
-etc/wifi/nvram_net.txt_murata_a0:vendor/etc/wifi/nvram_net.txt_murata_a0
-etc/wifi/nvram_net.txt_muratafem1:vendor/etc/wifi/nvram_net.txt_muratafem1
-etc/wifi/nvram_net.txt_muratafem2:vendor/etc/wifi/nvram_net.txt_muratafem2
+etc/wifi/nvram_net.txt_muratafem1:vendor/etc/wifi/nvram_net.txt_murata
 etc/wifi/nvram_net.txt_semco3rd:vendor/etc/wifi/nvram_net.txt_semco3rd
-etc/wifi/nvram_net.txt_semcosh:vendor/etc/wifi/nvram_net.txt_semcosh
