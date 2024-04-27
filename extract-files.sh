@@ -35,6 +35,12 @@ function blob_fixup() {
 	vendor/bin/thermal-engine)
             sed -i 's|/system/etc|/vendor/etc|g' "${2}"
             ;;
+	vendor/bin/mpdecision)
+            sed -i 's|/data/system|/data/vendor|g' "${2}"
+            ;;
+	vendor/lib/libsam.so)
+            sed -i 's|/data/system|/data/vendor|g' "${2}"
+            ;;
         vendor/lib/libmmcamera2_sensor_modules.so)
             sed -i 's|system/etc|vendor/etc|g;
                     s|/system/lib|/vendor/lib|g;

@@ -161,7 +161,7 @@ on post-fs-data
 
     # Create directories for perfd
     mkdir /data/misc/perfd 2755 root system
-    mkdir /data/system/perfd 2770 root system
+    mkdir /data/vendor/perfd 2770 root system
 
     # Smart Charging
     chown system system /sys/class/power_supply/battery/batt_slate_mode

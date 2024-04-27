@@ -99,7 +99,7 @@
 /tombstones                                             u:object_r:rootfs:s0
 
 # mpdecision
-/data/system/perfd(/.*)?                                                      u:object_r:mpdecision_data_file:s0
+/data/vendor/perfd(/.*)?                                                      u:object_r:mpdecision_data_file:s0
 /data/misc/perfd(/.*)?                                                        u:object_r:mpdecision_socket:s0
 
 # data files

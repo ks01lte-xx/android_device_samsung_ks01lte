@@ -106,7 +106,7 @@ on property:dev.bootcomplete=1
     setprop vendor.post_boot.parsed 1
 
     # Post boot services
-    rm /data/system/perfd/default_values
+    rm /data/vendor/perfd/default_values
     start vendor.mpdecision
 
 service vendor.mpdecision /vendor/bin/mpdecision --avg_comp
