@@ -326,8 +326,6 @@ etc/sec_config:vendor/etc/sec_config
 -lib/hw/sensors.msm8974.so:vendor/lib/hw/sensors.vendor.msm8974.so
 -lib/libsam.so:vendor/lib/libsam.so|f771f0a41b61d9bb3c22834d74a5c3970af2d19e
 -lib/libsensirion_ks01_eur.so:vendor/lib/libsensirion_ks01_eur.so
--vendor/lib/libqcgesture.so
--vendor/lib/libqcsyncgesture.so
 
 # STLport (Camera/RIL) - local compile LineageOS/external/stlport@984b8432
 -vendor/lib/libstlport.so|0be0a0d13e12fbf95d97d309dcbc25d3f969a469
