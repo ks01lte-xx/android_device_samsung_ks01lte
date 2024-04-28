@@ -55,6 +55,9 @@ function blob_fixup() {
 	vendor/lib/libperipheral_client.so)
             grep -q "libshim_binder.so" "${2}" || "${PATCHELF}" --add-needed "libshim_binder.so" "$2"
             ;;
+	vendor/lib/libbccQTI.so)
+            grep -q "libLLVM_android.so" "${2}" || "${PATCHELF}" --replace-needed libLLVM.so libLLVM_android.so "${2}"
+            ;;
     esac
 }
 

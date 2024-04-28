@@ -272,7 +272,7 @@ vendor/firmware/a330_pm4.fw|ae739ea812f9e4462d7bba8b9ead5782d4496618
 -vendor/lib/libCB.so|3d2ad5bbff1cf4019d89c38689ec2ce3c186a3c1
 -vendor/lib/libOpenCL.so|2b4b9692b16729b880d7881e68208183943f9612
 -vendor/lib/libadreno_utils.so|a109e06c933811c578d129c0772a612cf5d94367
--vendor/lib/libbccQTI.so|94132d5d8421428001c2201a8915949c531b0ad9
+-vendor/lib/libbccQTI.so|31f37f468803685225a59b3bbfddc620b2fc4921
 -vendor/lib/libc2d30-a3xx.so|3666e0bf418e7ea7480b27c2c1ddd1bc86037044
 -vendor/lib/libgsl.so|fafee1adf0e89325b3a1ea83d5205c02ebf860f3
 -vendor/lib/libllvm-qcom.so|fc96c949b662fb34b287a4c0aa194984fbb57d7d
