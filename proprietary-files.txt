@@ -243,14 +243,10 @@ etc/firmware/cpp_firmware_v1_2_0.fw:vendor/firmware/cpp_firmware_v1_2_0.fw
 # DRM
 -bin/qseecomd:vendor/bin/qseecomd
 -vendor/lib/libQSEEComAPI.so
--vendor/lib/libSecureUILib.so
 -vendor/lib/libdrmdiag.so
 -vendor/lib/libdrmfs.so
 -vendor/lib/libdrmtime.so
 -vendor/lib/librpmb.so
--vendor/lib/libsecureui.so
--vendor/lib/libsecureui_svcsock.so
--vendor/lib/libsecureuisvc_jni.so
 -vendor/lib/libssd.so
 
 # GPS (OnePlus bacon - lineage-14.1-20170807-nightly-bacon-signed.zip)
