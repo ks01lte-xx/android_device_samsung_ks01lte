@@ -41,7 +41,7 @@ on early-init
 on fs
     mount_all /vendor/etc/fstab.qcom
 
-    restorecon_recursive /efs
+    restorecon_recursive /mnt/vendor/efs
 
     write /sys/kernel/boot_adsp/boot 1
     setprop qcom.audio.init complete
@@ -89,10 +89,9 @@ on post-fs-data
     restorecon /data/.wifiver.info
 
     # for WIFI MAC address
-    mkdir /efs/wifi 0775 radio system
-    chown system wifi /efs/wifi/.mac.info
-    chmod 0660 /efs/wifi/.mac.info
-    restorecon /efs/wifi/.mac.info
+    mkdir /mnt/vendor/efs/wifi 0775 radio system
+    chown system wifi /mnt/vendor/efs/wifi/.mac.info
+    chmod 0660 /mnt/vendor/efs/wifi/.mac.info
 
     # for WIFI Front End Module
     chown system system /data/.cid.info
@@ -116,40 +115,35 @@ on post-fs-data
     mkdir /data/misc/radio 0775 radio radio
 
     # drm and related files in EFS
-    mkdir /efs/drm 0774 drm system
-    mkdir /efs/drm/sdrm 0774 drm system
-    restorecon /efs/drm
-    restorecon /efs/drm/sdrm
+    mkdir /mnt/vendor/efs/drm 0774 drm system
+    mkdir /mnt/vendor/efs/drm/sdrm 0774 drm system
 
     # h2k permission
-    chown radio radio /efs/h2k.dat
-    chmod 0644 /efs/h2k.dat
-    chown system system /efs/drm/h2k
+    chown radio radio /mnt/vendor/efs/h2k.dat
+    chmod 0644 /mnt/vendor/efs/h2k.dat
+    chown system system /mnt/vendor/efs/drm/h2k
 
     # DRK permission
-    mkdir /efs/prov 0770 radio system
-    chown radio system /efs/prov/libdevkm.lock
-    chmod 0660 /efs/prov/libdevkm.lock
+    mkdir /mnt/vendor/efs/prov 0770 radio system
+    chown radio system /mnt/vendor/efs/prov/libdevkm.lock
+    chmod 0660 /mnt/vendor/efs/prov/libdevkm.lock
 
     # Magnetic_sensor
-    chown system system /efs/hw_offset
-    chmod 0660 /efs/hw_offset
+    chown system system /mnt/vendor/efs/hw_offset
+    chmod 0660 /mnt/vendor/efs/hw_offset
 
     # Sensors
-    chown system system /efs/prox_cal
-    chmod 0640 /efs/prox_cal
-    restorecon /efs/prox_cal
+    chown system system /mnt/vendor/efs/prox_cal
+    chmod 0640 /mnt/vendor/efs/prox_cal
 
-    chown system system /efs/FactoryApp/baro_delta
-    chmod 0640 /efs/FactoryApp/baro_delta
-    restorecon /efs/FactoryApp/baro_delta
+    chown system system /mnt/vendor/efs/FactoryApp/baro_delta
+    chmod 0640 /mnt/vendor/efs/FactoryApp/baro_delta
 
-    chown system system /efs/gyro_cal_data
-    chmod 0640 /efs/gyro_cal_data
-    restorecon /efs/gyro_cal_data
+    chown system system /mnt/vendor/efs/gyro_cal_data
+    chmod 0640 /mnt/vendor/efs/gyro_cal_data
 
     # wifi
-    mkdir /efs/wifi 0775 system system
+    mkdir /mnt/vendor/efs/wifi 0775 system system
 
     # Permissions for svc led
     chown system system /sys/class/sec/led/led_r
@@ -179,10 +173,10 @@ on early-boot
 
 on boot
     # for BT MAC address
-    mkdir /efs/bluetooth 0775 radio system
+    mkdir /mnt/vendor/efs/bluetooth 0775 radio system
     # if already exist
-    chown radio system /efs/bluetooth
-    chmod 0775 /efs/bluetooth
+    chown radio system /mnt/vendor/efs/bluetooth
+    chmod 0775 /mnt/vendor/efs/bluetooth
 
     # Prevents permission denied error for telephony
     chmod 0644 /proc/cmdline
@@ -492,9 +486,8 @@ on boot
 
     # permissions for bluetooth.
     chown bluetooth bluetooth ro.bt.bdaddr_path
-    chown radio bluetooth /efs/bluetooth/bt_addr
-    chmod 0640 /efs/bluetooth/bt_addr
-    restorecon_recursive /efs/bluetooth
+    chown radio bluetooth /mnt/vendor/efs/bluetooth/bt_addr
+    chmod 0640 /mnt/vendor/efs/bluetooth/bt_addr
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type

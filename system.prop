@@ -26,7 +26,7 @@ vendor.audio.offload.gapless.enabled=true
 
 # Bluetooth
 bluetooth.enable_timeout_ms=12000
-ro.bt.bdaddr_path=/efs/bluetooth/bt_addr
+ro.bt.bdaddr_path=/mnt/vendor/efs/bluetooth/bt_addr
 
 # Camera
 camera2.portability.force_api=1
