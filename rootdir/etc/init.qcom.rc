@@ -68,34 +68,39 @@ on post-fs-data
     mkdir /tombstones/mdm 0771 system system
 
     # Create the directories used by the Wireless subsystem
-    mkdir /data/vendor/wifi 0770 wifi wifi
+    mkdir /data/vendor/wifi 0771 wifi wifi
+    mkdir /data/vendor/conn 0771 wifi wifi
     mkdir /data/vendor/wifi/sockets 0770 wifi wifi
     mkdir /data/vendor/wifi/hostapd 0770 wifi wifi
     mkdir /data/vendor/wifi/hostapd/ctrl 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/vendor/wifi/wigig_hostapd 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    mkdir /data/vendor/wifi/log 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
 
     # for WIFI TRP/TIS
-    write /data/.psm.info 1
-    chown system root /data/.psm.info
-    chmod 0664 /data/.psm.info
+    write /data/vendor/conn/.psm.info 1
+    chown wifi wifi /data/vendor/conn/.psm.info
+    chmod 0664 /data/vendor/conn/.psm.info
 
     # for WIFI Version
-    write /data/.wifiver.info 0
-    chown system root /data/.wifiver.info
-    chmod 0664 /data/.wifiver.info
-    restorecon /data/.wifiver.info
-
-    # for WIFI MAC address
-    mkdir /mnt/vendor/efs/wifi 0775 radio system
-    chown system wifi /mnt/vendor/efs/wifi/.mac.info
-    chmod 0660 /mnt/vendor/efs/wifi/.mac.info
+    write /data/vendor/conn/.wifiver.info 0
+    chown wifi wifi /data/vendor/conn/.wifiver.info
+    chmod 0664 /data/vendor/conn/.wifiver.info
 
     # for WIFI Front End Module
-    chown system system /data/.cid.info
-    chmod 0664 /data/.cid.info
+    chown wifi wifi /data/vendor/conn/.cid.info
+    chmod 0640 /data/vendor/conn/.cid.info
+
+    # Set permissions for firmware path control
+    chown wifi wifi /sys/module/dhd/parameters/firmware_path
+    chown wifi wifi /sys/module/dhd/parameters/nvram_path
+
+    # for WIFI MAC address
+    mkdir /mnt/vendor/efs/wifi 0755 wifi wifi
+    chown wifi wifi /mnt/vendor/efs/wifi/.mac.info
+    chmod 0644 /mnt/vendor/efs/wifi/.mac.info
 
     # Chown polling nodes as needed from UI running on system server
     chown system system /sys/devices/msm_sdcc.1/polling
@@ -142,9 +147,6 @@ on post-fs-data
     chown system system /mnt/vendor/efs/gyro_cal_data
     chmod 0640 /mnt/vendor/efs/gyro_cal_data
 
-    # wifi
-    mkdir /mnt/vendor/efs/wifi 0775 system system
-
     # Permissions for svc led
     chown system system /sys/class/sec/led/led_r
     chown system system /sys/class/sec/led/led_g
@@ -173,10 +175,33 @@ on early-boot
 
 on boot
     # for BT MAC address
-    mkdir /mnt/vendor/efs/bluetooth 0775 radio system
+    mkdir /mnt/vendor/efs/bluetooth 0770 system bluetooth
     # if already exist
-    chown radio system /mnt/vendor/efs/bluetooth
-    chmod 0775 /mnt/vendor/efs/bluetooth
+    chown system bluetooth /mnt/vendor/efs/bluetooth
+    chown system bluetooth /mnt/vendor/efs/bluetooth/bt_addr
+    chmod 0770 /mnt/vendor/efs/bluetooth
+    chmod 0660 /mnt/vendor/efs/bluetooth/bt_addr
+
+    # permissions for bluetooth.
+    chown bluetooth bluetooth ro.bt.bdaddr_path
+
+    # Bluetooth UART dev
+    chown bluetooth bluetooth /sys/devices/f995e000.uart/clock
+    chmod 0660 /sys/devices/f995e000.uart/clock
+
+    # permissions for bluetooth.
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth /proc/bluetooth/sleep/proto
+    chmod 0660 /proc/bluetooth/sleep/proto
+    chown system system /sys/module/sco/parameters/disable_esco
+
+    # bluetooth LPM
+    chmod 0660 /proc/bluetooth/sleep/lpm
+    chmod 0220 /proc/bluetooth/sleep/btwrite
+    chown bluetooth bluetooth /proc/bluetooth/sleep/lpm
+    chown bluetooth bluetooth /proc/bluetooth/sleep/btwrite
 
     # Prevents permission denied error for telephony
     chmod 0644 /proc/cmdline
@@ -480,33 +505,8 @@ on boot
     chown system system /sys/class/input/input18/enabled
     chmod 0660 /sys/class/input/input18/enabled
 
-    # Bluetooth UART dev
-    chown bluetooth bluetooth /sys/devices/f995e000.uart/clock
-    chmod 0660 /sys/devices/f995e000.uart/clock
-
-    # permissions for bluetooth.
-    chown bluetooth bluetooth ro.bt.bdaddr_path
-    chown radio bluetooth /mnt/vendor/efs/bluetooth/bt_addr
-    chmod 0640 /mnt/vendor/efs/bluetooth/bt_addr
-    chmod 0660 /sys/class/rfkill/rfkill0/state
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
-    chown bluetooth bluetooth /proc/bluetooth/sleep/proto
-    chmod 0660 /proc/bluetooth/sleep/proto
-    chown system system /sys/module/sco/parameters/disable_esco
-
     # DualWave
     chown system system /sys/kernel/DualWave/sound/DUALWAVE_CONFIG
-
-    # bluetooth LPM
-    chmod 0660 /proc/bluetooth/sleep/lpm
-    chmod 0220 /proc/bluetooth/sleep/btwrite
-    chown bluetooth bluetooth /proc/bluetooth/sleep/lpm
-    chown bluetooth bluetooth /proc/bluetooth/sleep/btwrite
-
-    # Set permissions for firmware path control
-    chown wifi wifi /sys/module/dhd/parameters/firmware_path
-    chown wifi wifi /sys/module/dhd/parameters/nvram_path
 
     # Disable serial console notification
     stop console
@@ -516,13 +516,6 @@ service vendor.adsprpcd /vendor/bin/adsprpcd
     class main
     user media
     group media
-
-service media /system/bin/mediaserver
-    override
-    class late_start
-    user media
-    group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm
-    ioprio rt 4
 
 #start vendor.camera server as daemon
 service vendor.qcamerasvr /vendor/bin/mm-qcamera-daemon
@@ -544,7 +537,7 @@ service vendor.thermal-engine /vendor/bin/thermal-engine
     group root
 
 service vendor.irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
-    class main
+    class core
     user root
     oneshot
 
@@ -561,7 +554,7 @@ service vendor.rmt_storage /vendor/bin/rmt_storage
 # QMUX must be in multiple groups to support external process connections
 service vendor.qmuxd /vendor/bin/qmuxd
     class core
-    user radio
+    user root
     group radio audio bluetooth gps oem_2950
 
 on property:sys.boot_completed=1

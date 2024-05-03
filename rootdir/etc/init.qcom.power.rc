@@ -110,7 +110,7 @@ on property:dev.bootcomplete=1
     start vendor.mpdecision
 
 service vendor.mpdecision /vendor/bin/mpdecision --avg_comp
-    class main
+    class core
     user root
     group root readproc
     disabled

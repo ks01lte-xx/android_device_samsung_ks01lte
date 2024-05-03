@@ -56,10 +56,8 @@ TARGET_USES_64_BIT_BINDER := true
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 MALLOC_SVELTE_FOR_LIBC32 := true
 
-# Charger
-BOARD_BATTERY_DEVICE_NAME := "battery"
-BOARD_CHARGING_CMDLINE_NAME := "androidboot.bootchg"
-BOARD_CHARGING_CMDLINE_VALUE := "true"
+# DexPreopt debug info
+WITH_DEXPREOPT_DEBUG_INFO := false
 
 # Dexpreopt
 ifeq ($(HOST_OS),linux)
