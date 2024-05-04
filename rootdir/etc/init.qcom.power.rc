@@ -26,9 +26,10 @@
 #
 
 on early-init
-    # Increase max readahead size to 512 KB
-    write /sys/block/mmcblk0/queue/read_ahead_kb 512
-    write /sys/block/mmcblk0/queue/scheduler "noop"
+    # Increase max readahead size to 2048 KB
+    write /sys/block/mmcblk0/queue/iostats 0
+    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
+    write /sys/block/mmcblk0/queue/nr_requests 256"
 
 on enable-low-power
     # Configure the hardware properly
@@ -99,6 +100,10 @@ on boot
     trigger enable-low-power
 
 on property:dev.bootcomplete=1
+    # end boot time fs tune
+    write /sys/block/mmcblk0/queue/iostats 1
+    write /sys/block/mmcblk0/queue/read_ahead_kb 128
+    write /sys/block/mmcblk0/queue/nr_requests 128
     # Set I/O scheduler
     setprop sys.io.scheduler "bfq"
 
