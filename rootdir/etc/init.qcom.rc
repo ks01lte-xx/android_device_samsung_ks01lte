@@ -550,12 +550,13 @@ service vendor.rmt_storage /vendor/bin/rmt_storage
     class core
     user root
     group system wakelock
+    shutdown critical
 
 # QMUX must be in multiple groups to support external process connections
 service vendor.qmuxd /vendor/bin/qmuxd
     class core
-    user root
-    group radio audio bluetooth gps oem_2950
+    user radio
+    group radio audio bluetooth gps oem_2950 wakelock log
 
 on property:sys.boot_completed=1
     # Symlink directories to access telephony.db and preferred-apn.xml required by libsec-ril

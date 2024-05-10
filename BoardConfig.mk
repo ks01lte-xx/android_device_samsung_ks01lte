@@ -94,6 +94,7 @@ TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE := true
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 zcache.enabled=1 zcache.compressor=lz4
 BOARD_KERNEL_CMDLINE += androidboot.boot_devices=msm_sdcc.1
+BOARD_KERNEL_CMDLINE += androidboot.memcg=1
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_PAGESIZE := 2048
@@ -175,7 +176,6 @@ TARGET_VNDK_USE_CORE_VARIANT := true
 VENDOR_SECURITY_PATCH := 2016-12-01
 
 # Wifi
-BOARD_HAVE_SAMSUNG_WIFI := true
 BOARD_WLAN_DEVICE := bcmdhd
 BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
