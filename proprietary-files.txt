@@ -291,6 +291,7 @@ etc/sec_config:vendor/etc/sec_config
 -vendor/lib/libOmxWmaDec.so
 
 # Qualcomm
+etc/data/qmi_config.xml:vendor/etc/data/qmi_config.xml
 -vendor/lib/libxml.so
 
 # Qualcomm framework - pinned blobs from G900FXXS1BPCL_G900FOXA1BOJ1_BTU
