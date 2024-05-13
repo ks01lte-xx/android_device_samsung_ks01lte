@@ -17,6 +17,7 @@
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += $(LOCAL_PATH)
+QCOM_SOONG_NAMESPACE := $(LOCAL_PATH)/hardware
 
 # Shipping API level
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_k.mk)
