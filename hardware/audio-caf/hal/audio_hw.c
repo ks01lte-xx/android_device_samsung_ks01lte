@@ -240,6 +240,7 @@ static unsigned int audio_device_ref_count;
 
 static int set_voice_volume_l(struct audio_device *adev, float volume);
 
+#ifdef SUPPORTS_AMPLIFIER
 static amplifier_device_t * get_amplifier_device(void)
 {
     if (adev)
@@ -378,6 +379,7 @@ static int amplifier_close(void)
 
     return 0;
 }
+#endif
 
 static int check_and_set_gapless_mode(struct audio_device *adev, bool enable_gapless)
 {
@@ -612,7 +614,9 @@ int enable_snd_device(struct audio_device *adev,
         }
         audio_extn_listen_update_status(snd_device,
                 LISTEN_EVENT_SND_DEVICE_BUSY);
+#ifdef SUPPORTS_AMPLIFIER
         amplifier_enable_devices(snd_device, true);
+#endif
         audio_route_apply_and_update_path(adev->audio_route, device_name);
     }
     return 0;
@@ -658,7 +662,9 @@ int disable_snd_device(struct audio_device *adev,
             audio_extn_spkr_prot_stop_processing();
         } else {
             audio_route_reset_and_update_path(adev->audio_route, device_name);
+#ifdef SUPPORTS_AMPLIFIER
             amplifier_enable_devices(snd_device, false);
+#endif
         }
 
         audio_extn_listen_update_status(snd_device,
@@ -1011,10 +1017,11 @@ int select_devices(struct audio_device *adev, audio_usecase_t uc_id)
     usecase->out_snd_device = out_snd_device;
 
     enable_audio_route(adev, usecase);
-
+#ifdef SUPPORTS_AMPLIFIER
     /* Rely on amplifier_set_devices to distinguish between in/out devices */
     amplifier_set_input_devices(in_snd_device);
     amplifier_set_output_devices(out_snd_device);
+#endif
 
     /* Applicable only on the targets that has external modem.
      * Enable device command should be sent to modem only after
@@ -1828,9 +1835,9 @@ static int out_standby(struct audio_stream *stream)
     lock_output_stream(out);
     if (!out->standby) {
         pthread_mutex_lock(&adev->lock);
-
+#ifdef SUPPORTS_AMPLIFIER
         amplifier_output_stream_standby((struct audio_stream_out *) stream);
-
+#endif
         out->standby = true;
         if (!is_offload_usecase(out->usecase)) {
             if (out->pcm) {
@@ -2188,11 +2195,11 @@ static ssize_t out_write(struct audio_stream_out *stream, const void *buffer,
             ret = voice_extn_compress_voip_start_output_stream(out);
         else
             ret = start_output_stream(out);
-
+#ifdef SUPPORTS_AMPLIFIER
         if (ret == 0)
             amplifier_output_stream_start(stream,
                     is_offload_usecase(out->usecase));
-
+#endif
         pthread_mutex_unlock(&adev->lock);
         /* ToDo: If use case is compress offload should return 0 */
         if (ret != 0) {
@@ -2557,9 +2564,9 @@ static int in_standby(struct audio_stream *stream)
     lock_input_stream(in);
     if (!in->standby) {
         pthread_mutex_lock(&adev->lock);
-
+#ifdef SUPPORTS_AMPLIFIER
         amplifier_input_stream_standby((struct audio_stream_in *) stream);
-
+#endif
         in->standby = true;
         if (in->pcm) {
             pcm_close(in->pcm);
@@ -2729,10 +2736,10 @@ static ssize_t in_read(struct audio_stream_in *stream, void *buffer,
             ret = voice_extn_compress_voip_start_input_stream(in);
         else
             ret = start_input_stream(in);
-
+#ifdef SUPPORTS_AMPLIFIER
         if (ret == 0)
             amplifier_input_stream_start(stream);
-
+#endif
         pthread_mutex_unlock(&adev->lock);
         if (ret != 0) {
             goto exit;
@@ -3419,8 +3426,10 @@ static int adev_set_mode(struct audio_hw_device *dev, audio_mode_t mode)
     pthread_mutex_lock(&adev->lock);
     if (adev->mode != mode) {
         ALOGD("%s mode %d\n", __func__, mode);
+#ifdef SUPPORTS_AMPLIFIER
         if (amplifier_set_mode(mode) != 0)
             ALOGE("Failed setting amplifier mode");
+#endif
         adev->mode = mode;
     }
     pthread_mutex_unlock(&adev->lock);
@@ -3787,8 +3796,10 @@ static int adev_close(hw_device_t *device)
     pthread_mutex_lock(&adev_init_lock);
 
     if ((--audio_device_ref_count) == 0) {
+#ifdef SUPPORTS_AMPLIFIER
         if (amplifier_close() != 0)
             ALOGE("Amplifier close failed");
+#endif
         audio_extn_snd_mon_unregister_listener(adev);
         audio_extn_listen_deinit(adev);
         audio_route_free(adev->audio_route);
@@ -3972,9 +3983,10 @@ static int adev_open(const hw_module_t *module, const char *name,
                                          "offload_effects_bundle_hal_stop_output");
         }
     }
-
+#ifdef SUPPORTS_AMPLIFIER
     if (amplifier_open() != 0)
         ALOGE("Amplifier initialization failed");
+#endif
 
     *device = &adev->device.common;
     if (k_enable_extended_precision)

@@ -24,7 +24,9 @@
 #include <cutils/list.h>
 #include <cutils/str_parms.h>
 #include <hardware/audio.h>
+#ifdef SUPPORTS_AMPLIFIER
 #include <hardware/audio_amplifier.h>
+#endif
 #include <tinyalsa/asoundlib.h>
 #include <tinycompress/tinycompress.h>
 
@@ -290,7 +292,9 @@ struct audio_device {
      * or other capabilities are present for the device corresponding to that usecase.
      */
     struct pcm_params *use_case_table[AUDIO_USECASE_MAX];
+#ifdef SUPPORTS_AMPLIFIER
     amplifier_device_t *amp;
+#endif
 };
 
 int select_devices(struct audio_device *adev,
