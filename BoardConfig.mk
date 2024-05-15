@@ -94,6 +94,10 @@ TARGET_HAS_MEMFD_BACKPORT := true
 # Netd
 TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE := true
 
+# Linaro GCC 5.2.1
+KERNEL_TOOLCHAIN := $(shell pwd)/armv7_a15/bin
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := armv7-cortex_a15-linux-gnueabihf-
+
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 zcache.enabled=1 zcache.compressor=lz4
