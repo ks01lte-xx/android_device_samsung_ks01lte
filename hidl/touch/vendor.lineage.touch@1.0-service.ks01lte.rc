@@ -1,10 +1,3 @@
-on early-init
-    #
-    # vendor.lineage.touch@ks01lte
-    # For GloveMode
-    chown system radio /sys/class/sec/tsp/cmd
-    chmod 0664 /sys/class/sec/tsp/cmd
-
 on init
     # Touchkey sysfs
     chown system radio /sys/devices/virtual/sec/sec_touchkey/keypad_enable

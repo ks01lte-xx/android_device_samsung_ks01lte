@@ -1,18 +1,3 @@
-on early-boot
-    # Vibrator
-    chown system system /sys/class/timed_output/vibrator/pwm_value
-    chmod 0660 /sys/class/timed_output/vibrator/pwm_value
-    chown system system /sys/class/timed_output/vibrator/pwm_max
-    chmod 0440 /sys/class/timed_output/vibrator/pwm_max
-    chown system system /sys/class/timed_output/vibrator/pwm_min
-    chmod 0440 /sys/class/timed_output/vibrator/pwm_min
-    chown system system /sys/class/timed_output/vibrator/pwm_default
-    chmod 0660 /sys/class/timed_output/vibrator/pwm_default
-    chown system system /sys/class/timed_output/vibrator/pwm_threshold
-    chmod 0440 /sys/class/timed_output/vibrator/pwm_threshold
-    chown system system /sys/class/timed_output/vibrator/enable
-    chmod 0660 /sys/class/timed_output/vibrator/enable
-
 service vendor.vibrator-1-0 /vendor/bin/hw/android.hardware.vibrator@1.0-service.ks01lte
     interface android.hardware.vibrator@1.0::IVibrator default
     class hal

@@ -108,6 +108,46 @@
 
 /sys/devices/f9924000.i2c/i2c-2/2-0020/input/input3   enabled     0660  system  system
 
+# TSP
+/sys/class/sec/tsp cmd 0660 system radio
+
+# USB OTG
+/sys/class/sec/switch       usb_state   0664    radio   system
+/sys/class/sec/switch       chg_type    0664    radio   system
+/sys/class/sec/switch       otg_test    0664    radio   system
+/sys/class/sec/switch       usb_sel     0664    radio   system
+/sys/class/sec/switch       adc         0664    radio   system
+/sys/class/sec/switch       uart_sel    0664    radio   system
+/sys/class/sec/switch       apo_factory 0664    radio   system
+
+# Camera::Flash
+/sys/class/camera/flash    rear_flash              0664    system    camera
+
+# Camera::Front1
+/sys/class/camera/front    front_camfw              0664    system    system
+/sys/class/camera/front    front_camtype            0444    system    system
+
+# Camera::Rear Start
+/sys/class/camera/rear    isp_core                  0664    system   system
+/sys/class/camera/rear    rear_camfw                0664    system   system
+/sys/class/camera/rear    rear_camfw_full           0664    system   system
+/sys/class/camera/rear    rear_camfw_load           0664    system   system
+/sys/class/camera/rear    rear_camtype              0444    system   system
+/sys/class/camera/rear    rear_calcheck             0664    system   system
+/sys/class/camera/rear    rear_fwcheck              0664    system   system
+/sys/class/camera/rear    rear_companionfw_full     0664    system   system
+/sys/class/camera/rear    rear_latest_module_check  0664    system   system
+
+#
+# Permissions for Vibrator
+#
+/sys/class/timed_output/vibrator    enable             0664   system system
+/sys/class/timed_output/vibrator    pwm_threshold      0664   system system
+/sys/class/timed_output/vibrator    pwm_default        0664   system system
+/sys/class/timed_output/vibrator    pwm_min            0664   system system
+/sys/class/timed_output/vibrator    pwm_max            0664   system system
+/sys/class/timed_output/vibrator    pwm_value          0664   system system
+
 # sensorhub
 /dev/ssp_sensorhub        0660   system     system
 
