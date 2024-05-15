@@ -141,12 +141,12 @@
 #
 # Permissions for Vibrator
 #
-/sys/class/timed_output/vibrator    enable             0664   system system
-/sys/class/timed_output/vibrator    pwm_threshold      0664   system system
-/sys/class/timed_output/vibrator    pwm_default        0664   system system
-/sys/class/timed_output/vibrator    pwm_min            0664   system system
-/sys/class/timed_output/vibrator    pwm_max            0664   system system
-/sys/class/timed_output/vibrator    pwm_value          0664   system system
+/sys/class/timed_output/vibrator    enable             0660   system system
+/sys/class/timed_output/vibrator    pwm_threshold      0440   system system
+/sys/class/timed_output/vibrator    pwm_default        0660   system system
+/sys/class/timed_output/vibrator    pwm_min            0440   system system
+/sys/class/timed_output/vibrator    pwm_max            0440   system system
+/sys/class/timed_output/vibrator    pwm_value          0660   system system
 
 # sensorhub
 /dev/ssp_sensorhub        0660   system     system
