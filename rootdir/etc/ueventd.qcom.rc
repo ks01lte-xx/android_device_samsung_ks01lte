@@ -56,7 +56,6 @@
 /dev/jpeg*                0660   media     camera
 /dev/adsprpc-smd          0664   system     system
 /dev/rmnet_ctrl           0660   usb        usb
-/dev/tun                  0660   system     vpn
 
 # for datarouter
 /dev/dun               0660   system     system
@@ -103,8 +102,6 @@
 /sys/devices/virtual/input/input*   flush       0660  root   input
 /sys/devices/virtual/input/input*   poll        0660  input  system
 /sys/devices/virtual/input/input*   pollrate_ms 0660  input  system
-
-/sys/devices/virtual/usb_composite/*   enable    0664  root   system
 
 /sys/devices/f9924000.i2c/i2c-2/2-0020/input/input3   enabled     0660  system  system
 
