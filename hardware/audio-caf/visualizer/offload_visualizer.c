@@ -19,11 +19,12 @@
 #include <assert.h>
 #include <dlfcn.h>
 #include <math.h>
+#include <pthread.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
-#include <pthread.h>
 #include <sys/prctl.h>
+#include <time.h>
+#include <unistd.h>
 
 #include <cutils/list.h>
 #include <cutils/log.h>
