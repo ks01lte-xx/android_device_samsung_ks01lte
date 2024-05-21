@@ -28,7 +28,7 @@ LOCAL_HEADER_LIBRARIES := \
 LOCAL_SHARED_LIBRARIES := \
 	libcutils \
 	liblog \
-	libhardware \
+	libdl \
 	libtinyalsa
 
 LOCAL_MODULE_RELATIVE_PATH := soundfx
