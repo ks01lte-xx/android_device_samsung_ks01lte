@@ -92,10 +92,10 @@
 
 # firmware images
 #
-/firmware(/.*)?                                                     u:object_r:firmware_file:s0
+/vendor/firmware_mnt(/.*)?                                     u:object_r:firmware_file:s0
+/vendor/firmware-modem(/.*)?                                   u:object_r:firmware-modem_file:s0
 
 # rootfs
-/firmware-modem(/.*)?                                   u:object_r:firmware-modem_file:s0
 /tombstones                                             u:object_r:rootfs:s0
 
 # mpdecision
