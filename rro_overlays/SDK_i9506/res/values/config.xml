@@ -78,9 +78,9 @@
             2 - Supported with variable brightness control
     -->
     <integer name="config_deviceSupportsButtonBrightnessControl">1</integer>
+
     <!-- Defines the actions shown in advanced reboot submenu -->
     <string-array name="config_restartActionsList">
-
         <item>restart</item>
         <item>restart_recovery</item>
         <item>restart_download</item>

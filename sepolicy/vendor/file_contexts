@@ -105,9 +105,6 @@
 # data files
 /data/vendor/yas(.*)                                    u:object_r:yas_lib_vendor_data_file:s0
 
-# device nodes
-/dev/ssp_sensorhub                                      u:object_r:sensors_device:s0
-
 # Sensor Library
 /(vendor|system/vendor)/lib/libsensirion_ks01_eur.so    u:object_r:vendor_sensor_libsensirion_file:s0
 

@@ -101,7 +101,6 @@ TARGET_KERNEL_CROSS_COMPILE_PREFIX := armv7-cortex_a15-linux-gnueabihf-
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 zcache.enabled=1 zcache.compressor=lz4
-BOARD_KERNEL_CMDLINE += androidboot.boot_devices=msm_sdcc.1
 BOARD_KERNEL_CMDLINE += androidboot.memcg=1
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := zImage

@@ -60,7 +60,6 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 /dev/qce                  0660   system     drmrpc
 /dev/jpeg*                0660   media     camera
 /dev/adsprpc-smd          0664   system     system
-/dev/rmnet_ctrl           0660   usb        usb
 
 # for datarouter
 /dev/dun               0660   system     system
@@ -96,9 +95,6 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 /dev/ttyHSL0              0660   radio      system
 
 /sys/devices/virtual/smdpkt/smdcntl*       open_timeout   0664 radio radio
-
-# sensors
-/sys/devices/i2c-12/12-*  pollrate_ms 0664 system system
 
 # sysfs properties
 /sys/devices/virtual/input/input*   enable      0660  root   input
@@ -149,9 +145,6 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 /sys/class/timed_output/vibrator    pwm_min            0440   system system
 /sys/class/timed_output/vibrator    pwm_max            0440   system system
 /sys/class/timed_output/vibrator    pwm_value          0660   system system
-
-# sensorhub
-/dev/ssp_sensorhub        0660   system     system
 
 # Bluetooth
 /dev/ttyHS0               0660   bluetooth  bluetooth
