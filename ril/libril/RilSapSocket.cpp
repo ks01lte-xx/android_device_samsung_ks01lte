@@ -23,7 +23,7 @@
 #include "pb_encode.h"
 #undef LOG_TAG
 #define LOG_TAG "RIL_UIM_SOCKET"
-#include <utils/Log.h>
+#include <log/log.h>
 #include <arpa/inet.h>
 #include <errno.h>
 #include <sap_service.h>

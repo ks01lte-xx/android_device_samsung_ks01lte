@@ -21,7 +21,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <utils/Log.h>
+#include <log/log.h>
 #include <ril_event.h>
 #include <string.h>
 #include <sys/time.h>
