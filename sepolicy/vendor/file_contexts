@@ -120,6 +120,8 @@
 /mnt/vendor/efs/FactoryApp(/.*)?                                   u:object_r:app_efs_file:s0
 /mnt/vendor/efs/hw_offset                                          u:object_r:sensors_efs_file:s0
 /mnt/vendor/efs/FactoryApp/baro_delta                              u:object_r:sensors_efs_file:s0
+/mnt/vendor/efs/sec_efs(/.*)?                                      u:object_r:sec_efs_file:s0
+/mnt/vendor/efs/wv\.keys                                           u:object_r:wv_efs_file:s0
 
 # executeables
 /(vendor|system/vendor)/bin/hw/android\.hardware\.gatekeeper@1\.0-service\.software       u:object_r:hal_gatekeeper_default_exec:s0

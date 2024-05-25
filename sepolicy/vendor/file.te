@@ -120,6 +120,8 @@ type sysfs_usb_otg, fs_type, sysfs_type;
 type sysfs_wifi_writeable, fs_type, sysfs_type;
 type bt_fw_file, file_type;
 type wifi_efs_file, file_type;
+type wv_efs_file, file_type, mlstrustedobject;
+type sec_efs_file, file_type, mlstrustedobject;
 
 type proc_deny_new_usb, fs_type, proc_type;
 type sysfs_livedisplay_tuneable, fs_type, sysfs_type;
