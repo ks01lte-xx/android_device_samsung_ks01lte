@@ -163,8 +163,5 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 # SSR devices
 /dev/subsys_*             0640   system     system
 
-# EFS
-/dev/block/mmcblk0p11     0660   system     system
-
 # wlan
 /dev/rfkill               0600   wifi       wifi
