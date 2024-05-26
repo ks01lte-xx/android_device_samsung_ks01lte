@@ -118,4 +118,5 @@ service vendor.mpdecision /vendor/bin/mpdecision --avg_comp
     class core
     user root
     group root readproc
+    socket perfd seqpacket 0666 root system
     disabled
