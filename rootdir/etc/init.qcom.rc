@@ -82,12 +82,12 @@ on post-fs-data
     # for WIFI TRP/TIS
     write /data/vendor/conn/.psm.info 1
     chown wifi wifi /data/vendor/conn/.psm.info
-    chmod 0664 /data/vendor/conn/.psm.info
+    chmod 0640 /data/vendor/conn/.psm.info
 
     # for WIFI Version
     write /data/vendor/conn/.wifiver.info 0
     chown wifi wifi /data/vendor/conn/.wifiver.info
-    chmod 0664 /data/vendor/conn/.wifiver.info
+    chmod 0640 /data/vendor/conn/.wifiver.info
 
     # for WIFI Front End Module
     chown wifi wifi /data/vendor/conn/.cid.info
