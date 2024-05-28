@@ -123,7 +123,9 @@ TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
     /system/vendor/bin/mm-qcamera-daemon=22 \
     /system/vendor/bin/hw/rild=27
 
+#
 # Partitions
+# Don't build userdata.img
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 20971520
 BOARD_CACHEIMAGE_PARTITION_SIZE := 367001600
