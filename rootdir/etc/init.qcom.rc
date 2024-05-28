@@ -138,11 +138,6 @@ on post-fs-data
     chmod 0644 /mnt/vendor/efs/h2k.dat
     chown system system /mnt/vendor/efs/drm/h2k
 
-    # DRK permission
-    mkdir /mnt/vendor/efs/prov 0770 radio system
-    chown radio system /mnt/vendor/efs/prov/libdevkm.lock
-    chmod 0660 /mnt/vendor/efs/prov/libdevkm.lock
-
     # Magnetic_sensor
     chown system system /mnt/vendor/efs/hw_offset
     chmod 0660 /mnt/vendor/efs/hw_offset
