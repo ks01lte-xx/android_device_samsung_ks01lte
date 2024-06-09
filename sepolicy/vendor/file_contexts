@@ -138,7 +138,7 @@
 /(vendor|system/vendor)/bin/hw/vendor\.lineage\.trust@1\.0-service                        u:object_r:hal_lineage_trust_default_exec:s0
 
 # firmware
-/system/vendor/firmware/bcm(.*).hcd                     u:object_r:bt_fw_file:s0
+/(vendor|system/vendor)/firmware/bcm(.*).hcd                     u:object_r:bt_fw_file:s0
 
 # rootfs
 /firmware-modem                                         u:object_r:firmware_file:s0
@@ -157,7 +157,7 @@
 # sysfs - block/storage
 /sys/devices/msm_sdcc\.[0-9]/mmc_host/mmc[0-9]/power(/.*)?  u:object_r:sysfs_mmc_host:s0
 
-/sys/devices/virtual/smdpkt/smdcntl[0-11]/open_timeout                 u:object_r:sysfs_smd_open_timeout:s0
+/sys/devices/virtual/smdpkt/smdcntl[0-9]/open_timeout                 u:object_r:sysfs_smd_open_timeout:s0
 
 # sysfs - pwr
 /sys/devices(/.*)?/input/input[2-4]/enabled             u:object_r:sysfs_hal_pwr:s0

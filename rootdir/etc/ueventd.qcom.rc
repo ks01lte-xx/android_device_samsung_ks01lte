@@ -165,3 +165,6 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 
 # wlan
 /dev/rfkill               0600   wifi       wifi
+
+# Reactivation Lock
+/dev/block/mmcblk0rpmb	0660	system	system
