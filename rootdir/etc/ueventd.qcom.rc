@@ -146,6 +146,20 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 /sys/class/timed_output/vibrator    pwm_max            0440   system system
 /sys/class/timed_output/vibrator    pwm_value          0660   system system
 
+# sys-fs display
+/sys/class/graphics/fb*     hpd                      0664    system  graphics
+/sys/class/graphics/fb*     vendor_name              0664    system  graphics
+/sys/class/graphics/fb*     product_description      0664    system  graphics
+/sys/class/graphics/fb*     dynamic_fps              0664    system  graphics
+/sys/class/graphics/fb*     pa                       0664    system  graphics
+/sys/class/graphics/fb*     hdcp/tp                  0664    system  graphics
+
+/sys/class/graphics/fb0     idle_time                0664    system  graphics
+/sys/class/graphics/fb0     modes                    0664    system  graphics
+/sys/class/graphics/fb0     mode                     0664    system  graphics
+
+/sys/class/graphics/fb0     csc_cfg                  0664    system  camera
+
 # Bluetooth
 /dev/ttyHS0               0660   bluetooth  bluetooth
 
