@@ -4,25 +4,30 @@ dalvik.vm.dex2oat-swap=false
 dalvik.vm.dex2oat-flags=--no-watch-dog
 
 # Audio
+# Reduce client buffer size for fast audio output tracks
 af.fast_track_multiplier=1
+
+# music through deep buffer
 audio.deep_buffer.media=true
+
+# Audio offload
 vendor.audio.offload.buffer.size.kb=256
+vendor.audio.offload.multiple.enabled=false
+vendor.audio.offload.gapless.enabled=true
 audio.offload.pcm.16bit.enable=true
 audio.offload.pcm.24bit.enable=true
 audio.offload.video=true
+audio.offload.disable=true
+
+# Audio - Fluence
 persist.vendor.audio.fluence.speaker=true
 persist.vendor.audio.fluence.voicecall=true
 persist.vendor.audio.fluence.voicerec=false
 ro.vendor.audio.sdk.fluencetype=fluence
-vendor.audio.offload.multiple.enabled=false
+
 vendor.audio_hal.period_size=192
 vendor.dedicated.device.for.voip=true
 vendor.voice.path.for.pcm.voip=false
-
-# Audio (Media)
-audio.offload.disable=true
-vendor.audio.offload.gapless.enabled=true
-#audio.offload.gapless.enabled=false
 
 # Bluetooth
 bluetooth.enable_timeout_ms=12000
