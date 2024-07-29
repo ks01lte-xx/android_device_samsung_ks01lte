@@ -146,7 +146,7 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-service.ks01lte
+    android.hardware.light-service.ks01lte
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
