@@ -132,6 +132,9 @@ PRODUCT_PACKAGES += \
     libhidltransport \
     libhwbinder
 
+PRODUCT_PACKAGES += \
+    vndservicemanager
+
 # IR Blaster
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-service.ks01lte
@@ -248,6 +251,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl.samsung8974 \
     android.hardware.sensors@1.0-service.samsung8974
+
+# Cannot find entry android.hardware.sensors@2.x
+# PRODUCT_PACKAGES += \
+#     android.hardware.sensors@2.0 \
+#     android.hardware.sensors@2.1
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/_hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/_hals.conf
