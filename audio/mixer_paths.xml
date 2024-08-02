@@ -469,8 +469,7 @@
 	</path>
 
 	<path name="speaker-and-dock">
-		<path name="lineout" />
-		<path name="spk" />
+		<path name="spk-lineout" />
 		<ctl name="RX3 Digital Volume" value="84" />
 		<ctl name="RX5 Digital Volume" value="84" />
 		<ctl name="LINEOUT1 Volume" value="19" />
