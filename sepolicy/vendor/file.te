@@ -129,4 +129,4 @@ type sysfs_livedisplay_tuneable, fs_type, sysfs_type;
 # sysfs vadc device for hvdcp/quickcharge
 type sysfs_vadc_dev, sysfs_type, fs_type;
 
-type time_data_file,             file_type, data_file_type, core_data_file_type;
+type time_data_file, file_type, data_file_type, core_data_file_type;
