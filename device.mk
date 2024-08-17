@@ -68,12 +68,13 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.1-service \
     android.hardware.graphics.mapper@2.0-impl-2.1:32 \
-    android.hardware.memtrack@1.0-impl:32 \
-    android.hardware.memtrack@1.0-service \
     copybit.msm8974 \
     gralloc.msm8974 \
-    hwcomposer.msm8974 \
-    memtrack.msm8974
+    hwcomposer.msm8974
+
+# Display-memtrack
+PRODUCT_PACKAGES += \
+    vendor.qti.hardware.memtrack-service
 
 # Do not spin up a separate process for the network stack, use an in-process APK.
 PRODUCT_PACKAGES += InProcessNetworkStack
