@@ -57,14 +57,6 @@ ART_BUILD_TARGET_DEBUG := false
 ART_BUILD_HOST_NDEBUG := true
 ART_BUILD_HOST_DEBUG := false
 
-# Dexpreopt
-ifeq ($(HOST_OS),linux)
-  ifneq ($(TARGET_BUILD_VARIANT),eng)
-    WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY ?= false
-    WITH_DEXPREOPT := true
-  endif
-endif
-
 # Display
 USE_DEVICE_SPECIFIC_DISPLAY := true
 DEVICE_SPECIFIC_DISPLAY_PATH := $(DEVICE_PATH)/hardware/display-caf
@@ -85,10 +77,6 @@ TARGET_HAS_MEMFD_BACKPORT := true
 # Netd
 TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE := true
 
-# Linaro GCC 5.2.1
-KERNEL_TOOLCHAIN := $(shell pwd)/armv7_a15/bin
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := armv7-cortex_a15-linux-gnueabihf-
-
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 zcache.enabled=1 zcache.compressor=lz4
@@ -103,6 +91,8 @@ BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
 BOARD_RAMDISK_USE_XZ := true
 TARGET_KERNEL_CONFIG := lineage_ks01lte_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/msm8974
+TARGET_KERNEL_ADDITIONAL_FLAGS := \
+    HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument"
 
 # Enable SVELTE memory configuration
 MALLOC_SVELTE := true
