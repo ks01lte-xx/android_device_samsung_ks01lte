@@ -46,9 +46,9 @@ TARGET_BOOTANIMATION_HALF_RES := true
 
 # Camera
 PRODUCT_PACKAGES += \
-    Snap \
     android.hardware.camera.provider@2.4-impl-legacy \
     camera.msm8974 \
+    Camera2 \
     libshim_camera \
     libxml2
 
@@ -171,7 +171,6 @@ PRODUCT_PACKAGES += \
     Provider_i9506 \
     SDK_i9506 \
     Settings_i9506 \
-    Snap_i9506 \
     TelephonyRes_i9506 \
     Tethering_i9506 \
     Wifi_i9506
