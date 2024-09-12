@@ -11,7 +11,7 @@ LOCAL_SHARED_LIBRARIES        := $(common_libs) libEGL liboverlay \
                                  libhdmi libqdutils libhardware_legacy \
                                  libdl libmemalloc libqservice libsync \
                                  libbinder libmedia libhwui libvirtual \
-                                 libbfqio libnativewindow libGLESv2 libpng
+                                 libnativewindow libGLESv2 libpng
 LOCAL_CFLAGS                  := $(common_flags) -DLOG_TAG=\"qdhwcomposer\"
 #Enable Dynamic FPS if PHASE_OFFSET is not set
 ifeq ($(VSYNC_EVENT_PHASE_OFFSET_NS),)
