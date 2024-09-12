@@ -6,11 +6,12 @@ LOCAL_MODULE                  := hwcomposer.$(TARGET_BOARD_PLATFORM)
 LOCAL_MODULE_RELATIVE_PATH    := hw
 LOCAL_VENDOR_MODULE           := true
 LOCAL_MODULE_TAGS             := optional
+LOCAL_STATIC_LIBRARIES        += libskia_renderengine
 LOCAL_SHARED_LIBRARIES        := $(common_libs) libEGL liboverlay \
                                  libhdmi libqdutils libhardware_legacy \
                                  libdl libmemalloc libqservice libsync \
                                  libbinder libmedia libhwui libvirtual \
-                                 libbfqio
+                                 libbfqio libnativewindow libGLESv2 libpng
 LOCAL_CFLAGS                  := $(common_flags) -DLOG_TAG=\"qdhwcomposer\"
 #Enable Dynamic FPS if PHASE_OFFSET is not set
 ifeq ($(VSYNC_EVENT_PHASE_OFFSET_NS),)
