@@ -3,6 +3,7 @@ dalvik.vm.dex2oat-cpu-set=0,1,2,3
 dalvik.vm.dex2oat-threads=4
 dalvik.vm.dex2oat-filter=speed
 dalvik.vm.dex2oat-swap=false
+dalvik.vm.madvise-random=true
 dalvik.vm.systemuicompilerfilter=speed
 dalvik.vm.dex2oat-flags=--no-watch-dog
 
@@ -70,17 +71,23 @@ ro.gps.agps_provider=1
 ro.qc.sdk.izat.premium_enabled=0
 ro.qc.sdk.izat.service_mask=0x0
 
+# filter unused apps
+pm.dexopt.downgrade_after_inactive_days=10
+pm.dexopt.shared=quicken
+
 # Disable media transcoding
 persist.sys.fuse.transcode_user_control=true
 persist.sys.fuse.transcode_enabled=false
 debug.stagefright.ccodec=0
 
 # LMKD
-ro.lmk.kill_heaviest_task=true
+ro.lmk.critical_upgrade=true
+ro.lmk.kill_heaviest_task=false
 ro.lmk.use_psi=true
 ro.lmk.use_minfree_levels=false
 ro.lmk.thrashing_limit_decay=50
-ro.lmk.downgrade_pressure=30
+ro.lmk.upgrade_pressure=30
+ro.lmk.downgrade_pressure=40
 
 # Memory optimizations
 ro.vendor.qti.am.reschedule_service=true
