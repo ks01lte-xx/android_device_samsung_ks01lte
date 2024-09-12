@@ -11,7 +11,7 @@ type qmuxd_socket, file_type;
 type sysfs_smd_open_timeout, sysfs_type, fs_type;
 
 # Sensor file types
-type yas_lib_vendor_data_file, file_type, data_file_type;
+type sensor_lib_vendor_data_file, file_type, data_file_type;
 type sysfs_sensors, sysfs_type, fs_type;
 
 #type for thermal-engine
