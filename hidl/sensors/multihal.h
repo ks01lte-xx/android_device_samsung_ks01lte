@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef HARDWARE_LIBHARDWARE_MODULES_SENSORS_MULTIHAL_H_
-#define HARDWARE_LIBHARDWARE_MODULES_SENSORS_MULTIHAL_H_
+#pragma once
 
 #include <hardware/sensors.h>
 
@@ -24,5 +23,3 @@ static const char* MULTI_HAL_CONFIG_FILE_PATH = "/vendor/etc/sensors/_hals.conf"
 static const char* DEPRECATED_MULTI_HAL_CONFIG_FILE_PATH = "/system/etc/sensors/_hals.conf";
 
 struct sensors_module_t* get_multi_hal_module_info(void);
-
-#endif  // HARDWARE_LIBHARDWARE_MODULES_SENSORS_MULTIHAL_H_

@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-#ifndef ANDROID_HARDWARE_VIBRATOR_V1_0_VIBRATOR_H
-#define ANDROID_HARDWARE_VIBRATOR_V1_0_VIBRATOR_H
+#pragma once
 
 #include <android/hardware/vibrator/1.0/IVibrator.h>
 #include <hidl/Status.h>
@@ -49,4 +48,3 @@ private:
 }  // namespace hardware
 }  // namespace android
 
-#endif  // ANDROID_HARDWARE_VIBRATOR_V1_0_VIBRATOR_H

@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-#ifndef SENSOREVENTQUEUE_H_
-#define SENSOREVENTQUEUE_H_
+#pragma once
 
 #include <hardware/sensors.h>
 #include <pthread.h>
@@ -72,5 +71,3 @@ class SensorEventQueue {
     // Returns true if it had to wait.
     bool waitForSpace(pthread_mutex_t* mutex);
 };
-
-#endif  // SENSOREVENTQUEUE_H_

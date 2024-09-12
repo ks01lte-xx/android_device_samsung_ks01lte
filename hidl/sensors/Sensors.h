@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-#ifndef HARDWARE_INTERFACES_SENSORS_V1_0_DEFAULT_SENSORS_H_
-
-#define HARDWARE_INTERFACES_SENSORS_V1_0_DEFAULT_SENSORS_H_
+#pragma once
 
 #include <android-base/macros.h>
 #include <android/hardware/sensors/1.0/ISensors.h>
@@ -80,5 +78,3 @@ extern "C" ISensors* HIDL_FETCH_ISensors(const char* name);
 }  // namespace sensors
 }  // namespace hardware
 }  // namespace android
-
-#endif  // HARDWARE_INTERFACES_SENSORS_V1_0_DEFAULT_SENSORS_H_

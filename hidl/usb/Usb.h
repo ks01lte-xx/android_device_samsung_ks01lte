@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-#ifndef ANDROID_HARDWARE_USB_V1_0_USB_H
-#define ANDROID_HARDWARE_USB_V1_0_USB_H
+#pragma once
 
 #include <android/hardware/usb/1.0/IUsb.h>
 #include <hidl/MQDescriptor.h>
@@ -60,5 +59,3 @@ struct Usb : public IUsb {
 }  // namespace usb
 }  // namespace hardware
 }  // namespace android
-
-#endif  // ANDROID_HARDWARE_USB_V1_0_USB_H
