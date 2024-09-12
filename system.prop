@@ -92,5 +92,9 @@ ro.fastbootd.available=true
 # Sensors
 debug.sensors=1
 
+# SoC
+ro.soc.manufacturer=Qualcomm
+ro.soc.model=MSM8974
+
 # Wifi
 wifi.interface=wlan0
