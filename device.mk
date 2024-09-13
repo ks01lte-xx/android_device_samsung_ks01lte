@@ -173,10 +173,12 @@ PRODUCT_PACKAGES += \
     Dialer_i9506 \
     Frameworks_i9506 \
     Provider_i9506 \
+    Simple_i9506 \
     SDK_i9506 \
     Settings_i9506 \
     TelephonyRes_i9506 \
     Tethering_i9506 \
+    Thread_i9506 \
     Wifi_i9506
 
 # Permissions
