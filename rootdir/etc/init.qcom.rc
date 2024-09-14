@@ -66,55 +66,11 @@ on post-fs
     chmod 0664 /sys/block/mmcblk0/bkops_en
 
 on post-fs-data
-    mkdir /tombstones/modem 0771 system system
-    mkdir /tombstones/lpass 0771 system system
-    mkdir /tombstones/dsps 0771 system system
-    mkdir /tombstones/mdm 0771 system system
-
-    # Create the directories used by the Wireless subsystem
-    mkdir /data/vendor/wifi 0771 wifi wifi
-    mkdir /data/vendor/conn 0771 wifi wifi
-    mkdir /data/vendor/wifi/sockets 0770 wifi wifi
-    mkdir /data/vendor/wifi/hostapd 0770 wifi wifi
-    mkdir /data/vendor/wifi/hostapd/ctrl 0770 wifi wifi
-    mkdir /data/vendor/wifi/wpa_supplicant 0770 wifi wifi
-    mkdir /data/vendor/wifi/wigig_hostapd 0770 wifi wifi
-    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
-    mkdir /data/vendor/wifi/log 0770 wifi wifi
-    mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
-
-    # for WIFI TRP/TIS
-    write /data/vendor/conn/.psm.info 1
-    chown wifi wifi /data/vendor/conn/.psm.info
-    chmod 0640 /data/vendor/conn/.psm.info
-
-    # for WIFI Version
-    write /data/vendor/conn/.wifiver.info 0
-    chown wifi wifi /data/vendor/conn/.wifiver.info
-    chmod 0640 /data/vendor/conn/.wifiver.info
-
-    # for WIFI Front End Module
-    chown wifi wifi /data/vendor/conn/.cid.info
-    chmod 0640 /data/vendor/conn/.cid.info
-
-    # Set permissions for firmware path control
-    chown wifi wifi /sys/module/dhd/parameters/firmware_path
-    chown wifi wifi /sys/module/dhd/parameters/nvram_path
-
-    # Create carrier folder for HiddenMenu
-    mkdir /mnt/vendor/efs/carrier 0755 radio system
-    chown radio system /mnt/vendor/efs/carrier
-    chown radio system /mnt/vendor/efs/carrier/HiddenMenu
-
-    # Permissions for Charging
-    mkdir /mnt/vendor/efs/Battery 0775 radio system
-    chown radio system /mnt/vendor/efs/Battery
-    chmod 0775 /mnt/vendor/efs/Battery
-
-    # for WIFI MAC address
-    mkdir /mnt/vendor/efs/wifi 0755 wifi wifi
-    chown wifi wifi /mnt/vendor/efs/wifi/.mac.info
-    chmod 0644 /mnt/vendor/efs/wifi/.mac.info
+    # Create directories for tombstones
+    mkdir /data/tombstones/modem 0771 system system
+    mkdir /data/tombstones/lpass 0771 system system
+    mkdir /data/tombstones/dsps 0771 system system
+    mkdir /data/tombstones/mdm 0771 system system
 
     # Chown polling nodes as needed from UI running on system server
     chown system system /sys/devices/msm_sdcc.1/polling
@@ -212,7 +168,7 @@ on boot
     chown bluetooth bluetooth /proc/bluetooth/sleep/btwrite
 
     # Prevents permission denied error for telephony
-    chmod 0644 /proc/cmdline
+    chown root radio /proc/cmdline
 
     # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 2770 radio radio
@@ -246,25 +202,26 @@ on boot
     # overhead in the kernel. Turn it off.
     write /sys/block/mmcblk0/queue/add_random 0
 
-    chown radio system /sys/devices/system/cpu/kernel_max
+    # Permission for SystemPerformance
+    chown root system /sys/devices/system/cpu/kernel_max
     chmod 664 /sys/devices/system/cpu/kernel_max
 
-    chown radio system /sys/class/kgsl/kgsl-3d0/max_pwrlevel
-    chmod 664  /sys/class/kgsl/kgsl-3d0/max_pwrlevel
-    chown radio system /sys/class/kgsl/kgsl-3d0/min_pwrlevel
-    chmod 664  /sys/class/kgsl/kgsl-3d0/min_pwrlevel
-    chown radio system /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
-    chmod 664  /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
+    chown root system /sys/class/kgsl/kgsl-3d0/max_pwrlevel
+    chown root system /sys/class/kgsl/kgsl-3d0/min_pwrlevel
+    chown root system /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
+    chmod 0664  /sys/class/kgsl/kgsl-3d0/max_pwrlevel
+    chmod 0664  /sys/class/kgsl/kgsl-3d0/min_pwrlevel
+    chmod 0664  /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
 
-    chown radio system /sys/class/devfreq/qcom,cpubw.42/available_frequencies
+    chown root system /sys/class/devfreq/qcom,cpubw.42/available_frequencies
+    chown root system /sys/class/devfreq/qcom,cpubw.42/available_governors
+    chown root system /sys/class/devfreq/qcom,cpubw.42/governor
+    chown root system /sys/class/devfreq/qcom,cpubw.42/max_freq
+    chown root system /sys/class/devfreq/qcom,cpubw.42/min_freq
     chmod 664 /sys/class/devfreq/qcom,cpubw.42/available_frequencies
-    chown radio system /sys/class/devfreq/qcom,cpubw.42/available_governors
     chmod 664 /sys/class/devfreq/qcom,cpubw.42/available_governors
-    chown radio system /sys/class/devfreq/qcom,cpubw.42/governor
     chmod 664 /sys/class/devfreq/qcom,cpubw.42/governor
-    chown radio system /sys/class/devfreq/qcom,cpubw.42/max_freq
     chmod 664 /sys/class/devfreq/qcom,cpubw.42/max_freq
-    chown radio system /sys/class/devfreq/qcom,cpubw.42/min_freq
     chmod 664 /sys/class/devfreq/qcom,cpubw.42/min_freq
 
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
@@ -295,122 +252,6 @@ on boot
     chmod 0444 /sys/devices/system/soc/soc0/soc_iddq
     chown system radio /sys/devices/system/soc/soc0/soc_pvs
     chmod 0444 /sys/devices/system/soc/soc0/soc_pvs
-
-    # LCD mdnie and panel work
-    chown system system /sys/class/mdnie/mdnie/scenario
-    chmod 0660 /sys/class/mdnie/mdnie/scenario
-    chown system system /sys/class/mdnie/mdnie/outdoor
-    chown system system /sys/class/mdnie/mdnie/accessibility
-    chown system system /sys/class/mdnie/mdnie/mode
-    chown system system /sys/class/mdnie/mdnie/playspeed
-    chown system system /sys/class/lcd/panel/window_type
-    chown radio system /sys/class/lcd/panel/power_reduce
-    chown radio system /sys/class/lcd/panel/siop_enable
-    chown radio system /sys/class/lcd/panel/temperature
-    chown radio system /sys/class/lcd/panel/tuning
-
-    # Charger
-    chown system system /sys/class/power_supply/battery/batt_slate_mode
-
-    # Auto Brightness
-    chown system system /sys/class/backlight/panel/auto_brightness
-    chmod 0664 /sys/class/backlight/panel/auto_brightness
-
-    chown system system /sys/class/leds/keyboard-backlight/brightness
-    chown system system /sys/class/leds/lcd-backlight/brightness
-    chown system system /sys/class/leds/button-backlight/brightness
-
-    # Accelerometer_sensor
-    chown system radio /sys/class/sensors/accelerometer_sensor/raw_data
-    chown system radio /sys/class/sensors/accelerometer_sensor/calibration
-    chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
-    chown system radio /sys/class/sensors/accelerometer_sensor/vendor
-    chown system radio /sys/class/sensors/accelerometer_sensor/name
-
-    # Proximity_sensor
-    chown system radio /sys/class/sensors/proximity_sensor/state
-    chown system radio /sys/class/sensors/proximity_sensor/raw_data
-    chown system radio /sys/class/sensors/proximity_sensor/prox_avg
-    chown system radio /sys/class/sensors/proximity_sensor/prox_cal
-    chown system radio /sys/class/sensors/proximity_sensor/vendor
-    chown system radio /sys/class/sensors/proximity_sensor/name
-    chown system radio /sys/class/sensors/proximity_sensor/thresh_high
-    chown system radio /sys/class/sensors/proximity_sensor/thresh_low
-    chown system radio /sys/class/sensors/proximity_sensor/barcode_emul_en
-
-    # Light_sensor
-    chown system radio /sys/class/sensors/light_sensor/lux
-    chown system radio /sys/class/sensors/light_sensor/raw_data
-    chown system radio /sys/class/sensors/light_sensor/vendor
-    chown system radio /sys/class/sensors/light_sensor/name
-
-    # Gyro_sensor
-    chown system radio /sys/class/sensors/gyro_sensor/power_on
-    chown system radio /sys/class/sensors/gyro_sensor/power_off
-    chown system radio /sys/class/sensors/gyro_sensor/temperature
-    chown system radio /sys/class/sensors/gyro_sensor/selftest
-    chown system radio /sys/class/sensors/gyro_sensor/selftest_dps
-    chown system radio /sys/class/sensors/gyro_sensor/vendor
-    chown system radio /sys/class/sensors/gyro_sensor/name
-
-    # Barometer_sensor
-    chown system radio /sys/class/sensors/barometer_sensor/sea_level_pressure
-    chown system radio /sys/class/sensors/barometer_sensor/vendor
-    chown system radio /sys/class/sensors/barometer_sensor/name
-    chown system radio /sys/class/sensors/barometer_sensor/calibration
-    # Magnetic_sensor
-    chown system radio /sys/class/sensors/magnetic_sensor/selftest
-    chown system radio /sys/class/sensors/magnetic_sensor/raw_data
-    chown system radio /sys/class/sensors/magnetic_sensor/adc
-    chown system radio /sys/class/sensors/magnetic_sensor/hw_offset
-    chown system radio /sys/class/sensors/magnetic_sensor/vendor
-    chown system radio /sys/class/sensors/magnetic_sensor/name
-
-    # Temphumidity_sensor
-    chown system radio /sys/class/sensors/temphumidity_sensor/cp_temperature
-    chown system radio /sys/class/sensors/temphumidity_sensor/crc_check
-    chown system radio /sys/class/sensors/temphumidity_sensor/vendor
-    chown system radio /sys/class/sensors/temphumidity_sensor/name
-    chown system radio /sys/class/sensors/temphumidity_sensor/engine_ver
-    chown system radio /sys/class/sensors/temphumidity_sensor/engine_ver2
-    chown system radio /sys/class/sensors/temphumidity_sensor/cp_thm
-    chown system radio /sys/class/sensors/temphumidity_sensor/send_accuracy
-
-    # SensorHub
-    chown system radio /sys/class/sensors/ssp_sensor/enable
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_rev
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_name
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_test
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_reset
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_update
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_update2
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_update_ums
-    chown system radio /sys/class/sensors/ssp_sensor/mcu_sleep_test
-    chown system radio /sys/class/sensors/ssp_sensor/ssp_flush
-
-    # Gesture_sensor
-    chown system radio /sys/class/sensors/gesture_sensor/vendor
-    chown system radio /sys/class/sensors/gesture_sensor/name
-    chown system radio /sys/class/sensors/gesture_sensor/raw_data
-    chown system radio /sys/class/sensors/gesture_sensor/ir_current
-    chown system radio /sys/class/sensors/gesture_sensor/selftest
-
-    # Permissions for SSRM
-    chmod 0664 /sys/devices/platform/sec-thermistor/temperature
-    chmod 0664 /sys/devices/platform/sec-thermistor/temp_adc
-    chmod 0664 /sys/class/power_supply/battery/siop_level
-    chown radio system /sys/devices/platform/sec-thermistor/temperature
-    chown radio system /sys/devices/platform/sec-thermistor/temp_adc
-    chown radio system /sys/class/power_supply/battery/siop_level
-
-    # Barcode_emul
-    chown system radio /sys/class/sec/sec_barcode_emul/vendor
-    chown system radio /sys/class/sec/sec_barcode_emul/name
-    chown system radio /sys/class/sec/sec_barcode_emul/barcode_fw_update
-    chown system radio /sys/class/sec/sec_barcode_emul/barcode_test_send
-    chown system radio /sys/class/sec/sec_barcode_emul/barcode_send
-    chown system radio /sys/class/sec/sec_barcode_emul/barcode_led_status
-    chown system radio /sys/class/sec/sec_barcode_emul/barcode_ver_check
 
     # Permission for HALL IC
     chown system system /sys/class/sec/sec_key/hall_detect

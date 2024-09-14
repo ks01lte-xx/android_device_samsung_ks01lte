@@ -49,6 +49,7 @@
 /dev/smd([0-9])+                                u:object_r:smd_device:s0
 /dev/cpu_dma_latency                            u:object_r:cpu_latency_device:s0
 /dev/uio*                                       u:object_r:dev_uio_device:s0
+/dev/mdm                                        u:object_r:mdm_device:s0
 
 # cgroup
 /dev/stune(/.*)?                                        u:object_r:cgroup:s0
