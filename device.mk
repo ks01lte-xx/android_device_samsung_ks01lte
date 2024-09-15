@@ -219,6 +219,9 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.qcom.power.rc \
     init.qcom.usb.rc \
+    init.samsung.display.rc \
+    init.vendor.sensors.rc \
+    wifi_sec.rc \
     ueventd.qcom.rc
 
 # RenderScript HAL
