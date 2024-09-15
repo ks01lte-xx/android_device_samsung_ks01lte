@@ -30,6 +30,27 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
+    name: "init.samsung.display.rc",
+    src: "etc/init.samsung.display.rc",
+    sub_dir: "init/hw",
+    vendor: true,
+}
+
+prebuilt_etc {
+    name: "init.vendor.sensors.rc",
+    src: "etc/init.vendor.sensors.rc",
+    sub_dir: "init/hw",
+    vendor: true,
+}
+
+prebuilt_etc {
+    name: "wifi_sec.rc",
+    src: "etc/wifi_sec.rc",
+    sub_dir: "init/hw",
+    vendor: true,
+}
+
+prebuilt_etc {
     name: "init.qcom.usb.rc",
     src: "etc/init.qcom.usb.rc",
     sub_dir: "init/hw",
