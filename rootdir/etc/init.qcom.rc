@@ -381,6 +381,9 @@ on property:sys.boot_completed=1
     # Enable ZRAM on boot_complete
     swapon_all /vendor/etc/fstab.enableswap
 
+    # Disable native stats collection service
+    stop statsd
+
 service charger /system/bin/charger
     class charger
     user system
