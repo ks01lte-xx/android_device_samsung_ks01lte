@@ -1,6 +1,5 @@
 runtime_resource_overlay {
     name: "Wifi_i9506",
     theme: "Wifi_i9506",
-    sdk_version: "current",
     product_specific: true
 }

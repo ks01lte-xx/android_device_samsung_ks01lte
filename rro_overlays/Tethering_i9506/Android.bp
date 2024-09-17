@@ -17,6 +17,5 @@
 runtime_resource_overlay {
     name: "Tethering_i9506",
     theme: "Tethering_i9506",
-    sdk_version: "current",
     product_specific: true
 }

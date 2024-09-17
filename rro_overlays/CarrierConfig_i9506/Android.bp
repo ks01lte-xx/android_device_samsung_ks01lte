@@ -17,7 +17,6 @@
 runtime_resource_overlay {
     name: "CarrierConfig_i9506",
     theme: "CarrierConfig_i9506",
-    sdk_version: "current",
     product_specific: true,
     aaptflags: ["--keep-raw-values"],
 }
