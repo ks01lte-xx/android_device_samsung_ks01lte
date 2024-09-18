@@ -31,6 +31,10 @@ on early-init
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
     write /sys/block/mmcblk0/queue/nr_requests 256"
 
+on boot
+    # Disable console_suspend to get better logging for kernel crashes
+    write /sys/module/printk/parameters/console_suspend N
+
 on enable-low-power
     # Configure the hardware properly
     write /sys/module/lpm_levels/enable_low_power/l2 4
@@ -96,8 +100,12 @@ on enable-low-power
     write /sys/module/cpu_boost/parameters/input_boost_freq 1497600
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
 
-on boot
+on property:sys.boot_completed=1
     trigger enable-low-power
+
+# If UART is on, enable console_suspend on boot_complete to save power
+on property:sys.boot_completed=1 && property:init.svc.console=running
+    write /sys/module/printk/parameters/console_suspend Y
 
 on property:dev.bootcomplete=1
     # end boot time fs tune
