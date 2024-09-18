@@ -17,7 +17,7 @@ LOCAL_PATH := $(call my-dir)
 ### android.hardware.wifi static library
 ###
 include $(CLEAR_VARS)
-LOCAL_MODULE := android.hardware.wifi@1.0-legacy_service-lib
+LOCAL_MODULE := android.hardware.wifi@1.0-ks01lte_service-lib
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_PROPRIETARY_MODULE := true
 LOCAL_CPPFLAGS := -Wall -Werror -Wextra
@@ -79,8 +79,8 @@ include $(BUILD_STATIC_LIBRARY)
 ### android.hardware.wifi daemon
 ###
 include $(CLEAR_VARS)
-LOCAL_MODULE := android.hardware.wifi@1.0-service.legacy
-LOCAL_VINTF_FRAGMENTS := android.hardware.wifi@1.0-service.legacy.xml
+LOCAL_MODULE := android.hardware.wifi@1.0-service.ks01lte
+LOCAL_VINTF_FRAGMENTS := android.hardware.wifi@1.0-service.ks01lte.xml
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_PROPRIETARY_MODULE := true
 LOCAL_CPPFLAGS := -Wall -Werror -Wextra
@@ -105,17 +105,17 @@ LOCAL_SHARED_LIBRARIES := \
     android.hardware.wifi@1.3 \
     android.hardware.wifi@1.4
 LOCAL_STATIC_LIBRARIES := \
-    android.hardware.wifi@1.0-legacy_service-lib
-LOCAL_INIT_RC := android.hardware.wifi@1.0-service.legacy.rc
+    android.hardware.wifi@1.0-ks01lte_service-lib
+LOCAL_INIT_RC := android.hardware.wifi@1.0-service.ks01lte.rc
 include $(BUILD_EXECUTABLE)
 
 ###
 ### android.hardware.wifi daemon
 ###
 include $(CLEAR_VARS)
-LOCAL_MODULE := android.hardware.wifi@1.0-service-lazy.legacy
-LOCAL_VINTF_FRAGMENTS := android.hardware.wifi@1.0-service.legacy.xml
-LOCAL_OVERRIDES_MODULES := android.hardware.wifi@1.0-service.legacy
+LOCAL_MODULE := android.hardware.wifi@1.0-service.ks01lte-lazy
+LOCAL_VINTF_FRAGMENTS := android.hardware.wifi@1.0-service.ks01lte.xml
+LOCAL_OVERRIDES_MODULES := android.hardware.wifi@1.0-service.ks01lte
 LOCAL_CFLAGS := -DLAZY_SERVICE
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_PROPRIETARY_MODULE := true
@@ -137,6 +137,6 @@ LOCAL_SHARED_LIBRARIES := \
     android.hardware.wifi@1.3 \
     android.hardware.wifi@1.4
 LOCAL_STATIC_LIBRARIES := \
-    android.hardware.wifi@1.0-legacy_service-lib
-LOCAL_INIT_RC := android.hardware.wifi@1.0-service-lazy.legacy.rc
+    android.hardware.wifi@1.0-ks01lte_service-lib
+LOCAL_INIT_RC := android.hardware.wifi@1.0-service.ks01lte-lazy.rc
 include $(BUILD_EXECUTABLE)

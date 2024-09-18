@@ -324,7 +324,7 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service.legacy \
+    android.hardware.wifi@1.0-service.ks01lte \
     hostapd \
     wificond \
     wpa_supplicant \
