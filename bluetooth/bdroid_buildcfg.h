@@ -12,10 +12,10 @@
 #define BTM_DEF_LOCAL_NAME   "Galaxy S4 LTE-A"
 
 #define BTA_DISABLE_DELAY 100 /* in milliseconds */
-#define SC_MODE_INCLUDED FALSE
-#define SDP_DEBUG FALSE
-#define BTSNOOP_MEM FALSE
 #define BTM_WBS_INCLUDED TRUE /* Enable WBS */
 #define BTIF_HF_WBS_PREFERRED FALSE /* Do not prefer WBS */
+#define SC_MODE_INCLUDED FALSE /* 4.1/4.2 secure connections feature */
+#define SDP_DEBUG FALSE /* Debug */
+#define BTSNOOP_MEM FALSE /* disable BTSnoop memory logging */
 
 #endif
