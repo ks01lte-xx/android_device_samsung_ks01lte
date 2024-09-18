@@ -130,9 +130,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.1-service
 
-PRODUCT_PACKAGES += \
-    libkeymaster3.vendor
-
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light-service.ks01lte
@@ -277,11 +274,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl.samsung8974 \
     android.hardware.sensors@1.0-service.samsung8974
-
-# Cannot find entry android.hardware.sensors@2.x
-# PRODUCT_PACKAGES += \
-#     android.hardware.sensors@2.0 \
-#     android.hardware.sensors@2.1
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/_hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/_hals.conf
