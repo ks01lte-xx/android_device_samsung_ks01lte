@@ -94,8 +94,7 @@
 # firmware images
 #
 /firmware(/.*)?                                         u:object_r:firmware_file:s0
-/firmware-modem(/.*)?                                   u:object_r:firmware-modem_file:s0
-/(vendor|system/vendor)//firmware(/.*)?                 u:object_r:firmware_file:s0
+/firmware-modem(/.*)?                                   u:object_r:firmware_file:s0
 
 # DRM
 /data/vendor/mediadrm(/.*)?                             u:object_r:mediadrm_vendor_data_file:s0
