@@ -50,91 +50,19 @@
 
 static int first_display_off_hint;
 
-static int current_power_profile = PROFILE_BALANCED;
+/**
+ * Returns true if the target is MSM8974AB or MSM8974AC.
+ */
+static bool is_target_8974pro(void) {
+    static int is_8974pro = -1;
+    int soc_id;
 
-// clang-format off
-/* power save mode: max 2 CPUs, max 1.2 GHz */
-static int profile_power_save[] = {
-    0x0A03,
-    CPUS_ONLINE_MAX_LIMIT_2,
-    CPU0_MAX_FREQ_NONTURBO_MAX + 1,
-    CPU1_MAX_FREQ_NONTURBO_MAX + 1,
-    CPU2_MAX_FREQ_NONTURBO_MAX + 1,
-    CPU3_MAX_FREQ_NONTURBO_MAX + 1
-};
+    if (is_8974pro >= 0) return is_8974pro;
 
-/* efficiency mode: max 2 CPUs, max 2.4 GHz */
-static int profile_bias_power[] = {
-    0x0A03,
-    CPUS_ONLINE_MAX_LIMIT_2,
-    CPU0_MAX_FREQ_NONTURBO_MAX + 14,
-    CPU1_MAX_FREQ_NONTURBO_MAX + 14,
-    CPU2_MAX_FREQ_NONTURBO_MAX + 14,
-    CPU3_MAX_FREQ_NONTURBO_MAX + 14,
-};
+    soc_id = get_soc_id();
+    is_8974pro = soc_id == 194 || (soc_id >= 208 && soc_id <= 218);
 
-/* quick mode: min 3 CPUs */
-static int profile_bias_performance[] = {
-    CPUS_ONLINE_MIN_3
-};
-
-/* high performance mode: min 4 CPUs */
-static int profile_high_performance[] = {
-    0x0901,
-    CPUS_ONLINE_MIN_4
-};
-// clang-format on
-
-#ifdef INTERACTION_BOOST
-int get_number_of_profiles() {
-    return 5;
-}
-#endif
-
-void set_power_profile(int profile) {
-    int ret = -EINVAL;
-    const char* profile_name = NULL;
-
-    if (profile == current_power_profile) return;
-
-    ALOGV("%s: Profile=%d", __func__, profile);
-
-    if (current_power_profile != PROFILE_BALANCED) {
-        undo_hint_action(DEFAULT_PROFILE_HINT_ID);
-        ALOGV("%s: Hint undone", __func__);
-        current_power_profile = PROFILE_BALANCED;
-    }
-
-    if (profile == PROFILE_POWER_SAVE) {
-        ret = perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_power_save,
-                                  ARRAY_SIZE(profile_power_save));
-        profile_name = "powersave";
-
-    } else if (profile == PROFILE_HIGH_PERFORMANCE) {
-        ret = perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_high_performance,
-                                  ARRAY_SIZE(profile_high_performance));
-        profile_name = "performance";
-
-    } else if (profile == PROFILE_BIAS_POWER) {
-        ret = perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_bias_power,
-                                  ARRAY_SIZE(profile_bias_power));
-        profile_name = "bias power";
-
-    } else if (profile == PROFILE_BIAS_PERFORMANCE) {
-        ret = perform_hint_action(DEFAULT_PROFILE_HINT_ID, profile_bias_performance,
-                                  ARRAY_SIZE(profile_bias_performance));
-        profile_name = "bias perf";
-    } else if (profile == PROFILE_BALANCED) {
-        ret = 0;
-        profile_name = "balanced";
-    }
-
-    if (ret == 0) {
-        current_power_profile = profile;
-        ALOGD("%s: Set %s mode", __func__, profile_name);
-    } else {
-        ALOGE("Setting power profile failed. mpdecision not started?");
-    }
+    return is_8974pro;
 }
 
 static int process_video_encode_hint(void* metadata) {
@@ -214,31 +142,20 @@ static int process_video_decode_hint(void* metadata) {
 }
 
 // clang-format off
-/* fling boost: min 3 CPUs, min 1.3 GHz */
 static int resources_interaction_fling_boost[] = {
     CPUS_ONLINE_MIN_3,
-    CPU0_MIN_FREQ_NONTURBO_MAX + 3,
-    CPU1_MIN_FREQ_NONTURBO_MAX + 3,
-    CPU2_MIN_FREQ_NONTURBO_MAX + 3,
-    CPU3_MIN_FREQ_NONTURBO_MAX + 3
+    0x20F,
+    0x30F,
+    0x40F,
+    0x50F
 };
 
-/* interactive boost: min 2 CPUs, min 1.2 GHz */
 static int resources_interaction_boost[] = {
     CPUS_ONLINE_MIN_2,
-    CPU0_MIN_FREQ_NONTURBO_MAX + 2,
-    CPU1_MIN_FREQ_NONTURBO_MAX + 2,
-    CPU2_MIN_FREQ_NONTURBO_MAX + 2,
-    CPU3_MIN_FREQ_NONTURBO_MAX + 2
-};
-
-/* fling boost: min 3 CPUs, min 1.5 GHz */
-static int resources_interaction_fling_boost_perf[] = {
-    CPUS_ONLINE_MIN_3,
-    CPU0_MIN_FREQ_NONTURBO_MAX + 5,
-    CPU1_MIN_FREQ_NONTURBO_MAX + 5,
-    CPU2_MIN_FREQ_NONTURBO_MAX + 5,
-    CPU3_MIN_FREQ_NONTURBO_MAX + 5
+    0x20F,
+    0x30F,
+    0x40F,
+    0x50F
 };
 
 static int resources_launch[] = {
@@ -248,22 +165,12 @@ static int resources_launch[] = {
     CPU2_MIN_FREQ_TURBO_MAX,
     CPU3_MIN_FREQ_TURBO_MAX
 };
-
-/* interactive boost: min 3 CPUs, min 1.5 GHz */
-static int resources_interaction_boost_perf[] = {
-    CPUS_ONLINE_MIN_3,
-    CPU0_MIN_FREQ_NONTURBO_MAX + 5,
-    CPU1_MIN_FREQ_NONTURBO_MAX + 5,
-    CPU2_MIN_FREQ_NONTURBO_MAX + 5,
-    CPU3_MIN_FREQ_NONTURBO_MAX + 5
-};
 // clang-format on
 
-const int kDefaultInteractiveDuration =  200; /* ms */
-const int kPerfInteractiveDuration =  500;    /* ms */
-const int kMinFlingDuration = 1500;           /* ms */
-const int kMaxInteractiveDuration = 5000;     /* ms */
-const int kMaxLaunchDuration = 5000;          /* ms */
+const int kDefaultInteractiveDuration = 500; /* ms */
+const int kMinFlingDuration = 1500;          /* ms */
+const int kMaxInteractiveDuration = 5000;    /* ms */
+const int kMaxLaunchDuration = 5000;         /* ms */
 
 static void process_interaction_hint(void* data) {
     static struct timespec s_previous_boost_timespec;
@@ -271,13 +178,7 @@ static void process_interaction_hint(void* data) {
 
     struct timespec cur_boost_timespec;
     long long elapsed_time;
-    int duration;
-    if (current_power_profile == PROFILE_BIAS_POWER ||
-        current_power_profile == PROFILE_HIGH_PERFORMANCE) {
-        duration = kPerfInteractiveDuration;
-    } else {
-        duration = kDefaultInteractiveDuration;
-    }
+    int duration = kDefaultInteractiveDuration;
 
     if (data) {
         int input_duration = *((int*)data);
@@ -290,7 +191,7 @@ static void process_interaction_hint(void* data) {
     clock_gettime(CLOCK_MONOTONIC, &cur_boost_timespec);
 
     elapsed_time = calc_timespan_us(s_previous_boost_timespec, cur_boost_timespec);
-    // don't hint if it's been less than 250 ms since last boost
+    // don't hint if it's been less than 250ms since last boost
     // also detect if we're doing anything resembling a fling
     // support additional boosting in case of flings
     if (elapsed_time < 250000 && duration <= 750) {
@@ -299,22 +200,11 @@ static void process_interaction_hint(void* data) {
     s_previous_boost_timespec = cur_boost_timespec;
     s_previous_duration = duration;
 
-    if (current_power_profile == PROFILE_BIAS_POWER) {
-        if (duration >= kMinFlingDuration) {
-            interaction(duration, ARRAY_SIZE(resources_interaction_fling_boost_perf),
-                    resources_interaction_fling_boost_perf);
-        } else {
-            interaction(duration, ARRAY_SIZE(resources_interaction_boost_perf),
-                    resources_interaction_boost_perf);
-        }
-    } else {
-        if (duration >= kMinFlingDuration) {
-            interaction(duration, ARRAY_SIZE(resources_interaction_fling_boost),
+    if (duration >= kMinFlingDuration) {
+        interaction(duration, ARRAY_SIZE(resources_interaction_fling_boost),
                     resources_interaction_fling_boost);
-        } else {
-            interaction(duration, ARRAY_SIZE(resources_interaction_boost),
-                    resources_interaction_boost);
-        }
+    } else {
+        interaction(duration, ARRAY_SIZE(resources_interaction_boost), resources_interaction_boost);
     }
 }
 
@@ -346,12 +236,6 @@ static int process_activity_launch_hint(void* data) {
 
 int power_hint_override(power_hint_t hint, void* data) {
     int ret_val = HINT_NONE;
-
-    // Skip other hints in high/low power modes
-    if (current_power_profile == PROFILE_POWER_SAVE) {
-        return HINT_HANDLED;
-    }
-
     switch (hint) {
         case POWER_HINT_VIDEO_ENCODE:
             ret_val = process_video_encode_hint(data);
@@ -386,12 +270,14 @@ int set_interactive_override(int on) {
          * We need to be able to identify the first display off hint
          * and release the current lock holder
          */
-        if (!first_display_off_hint) {
-            undo_initial_hint_action();
-            first_display_off_hint = 1;
+        if (is_target_8974pro()) {
+            if (!first_display_off_hint) {
+                undo_initial_hint_action();
+                first_display_off_hint = 1;
+            }
+            /* used for all subsequent toggles to the display */
+            undo_hint_action(DISPLAY_STATE_HINT_ID_2);
         }
-        /* Used for all subsequent toggles to the display */
-        undo_hint_action(DISPLAY_STATE_HINT_ID_2);
         if (is_interactive_governor(governor)) {
             int resource_values[] = {TR_MS_50, THREAD_MIGRATION_SYNC_OFF};
             perform_hint_action(DISPLAY_STATE_HINT_ID, resource_values,
@@ -399,9 +285,11 @@ int set_interactive_override(int on) {
         }
     } else {
         /* Display on */
-        int resource_values2[] = {CPUS_ONLINE_MIN_2};
-        perform_hint_action(DISPLAY_STATE_HINT_ID_2, resource_values2,
-                            ARRAY_SIZE(resource_values2));
+        if (is_target_8974pro()) {
+            int resource_values2[] = {CPUS_ONLINE_MIN_2};
+            perform_hint_action(DISPLAY_STATE_HINT_ID_2, resource_values2,
+                                ARRAY_SIZE(resource_values2));
+        }
         if (is_interactive_governor(governor)) {
             undo_hint_action(DISPLAY_STATE_HINT_ID);
         }
