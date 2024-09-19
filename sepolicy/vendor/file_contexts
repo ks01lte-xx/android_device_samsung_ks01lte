@@ -93,8 +93,9 @@
 
 # firmware images
 #
-/vendor/firmware_mnt(/.*)?                                     u:object_r:firmware_file:s0
-/vendor/firmware-modem(/.*)?                                   u:object_r:firmware-modem_file:s0
+/firmware(/.*)?                                         u:object_r:firmware_file:s0
+/firmware-modem(/.*)?                                   u:object_r:firmware-modem_file:s0
+/(vendor|system/vendor)//firmware(/.*)?                 u:object_r:firmware_file:s0
 
 # DRM
 /data/vendor/mediadrm(/.*)?                             u:object_r:mediadrm_vendor_data_file:s0
@@ -112,19 +113,19 @@
 /(vendor|system/vendor)/lib/libsensirion_ks01_eur.so    u:object_r:vendor_sensor_libsensirion_file:s0
 
 # data files
-/data/vendor/conn/.cid.info                                         u:object_r:wifi_vendor_data_file:s0
-/data/vendor/conn/.psm.info                                         u:object_r:wifi_vendor_data_file:s0
-/data/vendor/conn/.wifiver.info                                     u:object_r:wifi_vendor_data_file:s0
+/data/.cid.info                                         u:object_r:wifi_vendor_data_file:s0
+/data/.psm.info                                         u:object_r:wifi_vendor_data_file:s0
+/data/.wifiver.info                                     u:object_r:wifi_vendor_data_file:s0
 
 # efs files
-/mnt/vendor/efs/bluetooth(/.*)?                                    u:object_r:bluetooth_efs_file:s0
-/mnt/vendor/efs/imei(/.*)?                                         u:object_r:imei_efs_file:s0
-/mnt/vendor/efs/wifi(/.*)?                                         u:object_r:wifi_efs_file:s0
-/mnt/vendor/efs/FactoryApp(/.*)?                                   u:object_r:app_efs_file:s0
-/mnt/vendor/efs/hw_offset                                          u:object_r:sensors_efs_file:s0
-/mnt/vendor/efs/FactoryApp/baro_delta                              u:object_r:sensors_efs_file:s0
-/mnt/vendor/efs/sec_efs(/.*)?                                      u:object_r:sec_efs_file:s0
-/mnt/vendor/efs/wv\.keys                                           u:object_r:wv_efs_file:s0
+/efs/bluetooth(/.*)?                                    u:object_r:bluetooth_efs_file:s0
+/efs/imei(/.*)?                                         u:object_r:imei_efs_file:s0
+/efs/wifi(/.*)?                                         u:object_r:wifi_efs_file:s0
+/efs/FactoryApp(/.*)?                                   u:object_r:app_efs_file:s0
+/efs/hw_offset                                          u:object_r:sensors_efs_file:s0
+/efs/FactoryApp/baro_delta                              u:object_r:sensors_efs_file:s0
+/efs/sec_efs(/.*)?                                      u:object_r:sec_efs_file:s0
+/efs/wv\.keys                                           u:object_r:wv_efs_file:s0
 
 # executeables
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.4-service\.clearkey              u:object_r:hal_drm_clearkey_exec:s0

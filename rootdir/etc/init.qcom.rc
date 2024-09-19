@@ -48,7 +48,7 @@ on init
 on fs
     mount_all /vendor/etc/fstab.qcom
 
-    restorecon_recursive /mnt/vendor/efs
+    restorecon_recursive /efs
 
     write /sys/kernel/boot_adsp/boot 1
     setprop qcom.audio.init complete
@@ -93,27 +93,27 @@ on post-fs-data
     mkdir /data/misc/radio 0775 radio radio
 
     # drm and related files in EFS
-    mkdir /mnt/vendor/efs/drm 0774 drm system
-    mkdir /mnt/vendor/efs/drm/sdrm 0774 drm system
+    mkdir /efs/drm 0774 drm system
+    mkdir /efs/drm/sdrm 0774 drm system
 
     # h2k permission
-    chown radio radio /mnt/vendor/efs/h2k.dat
-    chmod 0644 /mnt/vendor/efs/h2k.dat
-    chown system system /mnt/vendor/efs/drm/h2k
+    chown radio radio /efs/h2k.dat
+    chmod 0644 /efs/h2k.dat
+    chown system system /efs/drm/h2k
 
     # Magnetic_sensor
-    chown system system /mnt/vendor/efs/hw_offset
-    chmod 0660 /mnt/vendor/efs/hw_offset
+    chown system system /efs/hw_offset
+    chmod 0660 /efs/hw_offset
 
     # Sensors
-    chown system system /mnt/vendor/efs/prox_cal
-    chmod 0640 /mnt/vendor/efs/prox_cal
+    chown system system /efs/prox_cal
+    chmod 0640 /efs/prox_cal
 
-    chown system system /mnt/vendor/efs/FactoryApp/baro_delta
-    chmod 0640 /mnt/vendor/efs/FactoryApp/baro_delta
+    chown system system /efs/FactoryApp/baro_delta
+    chmod 0640 /efs/FactoryApp/baro_delta
 
-    chown system system /mnt/vendor/efs/gyro_cal_data
-    chmod 0640 /mnt/vendor/efs/gyro_cal_data
+    chown system system /efs/gyro_cal_data
+    chmod 0640 /efs/gyro_cal_data
 
     # Permissions for svc led
     chown system system /sys/class/sec/led/led_r
@@ -142,12 +142,12 @@ on early-boot
 
 on boot
     # for BT MAC address
-    mkdir /mnt/vendor/efs/bluetooth 0770 system bluetooth
+    mkdir /efs/bluetooth 0770 system bluetooth
     # if already exist
-    chown system bluetooth /mnt/vendor/efs/bluetooth
-    chown system bluetooth /mnt/vendor/efs/bluetooth/bt_addr
-    chmod 0770 /mnt/vendor/efs/bluetooth
-    chmod 0660 /mnt/vendor/efs/bluetooth/bt_addr
+    chown system bluetooth /efs/bluetooth
+    chown system bluetooth /efs/bluetooth/bt_addr
+    chmod 0770 /efs/bluetooth
+    chmod 0660 /efs/bluetooth/bt_addr
 
     # permissions for bluetooth.
     chown bluetooth bluetooth ro.bt.bdaddr_path
@@ -212,9 +212,9 @@ on boot
     chown root system /sys/class/kgsl/kgsl-3d0/max_pwrlevel
     chown root system /sys/class/kgsl/kgsl-3d0/min_pwrlevel
     chown root system /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
-    chmod 0664  /sys/class/kgsl/kgsl-3d0/max_pwrlevel
-    chmod 0664  /sys/class/kgsl/kgsl-3d0/min_pwrlevel
-    chmod 0664  /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/max_pwrlevel
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/min_pwrlevel
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
 
     chown root system /sys/class/devfreq/qcom,cpubw.42/available_frequencies
     chown root system /sys/class/devfreq/qcom,cpubw.42/available_governors
@@ -284,8 +284,8 @@ on boot
     chown system radio /sys/class/power_supply/battery/batt_temp_table
     chmod 0664 /sys/class/power_supply/battery/batt_capacity_max
     chown system radio /sys/class/power_supply/battery/batt_capacity_max
-    chmod 0664 /mnt/vendor/efs/Battery/batt_capacity_max
-    chown radio system /mnt/vendor/efs/Battery/batt_capacity_max
+    chmod 0664 /efs/Battery/batt_capacity_max
+    chown radio system /efs/Battery/batt_capacity_max
 
     # Permission for fast dormancy for RIL
     chown system radio /sys/devices/virtual/sec/bamdmux/waketime
