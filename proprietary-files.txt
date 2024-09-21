@@ -312,9 +312,6 @@ etc/data/qmi_config.xml:vendor/etc/data/qmi_config.xml
 -vendor/lib/libqmiservices.so
 
 # Radio
--bin/efsks:vendor/bin/efsks
--bin/ks:vendor/bin/ks
--bin/qcks:vendor/bin/qcks
 -bin/qmuxd:vendor/bin/qmuxd
 -bin/rfs_access:vendor/bin/rfs_access
 -bin/rmt_storage:vendor/bin/rmt_storage
