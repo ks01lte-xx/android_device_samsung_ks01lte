@@ -25,7 +25,3 @@ on init
 
     chown system system /sys/class/sec/led/led_blink
     chmod 0664 /sys/class/sec/led/led_blink
-
-    chown system system /sys/class/leds/keyboard-backlight/brightness
-    chown system system /sys/class/leds/lcd-backlight/brightness
-    chown system system /sys/class/leds/button-backlight/brightness
