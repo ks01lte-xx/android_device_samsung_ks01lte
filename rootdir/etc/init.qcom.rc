@@ -53,13 +53,6 @@ on fs
     write /sys/kernel/boot_adsp/boot 1
     setprop qcom.audio.init complete
 
-    # Adaptive LMK
-    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
-
-    # disable lmk_fast_run earlier
-    write /sys/module/lowmemorykiller/parameters/lmk_fast_run 0
-
     # GnssConfiguration doesn't actually look at gps.conf, just the debug file
     mount none /system/etc/gps.conf /system/etc/gps_debug.conf bind
 
@@ -198,6 +191,21 @@ on boot
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
+    # Subsytem Restart
+    #adsp
+    write /sys/bus/msm_subsys/devices/subsys0/restart_level RELATED
+    #modem
+    write /sys/bus/msm_subsys/devices/subsys1/restart_level RELATED
+    #venus
+    write /sys/bus/msm_subsys/devices/subsys2/restart_level RELATED
+
+    # Adaptive LMK
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
+
+    # disable lmk_fast_run earlier
+    write /sys/module/lowmemorykiller/parameters/lmk_fast_run 0
+
     # Flash storage isn't a good entropy source, and only causes locking
     # overhead in the kernel. Turn it off.
     write /sys/block/mmcblk0/queue/add_random 0
@@ -276,7 +284,6 @@ service vendor.adsprpcd /vendor/bin/adsprpcd
     user media
     group media
 
-#start vendor.camera server as daemon
 service vendor.qcamerasvr /vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
@@ -336,17 +343,3 @@ service charger /system/bin/charger
     group system graphics input
     capabilities SYS_BOOT
     seclabel u:r:charger:s0
-
-# Disable SSR to SoC restart
-on property:persist.sys.ssr.restart_level=1
-    write /sys/module/subsystem_restart/parameters/restart_level 1
-    write /sys/bus/msm_subsys/devices/subsys0/restart_level system
-    write /sys/bus/msm_subsys/devices/subsys1/restart_level system
-    write /sys/bus/msm_subsys/devices/subsys2/restart_level system
-
-# Enable SSR
-on property:persist.sys.ssr.restart_level=3
-    write /sys/module/subsystem_restart/parameters/restart_level 3
-    write /sys/bus/msm_subsys/devices/subsys0/restart_level related
-    write /sys/bus/msm_subsys/devices/subsys1/restart_level related
-    write /sys/bus/msm_subsys/devices/subsys2/restart_level related
