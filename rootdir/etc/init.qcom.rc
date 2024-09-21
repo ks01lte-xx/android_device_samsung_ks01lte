@@ -259,34 +259,6 @@ on boot
     # Permission for HALL IC
     chown system system /sys/class/sec/sec_key/hall_detect
 
-    # Permissions for Charging
-    chown system radio /sys/class/power_supply/battery/batt_reset_soc
-    chown system radio /sys/class/power_supply/battery/update
-    chown system radio /sys/class/power_supply/battery/factory_mode
-    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/call
-    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/video
-    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/music
-    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/browser
-    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/hotspot
-    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/camera
-    chown system radio /sys/class/power_supply/battery/talk_wcdma
-    chown system radio /sys/class/power_supply/battery/talk_gsm
-    chown system radio /sys/class/power_supply/battery/call
-    chown system radio /sys/class/power_supply/battery/data_call
-    chown system radio /sys/class/power_supply/battery/gps
-    chown system radio /sys/class/power_supply/battery/wifi
-    chown system radio /sys/class/power_supply/battery/lte
-    chown system radio /sys/class/power_supply/battery/wc_enable
-    chown system radio /sys/class/power_supply/battery/lcd
-    chown system radio /sys/class/power_supply/ps/status
-    chmod 0664 /sys/class/power_supply/ps/status
-    chmod 0664 /sys/class/power_supply/battery/batt_temp_table
-    chown system radio /sys/class/power_supply/battery/batt_temp_table
-    chmod 0664 /sys/class/power_supply/battery/batt_capacity_max
-    chown system radio /sys/class/power_supply/battery/batt_capacity_max
-    chmod 0664 /efs/Battery/batt_capacity_max
-    chown radio system /efs/Battery/batt_capacity_max
-
     # Permission for fast dormancy for RIL
     chown system radio /sys/devices/virtual/sec/bamdmux/waketime
 
