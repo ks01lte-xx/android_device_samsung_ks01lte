@@ -170,9 +170,6 @@ on boot
     chown bluetooth bluetooth /proc/bluetooth/sleep/lpm
     chown bluetooth bluetooth /proc/bluetooth/sleep/btwrite
 
-    # Prevents permission denied error for telephony
-    chown root radio /proc/cmdline
-
     # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 2770 radio radio
     mkdir /dev/socket/qmux_audio 2770 media audio
