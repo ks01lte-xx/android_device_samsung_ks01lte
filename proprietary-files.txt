@@ -15,7 +15,7 @@
 -vendor/lib/libacdbloader.so|27ceba70917afc0e9b26877354c8404dae5af09c
 -vendor/lib/libacdbrtac.so|f1a150ccd4bf0b5a2957532ec2690b52124d006d
 -vendor/lib/libadiertac.so|e29a874dc3e6622fda4fc76032a7ea5dc44eb228
--vendor/lib/libaudcal.so|fa2bbd6df7818c787e472791d69fd6c4db184f7bo
+-vendor/lib/libaudcal.so|14e5ae8ba98d0d140e6bd824937e80cd4cc75f54
 etc/Bluetooth_cal.acdb:vendor/etc/acdbdata/Bluetooth_cal.acdb
 etc/General_cal.acdb:vendor/etc/acdbdata/General_cal.acdb
 etc/Global_cal.acdb:vendor/etc/acdbdata/Global_cal.acdb
@@ -30,7 +30,7 @@ vendor/firmware/bcm4335B0_002.001.006.0191.0201_ORC.hcd
 # Camera
 -bin/mm-qcamera-daemon:vendor/bin/mm-qcamera-daemon
 -lib/hw/camera.msm8974.so:vendor/lib/hw/camera.vendor.msm8974.so|8ffc00ff5158298ded774e20b1b06d40758c7c6f
--lib/libarcsoft_nighthawk.so:vendor/lib/libarcsoft_nighthawk.so
+-lib/libarcsoft_nighthawk.so:vendor/lib/libarcsoft_nighthawk.so|8f50497cb1bfbfb929229eb74cc0165b2c451d6b
 -lib/libliveframework.so:vendor/lib/libliveframework.so
 -lib/libmmcamera2_stats_algorithm.so:vendor/lib/libmmcamera2_stats_algorithm.so
 -lib/libmmcamera_cac2_lib.so:vendor/lib/libmmcamera_cac2_lib.so

@@ -45,10 +45,13 @@ function blob_fixup() {
 	vendor/lib/libsam.so)
             sed -i 's|/data/system|/data/vendor|g' "${2}"
             ;;
-        vendor/lib/libmmcamera2_sensor_modules.so)
+	vendor/lib/libmmcamera2_sensor_modules.so)
             sed -i 's|system/etc|vendor/etc|g;
                     s|/system/lib|/vendor/lib|g;
                     s|/system/cameradata|/vendor/cameradata|g' "${2}"
+            ;;
+	vendor/lib/libarcsoft_nighthawk.so)
+            "${PATCHELF}" --set-soname libarcsoft_nighthawk.so "${2}"
             ;;
 	vendor/lib/mediadrm/libwvdrmengine.so)
             "${PATCHELF}" --replace-needed libprotobuf-cpp-lite.so libprotobuf-cpp-lite-v29.so "${2}"
