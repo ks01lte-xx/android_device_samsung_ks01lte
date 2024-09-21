@@ -109,6 +109,7 @@ TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS := false
 
 # Legacy BLOB Support
 TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
+    /system/vendor/lib/libsensirion_ks01_eur.so=22 \
     /system/bin/mediaserver=22 \
     /system/vendor/bin/hw/android.hardware.sensors@1.0-service.samsung8974=22 \
     /system/vendor/bin/mm-qcamera-daemon=22 \
