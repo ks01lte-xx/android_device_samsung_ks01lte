@@ -60,7 +60,7 @@ vendor/firmware/bcm4335B0_002.001.006.0191.0201_ORC.hcd
 -vendor/lib/libmmcamera2_stats_modules.so
 -vendor/lib/libmmcamera2_vpe_module.so
 -vendor/lib/libmmcamera2_wnr_module.so
--vendor/lib/libmmcamera_faceproc.so|ac49bcc1aa20ff9f2c118f6c233b658f93543202
+-vendor/lib/libmmcamera_faceproc.so|820c1f92474957c4ee0b4e1444fe38626db83b77
 -vendor/lib/libmmcamera_image_stab.so
 -vendor/lib/libmmcamera_imglib.so
 -vendor/lib/libmmcamera_imx135.so
