@@ -99,8 +99,6 @@ ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so
 # Radio
 persist.data.netmgrd.qos.enable=true
 persist.data.qmi.adb_logmask=0
-persist.radio.apm_sim_not_pwdn=1
-persist.radio.no_wait_for_card=1
 persist.radio.add_power_save=1
 vendor.rild.libpath=/system/vendor/lib/libsec-ril.so
 ro.telephony.default_network=9
