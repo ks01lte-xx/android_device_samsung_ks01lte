@@ -1,7 +1,7 @@
-soong_namespace {
-}
+//
+// Copyright (C) 2024 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
 
-cc_library_shared {
-    name: "libldacBT_bco",
-    vendor: true,
+soong_namespace {
 }

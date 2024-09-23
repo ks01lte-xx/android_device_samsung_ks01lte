@@ -13,9 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-DEVICE_PATH := device/samsung/ks01ltexx
+DEVICE_PATH := device/samsung/ks01lte
 
-TARGET_OTA_ASSERT_DEVICE := ks01lte,ks01ltexx,GT-I9506
+# OTA
+TARGET_OTA_ASSERT_DEVICE := ks01lte,ks01ltexx,GT-I9506,ks01lteskt,ks01ltektt,ks01ltelgt
 
 # Android Platform
 TARGET_BOARD_PLATFORM := msm8974
@@ -41,7 +42,7 @@ USE_CUSTOM_AUDIO_POLICY := 1
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_CUSTOM_BT_CONFIG := $(DEVICE_PATH)/bluetooth/vnd_ks01ltexx.txt
+BOARD_CUSTOM_BT_CONFIG := $(DEVICE_PATH)/bluetooth/vnd_ks01lte.txt
 
 # Bootloader
 BOARD_VENDOR := samsung
@@ -69,14 +70,12 @@ ifeq ($(HOST_OS),linux)
 endif
 
 # Display
+TARGET_SCREEN_DENSITY := 480
 TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS := 0x02000000U
 TARGET_DISABLE_POSTRENDER_CLEANUP := true
 #
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
-
-# Qualcomm support
-BOARD_USES_QCOM_HARDWARE := true
 
 # Filesystem
 TARGET_FS_CONFIG_GEN += $(DEVICE_PATH)/config.fs
@@ -138,6 +137,9 @@ TARGET_USES_INTERACTION_BOOST := true
 # Radio
 BOARD_PROVIDES_LIBRIL := true
 
+# Qualcomm support
+BOARD_USES_QCOM_HARDWARE := true
+
 # Recovery
 TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)
 BOARD_HAS_DOWNLOAD_MODE := true
@@ -151,6 +153,9 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 
 # Sensors
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
+
+# Dedupe VNDK libraries with identical core variants.
+TARGET_VNDK_USE_CORE_VARIANT := true
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI := true

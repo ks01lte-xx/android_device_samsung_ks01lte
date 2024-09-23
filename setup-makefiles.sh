@@ -8,7 +8,7 @@
 
 set -e
 
-DEVICE=ks01ltexx
+DEVICE=ks01lte
 VENDOR=samsung
 
 # Load extract_utils and do some sanity checks
