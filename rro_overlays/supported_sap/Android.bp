@@ -1,0 +1,5 @@
+runtime_resource_overlay {
+    name: "Supported_sap",
+    theme: "Supported_sap",
+    product_specific: true,
+}

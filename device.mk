@@ -174,6 +174,7 @@ PRODUCT_PACKAGES += \
     Simple_i9506 \
     SDK_i9506 \
     Settings_i9506 \
+    Supported_sap \
     TelephonyRes_i9506 \
     Tethering_i9506 \
     Thread_i9506 \
