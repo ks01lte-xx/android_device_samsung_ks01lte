@@ -15,8 +15,6 @@
 
 DEVICE_PATH := device/samsung/ks01ltexx
 
-TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
-
 TARGET_OTA_ASSERT_DEVICE := ks01lte,ks01ltexx,GT-I9506
 
 # Android Platform
@@ -101,16 +99,13 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_CUSTOM_BOOTIMG := true
-BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
 BOARD_RAMDISK_USE_XZ := true
 TARGET_KERNEL_CONFIG := lineage_ks01lte_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/msm8974
 
 # Enable SVELTE memory configuration
 MALLOC_SVELTE := true
-
-# Encryption
-TARGET_KEYMASTER_SKIP_WAITING_FOR_QSEE := true
 
 # Legacy BLOB Support
 TARGET_LD_SHIM_LIBS += \

@@ -15,5 +15,12 @@
 ** limitations under the License.
 */
 
-static inline void remapUnsol(int *unsol __unused) {
+#define RIL_UNSOL_ON_SS_LL 11055
+
+static inline void remapUnsol(int *unsol) {
+    switch(*unsol) {
+        case RIL_UNSOL_ON_SS_LL:
+            *unsol = RIL_UNSOL_ON_SS;
+        return;
+    }
 }

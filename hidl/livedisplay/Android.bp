@@ -1,0 +1,27 @@
+//
+// Copyright (C) 2019 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_binary {
+    name: "vendor.lineage.livedisplay@2.0-service.ks01lte",
+    vintf_fragments: ["vendor.lineage.livedisplay@2.0-service.ks01lte.xml"],
+    defaults: ["hidl_defaults"],
+    vendor: true,
+    relative_install_path: "hw",
+    init_rc: ["vendor.lineage.livedisplay@2.0-service.ks01lte.rc"],
+    srcs: [
+        "AdaptiveBacklight.cpp",
+        "DisplayColorCalibration.cpp",
+        "DisplayModes.cpp",
+        "SunlightEnhancement.cpp",
+        "service.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libbinder",
+        "libhidlbase",
+        "libutils",
+        "vendor.lineage.livedisplay@2.0",
+    ],
+}

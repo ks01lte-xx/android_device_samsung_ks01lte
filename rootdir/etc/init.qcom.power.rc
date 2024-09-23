@@ -57,20 +57,10 @@ on enable-low-power
     write /sys/module/msm_pm/modes/cpu2/retention/suspend_enabled 1
     write /sys/module/msm_pm/modes/cpu3/retention/suspend_enabled 1
 
-    # Adaptive LMK
-    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
-
-    # disable lmk_fast_run earlier
-    write /sys/module/lowmemorykiller/parameters/lmk_fast_run 0
-
     # Disable thermal hotplug to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
 
     # Bring all CPUs online, and set node permissions
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
     chmod 664 /sys/devices/system/cpu/cpu1/online
     chmod 664 /sys/devices/system/cpu/cpu2/online
     chmod 664 /sys/devices/system/cpu/cpu3/online

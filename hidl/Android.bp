@@ -1,0 +1,9 @@
+subdirs = [
+    "consumerir",
+    "light",
+    "livedisplay",
+    "sensors",
+    "touch",
+    "usb",
+    "vibrator",
+]

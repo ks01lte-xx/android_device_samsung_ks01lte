@@ -126,7 +126,7 @@ PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true
 
 # IR Blaster
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-service.samsung
+    android.hardware.ir@1.0-service.ks01lte
 
 # Keymaster
 PRODUCT_PACKAGES += \
@@ -135,11 +135,11 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-service.samsung
+    android.hardware.light@2.0-service.ks01lte
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.0-service.samsung-qcom
+    vendor.lineage.livedisplay@2.0-service.ks01lte
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -244,7 +244,7 @@ PRODUCT_PACKAGES += \
 
 # Touch features
 PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.samsung
+    vendor.lineage.touch@1.0-service.ks01lte
 
 # Trust HAL
 PRODUCT_PACKAGES += \
@@ -252,22 +252,21 @@ PRODUCT_PACKAGES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service.basic
+    android.hardware.usb@1.0-service.ks01lte
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl
+    android.hardware.vibrator@1.0-service.ks01lte
 
 # Input device
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/idc/Synaptics_HID_TouchPad.idc:system/usr/idc/Synaptics_HID_TouchPad.idc \
-    $(LOCAL_PATH)/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc
+    $(LOCAL_PATH)/idc/sec_touchscreen.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/sec_touchscreen.idc \
+    $(LOCAL_PATH)/idc/Synaptics_HID_TouchPad.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/Synaptics_HID_TouchPad.idc
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-    $(LOCAL_PATH)/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl \
-    $(LOCAL_PATH)/keylayout/Vendor_04e8_Product_7021.kl:system/usr/keylayout/Vendor_04e8_Product_7021.kl
+    $(LOCAL_PATH)/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl \
+    $(LOCAL_PATH)/keylayout/sec_touchkey.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/sec_touchkey.kl
 
 # VNDK
 PRODUCT_COPY_FILES += \

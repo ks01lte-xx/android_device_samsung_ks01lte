@@ -28,9 +28,14 @@
 import /vendor/etc/init/hw/init.qcom.power.rc
 import /vendor/etc/init/hw/init.qcom.usb.rc
 
-on init
-    write /sys/block/zram0/max_comp_streams 4
+on early-init
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
+    chown system system /sys/kernel/debug
+
+    # ZRAM setup
     write /sys/block/zram0/comp_algorithm lz4
+    write /sys/block/zram0/max_comp_streams 4
     write /proc/sys/vm/page-cluster 0
 
 on fs
@@ -41,6 +46,13 @@ on fs
     write /sys/kernel/boot_adsp/boot 1
     setprop qcom.audio.init complete
 
+    # Adaptive LMK
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
+
+    # disable lmk_fast_run earlier
+    write /sys/module/lowmemorykiller/parameters/lmk_fast_run 0
+
     # GnssConfiguration doesn't actually look at gps.conf, just the debug file
     mount none /system/etc/gps.conf /system/etc/gps_debug.conf bind
 
@@ -50,6 +62,11 @@ on post-fs
     chmod 0664 /sys/block/mmcblk0/bkops_en
 
 on post-fs-data
+    mkdir /tombstones/modem 0771 system system
+    mkdir /tombstones/lpass 0771 system system
+    mkdir /tombstones/dsps 0771 system system
+    mkdir /tombstones/mdm 0771 system system
+
     # Create the directories used by the Wireless subsystem
     mkdir /data/vendor/wifi 0770 wifi wifi
     mkdir /data/vendor/wifi/sockets 0770 wifi wifi
@@ -88,17 +105,12 @@ on post-fs-data
     chmod 0664 /sys/devices/msm_sdcc.2/polling
 
     # For disabling softkeys
-    chown root system /sys/class/sec/sec_touchkey/max_brightness
-    chmod 0664 /sys/class/sec/sec_touchkey/max_brightness
-    chown root system /sys/class/sec/sec_touchkey/brightness
+    chown system radio /sys/class/sec/sec_touchkey/brightness
     chmod 0664 sys/class/sec/sec_touchkey/brightness
 
     # Torch
     chmod 0660 /sys/class/leds/torch-sec1/brightness
     chown system camera /sys/class/leds/torch-sec1/brightness
-
-    # Backlight
-    chown system system /sys/devices/virtual/lcd/panel/panel/backlight
 
     # create directory for ril data
     mkdir /data/misc/radio 0775 radio radio
@@ -119,6 +131,23 @@ on post-fs-data
     chown radio system /efs/prov/libdevkm.lock
     chmod 0660 /efs/prov/libdevkm.lock
 
+    # Magnetic_sensor
+    chown system system /efs/hw_offset
+    chmod 0660 /efs/hw_offset
+
+    # Sensors
+    chown system system /efs/prox_cal
+    chmod 0640 /efs/prox_cal
+    restorecon /efs/prox_cal
+
+    chown system system /efs/FactoryApp/baro_delta
+    chmod 0640 /efs/FactoryApp/baro_delta
+    restorecon /efs/FactoryApp/baro_delta
+
+    chown system system /efs/gyro_cal_data
+    chmod 0640 /efs/gyro_cal_data
+    restorecon /efs/gyro_cal_data
+
     # wifi
     mkdir /efs/wifi 0775 system system
 
@@ -127,13 +156,8 @@ on post-fs-data
     chown system system /sys/class/sec/led/led_g
     chown system system /sys/class/sec/led/led_b
     chown system system /sys/class/sec/led/led_pattern
-    chown system system /sys/class/sec/led/led_blink
     chown system system /sys/class/sec/led/led_br_lev
     chown system system /sys/class/sec/led/led_lowpower
-
-    # IR_LED
-    chown system radio /sys/class/sec/sec_ir/ir_send
-    chown system radio /sys/class/sec/sec_ir/ir_send_result
 
     # Create directories for perfd
     mkdir /data/misc/perfd 2755 root system
@@ -141,16 +165,6 @@ on post-fs-data
 
     # Smart Charging
     chown system system /sys/class/power_supply/battery/batt_slate_mode
-
-    #
-    # vendor.lineage.touch@1
-    # For GloveMode
-    chown system radio /sys/class/sec/tsp/cmd
-    chmod 0664 /sys/class/sec/tsp/cmd
-    chown system radio /sys/class/sec/tsp/cmd_list
-    chmod 0664  /sys/class/sec/tsp/cmd_list
-    chown system radio /sys/class/sec/tsp/cmd_result
-    chmod 0664 /sys/class/sec/tsp/cmd_result
 
     # Remove symlinks to avoid issues with migrate after nandroid restores
     # Will be recreated at end of boot
@@ -179,11 +193,23 @@ on boot
     mkdir /dev/socket/qmux_bluetooth 2770 bluetooth bluetooth
     mkdir /dev/socket/qmux_gps 2770 gps gps
 
-    # Create NETMGR daemon socket area
-    mkdir /dev/socket/netmgr 2770 radio radio
-
     # create symlink for fb1 as HDMI
     symlink /dev/graphics/fb1 /dev/graphics/hdmi
+
+    # HDMID Permission for sys nodes
+    chmod 0664 /sys/devices/virtual/graphics/fb1/hpd
+    chown system graphics /sys/class/graphics/fb1/connected
+    chown system graphics /sys/class/graphics/fb1/edid_modes
+    chown system graphics /sys/class/graphics/fb1/hpd
+
+    chown system graphics /sys/class/graphics/fb1/vendor_name
+    chown system graphics /sys/class/graphics/fb1/product_description
+    chmod 0664 /sys/devices/virtual/graphics/fb1/vendor_name
+    chmod 0664 /sys/devices/virtual/graphics/fb1/product_description
+
+    # MDP idle notifier
+    chown system graphics /sys/class/graphics/fb0/idle_time
+    chmod 0664 /sys/class/graphics/fb0/idle_time
 
     # To allow interfaces to get v6 address when tethering is enabled
     write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2
@@ -218,25 +244,48 @@ on boot
     chown system radio /sys/class/sec/switch/otg_test
 
     chown radio system /sys/devices/system/cpu/kernel_max
-    chmod 0664 /sys/devices/system/cpu/kernel_max
+    chmod 664 /sys/devices/system/cpu/kernel_max
 
     chown radio system /sys/class/kgsl/kgsl-3d0/max_pwrlevel
-    chmod 0664 /sys/class/kgsl/kgsl-3d0/max_pwrlevel
+    chmod 664  /sys/class/kgsl/kgsl-3d0/max_pwrlevel
     chown radio system /sys/class/kgsl/kgsl-3d0/min_pwrlevel
-    chmod 0664 /sys/class/kgsl/kgsl-3d0/min_pwrlevel
+    chmod 664  /sys/class/kgsl/kgsl-3d0/min_pwrlevel
     chown radio system /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
-    chmod 0664 /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
+    chmod 664  /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies
 
     chown radio system /sys/class/devfreq/qcom,cpubw.42/available_frequencies
-    chmod 0664 /sys/class/devfreq/qcom,cpubw.42/available_frequencies
+    chmod 664 /sys/class/devfreq/qcom,cpubw.42/available_frequencies
     chown radio system /sys/class/devfreq/qcom,cpubw.42/available_governors
-    chmod 0664 /sys/class/devfreq/qcom,cpubw.42/available_governors
+    chmod 664 /sys/class/devfreq/qcom,cpubw.42/available_governors
     chown radio system /sys/class/devfreq/qcom,cpubw.42/governor
-    chmod 0664 /sys/class/devfreq/qcom,cpubw.42/governor
+    chmod 664 /sys/class/devfreq/qcom,cpubw.42/governor
     chown radio system /sys/class/devfreq/qcom,cpubw.42/max_freq
-    chmod 0664 /sys/class/devfreq/qcom,cpubw.42/max_freq
+    chmod 664 /sys/class/devfreq/qcom,cpubw.42/max_freq
     chown radio system /sys/class/devfreq/qcom,cpubw.42/min_freq
-    chmod 0664 /sys/class/devfreq/qcom,cpubw.42/min_freq
+    chmod 664 /sys/class/devfreq/qcom,cpubw.42/min_freq
+
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_slack
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_slack
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/target_loads
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/target_loads
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boost
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boost
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boostpulse
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
 
     # SEC PM sysfs node
     chown system radio /sys/devices/system/soc/soc0/soc_iddq
@@ -269,8 +318,9 @@ on boot
     chown system system /sys/class/leds/lcd-backlight/brightness
     chown system system /sys/class/leds/button-backlight/brightness
 
-    # Permissions for InputDevices.
-    chown system system /sys/class/sec/sec_touchkey/brightness
+    # Adjust YUV to RGB Conversion(CSC_Conversion)
+    chown system media_rw /sys/class/graphics/fb0/csc_cfg
+    chmod 0660 /sys/class/graphics/fb0/csc_cfg
 
     # Permissions for Camera
     chown system system /sys/class/camera/rear/rear_camfw
@@ -292,6 +342,7 @@ on boot
     chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
     chown system radio /sys/class/sensors/accelerometer_sensor/vendor
     chown system radio /sys/class/sensors/accelerometer_sensor/name
+
     # Proximity_sensor
     chown system radio /sys/class/sensors/proximity_sensor/state
     chown system radio /sys/class/sensors/proximity_sensor/raw_data
@@ -377,20 +428,6 @@ on boot
     chown system radio /sys/class/sec/sec_barcode_emul/barcode_led_status
     chown system radio /sys/class/sec/sec_barcode_emul/barcode_ver_check
 
-    # Broadcom NFC
-    chmod 0600 /dev/bcm2079x
-    chown nfc nfc /dev/bcm2079x
-    mkdir /data/bcmnfc
-    mkdir /data/bcmnfc/param
-    chmod 0700 /data/bcmnfc
-    chmod 0700 /data/bcmnfc/param
-    chown nfc nfc /data/bcmnfc
-    chown nfc nfc /data/bcmnfc/param
-
-    # NFC_SLSI
-    mkdir /data/nfc 0700 nfc nfc
-    mkdir /data/nfc/param 0700 nfc nfc
-
     # Permission for HALL IC
     chown system system /sys/class/sec/sec_key/hall_detect
 
@@ -433,24 +470,6 @@ on boot
     write /proc/sys/net/core/rmem_max 8388608
     write /proc/sys/net/core/wmem_max 8388608
 
-    # Vibrator
-    chmod 0660 /sys/class/timed_output/vibrator/pwm_value
-    chown system system /sys/class/timed_output/vibrator/pwm_value
-    chmod 0440 /sys/class/timed_output/vibrator/pwm_max
-    chown system system /sys/class/timed_output/vibrator/pwm_max
-    chmod 0440 /sys/class/timed_output/vibrator/pwm_min
-    chown system system /sys/class/timed_output/vibrator/pwm_min
-    chmod 0440 /sys/class/timed_output/vibrator/pwm_default
-    chown system system /sys/class/timed_output/vibrator/pwm_default
-    chmod 0440 /sys/class/timed_output/vibrator/pwm_threshold
-    chown system system /sys/class/timed_output/vibrator/pwm_threshold
-    chown system system /sys/class/timed_output/vibrator/enable
-
-    # Key Enabler
-    chown system system /sys/devices/virtual/sec/sec_touchkey/keypad_enable
-    chmod 0660 /sys/devices/virtual/sec/sec_touchkey/keypad_enable
-    restorecon /sys/devices/virtual/sec/sec_touchkey/keypad_enable
-
     # permission for Input Device(Touchkey).
     chmod 0660 /sys/class/input/input3/enabled
     chown system system /sys/class/input/input3/enabled
@@ -492,19 +511,6 @@ on boot
     chown bluetooth bluetooth /proc/bluetooth/sleep/lpm
     chown bluetooth bluetooth /proc/bluetooth/sleep/btwrite
 
-    # Sensors
-    chown system system /efs/prox_cal
-    chmod 0640 /efs/prox_cal
-    restorecon /efs/prox_cal
-
-    chown system system /efs/FactoryApp/baro_delta
-    chmod 0640 /efs/FactoryApp/baro_delta
-    restorecon /efs/FactoryApp/baro_delta
-
-    chown system system /efs/gyro_cal_data
-    chmod 0640 /efs/gyro_cal_data
-    restorecon /efs/gyro_cal_data
-
     # Set permissions for firmware path control
     chown wifi wifi /sys/module/dhd/parameters/firmware_path
     chown wifi wifi /sys/module/dhd/parameters/nvram_path
@@ -513,7 +519,6 @@ on boot
     stop console
 
 # Services begin here
-
 service vendor.adsprpcd /vendor/bin/adsprpcd
     class main
     user media
@@ -559,11 +564,6 @@ service vendor.rmt_storage /vendor/bin/rmt_storage
     class core
     user root
     group system wakelock
-
-service vendor.netmgrd /vendor/bin/netmgrd
-    class main
-    user root
-    group radio readproc system wakelock oem_2950
 
 # QMUX must be in multiple groups to support external process connections
 service vendor.qmuxd /vendor/bin/qmuxd

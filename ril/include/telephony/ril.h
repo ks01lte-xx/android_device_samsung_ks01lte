@@ -437,8 +437,7 @@ typedef struct {
     int             numberPresentation; /* 0=Allowed, 1=Restricted, 2=Not Specified/Unknown 3=Payphone */
     char *          name;       /* Remote party name */
     int             namePresentation; /* 0=Allowed, 1=Restricted, 2=Not Specified/Unknown 3=Payphone */
-    void *          call_details1; /* Padding for Samsung's call detail fields */
-    void *          call_details2; /* Padding for Samsung's call detail fields */
+    long            call_details; /* Samsung call detail additions. Just padding, do not use */
     RIL_UUS_Info *  uusInfo;    /* NULL or Pointer to User-User Signaling Information */
 } RIL_Call;
 
@@ -697,6 +696,8 @@ typedef struct {
     int             toa;         /* "type" from TS 27.007 7.11 */
     char *          number;      /* "number" from TS 27.007 7.11. May be NULL */
     int             timeSeconds; /* for CF no reply only */
+    char *          startTime;   /* SEC addition */
+    char *          endTime;     /* SEC addition */
 }RIL_CallForwardInfo;
 
 typedef struct {
