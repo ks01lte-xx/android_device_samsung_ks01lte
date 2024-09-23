@@ -678,7 +678,7 @@ bool dispatchCallForwardStatus(int serial, int slotId, int request,
         return false;
     }
 
-    RIL_CallForwardInfo cf = {};
+    RIL_CallForwardInfo cf;
     cf.status = (int) callInfo.status;
     cf.reason = callInfo.reason;
     cf.serviceClass = callInfo.serviceClass;
@@ -6984,19 +6984,16 @@ int radio::nitzTimeReceivedInd(int slotId,
         hidl_string nitzTime;
         char *resp = strndup((char *) response, responseLen);
         char *tmp = resp;
-
         /* Find the 3rd comma */
         for (int i = 0; i < 3; i++) {
             if (tmp != NULL) {
                 tmp = strchr(tmp + 1, ',');
             }
         }
-
         /* Make the 3rd comma the end of the string */
         if (tmp != NULL) {
             *tmp = '\0';
         }
-
         nitzTime = convertCharPtrToHidlString(resp);
         memsetAndFreeStrings(1, resp);
 #if VDBG
