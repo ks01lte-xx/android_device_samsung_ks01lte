@@ -128,3 +128,9 @@ type sysfs_livedisplay_tuneable, fs_type, sysfs_type;
 type sysfs_vadc_dev, sysfs_type, fs_type;
 
 type time_data_file, file_type, data_file_type, core_data_file_type;
+
+#Define the netmgrd socket type
+type netmgrd_socket, file_type;
+
+#Define the files written during the operation of netmgrd
+type netmgrd_data_file, file_type, data_file_type;

@@ -53,6 +53,10 @@ PRODUCT_PACKAGES += \
     libshim_camera \
     libxml2
 
+# Data
+PRODUCT_PACKAGES += \
+    librmnetctl
+
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl:32 \
@@ -107,6 +111,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/gps.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/gps.conf \
     $(LOCAL_PATH)/gps/etc/izat.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/izat.conf \
     $(LOCAL_PATH)/gps/etc/sap.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/sap.conf
+
+#IRSC
+#PRODUCT_COPY_FILES += \
+#$(LOCAL_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
 # Health
 PRODUCT_PACKAGES += \
@@ -215,6 +223,11 @@ PRODUCT_COPY_FILES += \
 # Radio
 PRODUCT_PACKAGES += \
     libsecnativefeature
+
+# RIL
+PRODUCT_PACKAGES += \
+    libaudioclient_shim \
+    libcnefeatureconfig
 
 # Ramdisk
 PRODUCT_PACKAGES += \

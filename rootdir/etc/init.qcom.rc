@@ -165,6 +165,7 @@ on boot
 
     # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 2770 radio radio
+    mkdir /dev/socket/netmgr 2770 radio radio
     mkdir /dev/socket/qmux_audio 2770 media audio
     mkdir /dev/socket/qmux_bluetooth 2770 bluetooth bluetooth
     mkdir /dev/socket/qmux_gps 2770 gps gps
@@ -303,7 +304,7 @@ service vendor.thermal-engine /vendor/bin/thermal-engine
     group root
 
 service vendor.irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
-    class core
+    class main
     user root
     oneshot
 
@@ -318,24 +319,28 @@ service vendor.rmt_storage /vendor/bin/rmt_storage
     group system wakelock
     shutdown critical
 
+service vendor.netmgrd /vendor/bin/netmgrd
+    class main
+    user root
+    group radio readproc system wakelock oem_2950
+
 # QMUX must be in multiple groups to support external process connections
 service vendor.qmuxd /vendor/bin/qmuxd
-    class core
-    user radio
-    group radio audio bluetooth gps oem_2950 wakelock log
+    class main
+    user root
+    group radio audio bluetooth gps oem_2950
 
 on property:sys.boot_completed=1
-    # Symlink directories to access telephony.db and preferred-apn.xml required by libsec-ril
-    symlink /data/user_de/0/com.android.providers.telephony/databases /data/data/com.android.providers.telephony/databases
-    symlink /data/user_de/0/com.android.providers.telephony/shared_prefs /data/data/com.android.providers.telephony/shared_prefs
-    restorecon /data/data/com.android.providers.telephony/databases
-    restorecon /data/data/com.android.providers.telephony/shared_prefs
-
     # Enable ZRAM on boot_complete
     swapon_all /vendor/etc/fstab.enableswap
 
     # Disable native stats collection service
     stop statsd
+
+# Adjust socket buffer to enlarge TCP receive window for high bandwidth
+# but only if ro.data.large_tcp_window_size property is set.
+on property:ro.data.large_tcp_window_size=true
+    write /proc/sys/net/ipv4/tcp_adv_win_scale 2
 
 service charger /system/bin/charger
     class charger

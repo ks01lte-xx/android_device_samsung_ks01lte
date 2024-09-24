@@ -77,9 +77,6 @@ DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 # Legacy memfd
 TARGET_HAS_MEMFD_BACKPORT := true
 
-# Netd
-TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE := true
-
 # Linaro GCC 5.2.1
 KERNEL_TOOLCHAIN := $(shell pwd)/arm-cortex_a15/bin
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-cortex_a15-linux-gnueabihf-
@@ -109,13 +106,16 @@ TARGET_HEALTH_CHARGING_CONTROL_CHARGING_ENABLED := 0
 TARGET_HEALTH_CHARGING_CONTROL_CHARGING_DISABLED := 1
 TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS := false
 
+# SHIMS
+TARGET_LD_SHIM_LIBS := \
+    /system/vendor/lib/libril-qc-qmi-1.so|libaudioclient_shim.so
+
 # Legacy BLOB Support
 TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
     /system/vendor/lib/libsensirion_ks01_eur.so=22 \
     /system/bin/mediaserver=22 \
     /system/vendor/bin/hw/android.hardware.sensors@1.0-service.samsung8974=22 \
-    /system/vendor/bin/mm-qcamera-daemon=22 \
-    /system/vendor/bin/hw/rild=27
+    /system/vendor/bin/mm-qcamera-daemon=22
 
 #
 # Partitions
@@ -138,10 +138,6 @@ TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # Power
 TARGET_USES_INTERACTION_BOOST := true
-
-# Radio
-BOARD_PROVIDES_LIBRIL := true
-DISABLE_RILD_OEM_HOOK := true
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true

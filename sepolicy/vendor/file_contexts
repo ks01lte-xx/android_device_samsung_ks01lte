@@ -64,6 +64,7 @@
 /dev/socket/thermal-recv-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
 /dev/socket/thermal-send-rule                   u:object_r:thermal_socket:s0
+/dev/socket/netmgr(/.*)?                        u:object_r:netmgrd_socket:s0
 
 # vendor files
 #
@@ -77,12 +78,14 @@
 /(vendor|system/vendor)/bin/qseecomd            u:object_r:tee_qseecomd_exec:s0
 /(vendor|system/vendor)/bin/adsprpcd            u:object_r:adsprpcd_exec:s0
 /(vendor|system/vendor)/bin/timekeep            u:object_r:timekeep_exec:s0
+/(vendor|system/vendor)/bin/netmgrd             u:object_r:netmgrd_exec:s0
 
 # data files
 #
 /data(/vendor)?/time(/.*)?                                          u:object_r:time_data_file:s0
 /data/vendor/display(/.*)?                                          u:object_r:display_vendor_data_file:s0
 /data/misc/radio(/.*)?                                              u:object_r:radio_core_data_file:s0
+/data/vendor/netmgr(/.*)?                                           u:object_r:netmgrd_data_file:s0
 /data/vendor/wifi(/.*)?                                             u:object_r:wifi_vendor_data_file:s0
 /data/vendor/camera(/.*)?                                           u:object_r:vendor_camera_data_file:s0
 /data/vendor/location(/.*)?                                         u:object_r:location_data_file:s0
