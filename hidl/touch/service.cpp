@@ -47,8 +47,8 @@ int main() {
 
     status = keyDisabler->registerAsService();
     if (status != OK) {
-        LOG(ERROR) << "Could not register service for Touch HAL KeyDisabler Iface ("
-                   << status << ")";
+        LOG(ERROR) << "Could not register service for Touch HAL KeyDisabler Iface (" << status
+                   << ")";
         goto shutdown;
     }
 

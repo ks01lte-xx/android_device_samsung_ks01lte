@@ -112,18 +112,16 @@ constexpr ChipModeId kMainModeId = chip_mode_ids::kV1Sta;
  * The main point here is to simplify the syntax required by
  * WIFI_HAL_INTERFACE_COMBINATIONS.
  */
-struct ChipIfaceCombination
-    : public hidl_vec<IWifiChip::ChipIfaceCombinationLimit> {
-    ChipIfaceCombination(
-        const std::initializer_list<IWifiChip::ChipIfaceCombinationLimit> list)
+struct ChipIfaceCombination : public hidl_vec<IWifiChip::ChipIfaceCombinationLimit> {
+    ChipIfaceCombination(const std::initializer_list<IWifiChip::ChipIfaceCombinationLimit> list)
         : hidl_vec(list) {}
 
     operator IWifiChip::ChipIfaceCombination() const { return {*this}; }
 
     static hidl_vec<IWifiChip::ChipIfaceCombination> make_vec(
-        const std::initializer_list<ChipIfaceCombination> list) {
+            const std::initializer_list<ChipIfaceCombination> list) {
         return hidl_vec<IWifiChip::ChipIfaceCombination>(  //
-            std::begin(list), std::end(list));
+                std::begin(list), std::end(list));
     }
 };
 
@@ -132,11 +130,10 @@ struct ChipIfaceCombination
 #define P2P IfaceType::P2P
 #define NAN IfaceType::NAN
 static const std::vector<IWifiChip::ChipMode> kChipModes{
-    {kMainModeId,
-     ChipIfaceCombination::make_vec({WIFI_HAL_INTERFACE_COMBINATIONS})},
+        {kMainModeId, ChipIfaceCombination::make_vec({WIFI_HAL_INTERFACE_COMBINATIONS})},
 #ifdef WIFI_HAL_INTERFACE_COMBINATIONS_AP
-    {chip_mode_ids::kV1Ap,
-     ChipIfaceCombination::make_vec({WIFI_HAL_INTERFACE_COMBINATIONS_AP})},
+        {chip_mode_ids::kV1Ap,
+         ChipIfaceCombination::make_vec({WIFI_HAL_INTERFACE_COMBINATIONS_AP})},
 #endif
 };
 #undef STA
@@ -145,11 +142,11 @@ static const std::vector<IWifiChip::ChipMode> kChipModes{
 #undef NAN
 
 #ifdef WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION
-#pragma message                                                               \
-    "WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION is deprecated; override " \
-    "'config_wifi_ap_randomization_supported' in "                            \
-    "frameworks/base/core/res/res/values/config.xml in the device overlay "   \
-    "instead"
+#pragma message                                                                   \
+        "WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION is deprecated; override " \
+        "'config_wifi_ap_randomization_supported' in "                            \
+        "frameworks/base/core/res/res/values/config.xml in the device overlay "   \
+        "instead"
 #endif  // WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION
 
 WifiFeatureFlags::WifiFeatureFlags() {}

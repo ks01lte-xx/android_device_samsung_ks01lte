@@ -27,8 +27,8 @@ using android::hardware::joinRpcThreadpool;
 using android::hardware::usb::V1_0::IUsb;
 using android::hardware::usb::V1_0::implementation::Usb;
 
-using android::status_t;
 using android::OK;
+using android::status_t;
 
 int main() {
     android::sp<IUsb> service = new Usb();

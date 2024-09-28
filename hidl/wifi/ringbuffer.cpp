@@ -31,8 +31,7 @@ void Ringbuffer::append(const std::vector<uint8_t>& input) {
         return;
     }
     if (input.size() > maxSize_) {
-        LOG(INFO) << "Oversized message of " << input.size()
-                  << " bytes is dropped";
+        LOG(INFO) << "Oversized message of " << input.size() << " bytes is dropped";
         return;
     }
     data_.push_back(input);

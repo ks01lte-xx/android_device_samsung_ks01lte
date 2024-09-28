@@ -29,20 +29,18 @@ using on_death_cb_function = std::function<void(uint64_t)>;
 // callbacks stored in HidlCallbackHandler.
 template <typename CallbackType>
 class HidlDeathHandler : public android::hardware::hidl_death_recipient {
-   public:
+  public:
     HidlDeathHandler(const on_death_cb_function& user_cb_function)
         : cb_function_(user_cb_function) {}
     ~HidlDeathHandler() = default;
 
     // Death notification for callbacks.
-    void serviceDied(
-        uint64_t cookie,
-        const android::wp<android::hidl::base::V1_0::IBase>& /* who */)
-        override {
+    void serviceDied(uint64_t cookie,
+                     const android::wp<android::hidl::base::V1_0::IBase>& /* who */) override {
         cb_function_(cookie);
     }
 
-   private:
+  private:
     on_death_cb_function cb_function_;
 
     DISALLOW_COPY_AND_ASSIGN(HidlDeathHandler);
@@ -59,11 +57,10 @@ template <typename CallbackType>
 // Provides a class to manage callbacks for the various HIDL interfaces and
 // handle the death of the process hosting each callback.
 class HidlCallbackHandler {
-   public:
+  public:
     HidlCallbackHandler()
         : death_handler_(new HidlDeathHandler<CallbackType>(
-              std::bind(&HidlCallbackHandler::onObjectDeath, this,
-                        std::placeholders::_1))) {}
+                  std::bind(&HidlCallbackHandler::onObjectDeath, this, std::placeholders::_1))) {}
     ~HidlCallbackHandler() = default;
 
     bool addCallback(const sp<CallbackType>& cb) {
@@ -83,9 +80,7 @@ class HidlCallbackHandler {
         return true;
     }
 
-    const std::set<android::sp<CallbackType>>& getCallbacks() {
-        return cb_set_;
-    }
+    const std::set<android::sp<CallbackType>>& getCallbacks() { return cb_set_; }
 
     // Death notification for callbacks.
     void onObjectDeath(uint64_t cookie) {
@@ -108,7 +103,7 @@ class HidlCallbackHandler {
         cb_set_.clear();
     }
 
-   private:
+  private:
     std::set<sp<CallbackType>> cb_set_;
     sp<HidlDeathHandler<CallbackType>> death_handler_;
 

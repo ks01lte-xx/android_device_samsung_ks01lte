@@ -30,7 +30,7 @@ namespace implementation {
  * Ringbuffer object used to store debug data.
  */
 class Ringbuffer {
-   public:
+  public:
     explicit Ringbuffer(size_t maxSize);
 
     // Appends the data buffer and deletes from the front until buffer is
@@ -38,7 +38,7 @@ class Ringbuffer {
     void append(const std::vector<uint8_t>& input);
     const std::list<std::vector<uint8_t>>& getData() const;
 
-   private:
+  private:
     std::list<std::vector<uint8_t>> data_;
     size_t size_;
     size_t maxSize_;

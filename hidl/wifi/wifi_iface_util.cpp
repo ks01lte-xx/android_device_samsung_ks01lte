@@ -40,14 +40,10 @@ namespace V1_4 {
 namespace implementation {
 namespace iface_util {
 
-WifiIfaceUtil::WifiIfaceUtil(
-    const std::weak_ptr<wifi_system::InterfaceTool> iface_tool)
-    : iface_tool_(iface_tool),
-      random_mac_address_(nullptr),
-      event_handlers_map_() {}
+WifiIfaceUtil::WifiIfaceUtil(const std::weak_ptr<wifi_system::InterfaceTool> iface_tool)
+    : iface_tool_(iface_tool), random_mac_address_(nullptr), event_handlers_map_() {}
 
-std::array<uint8_t, 6> WifiIfaceUtil::getFactoryMacAddress(
-    const std::string& iface_name) {
+std::array<uint8_t, 6> WifiIfaceUtil::getFactoryMacAddress(const std::string& iface_name) {
     return iface_tool_.lock()->GetFactoryMacAddress(iface_name.c_str());
 }
 
@@ -85,8 +81,7 @@ std::array<uint8_t, 6> WifiIfaceUtil::getOrCreateRandomMacAddress() {
     if (random_mac_address_) {
         return *random_mac_address_.get();
     }
-    random_mac_address_ =
-        std::make_unique<std::array<uint8_t, 6>>(createRandomMacAddress());
+    random_mac_address_ = std::make_unique<std::array<uint8_t, 6>>(createRandomMacAddress());
     return *random_mac_address_.get();
 }
 
@@ -95,8 +90,7 @@ void WifiIfaceUtil::registerIfaceEventHandlers(const std::string& iface_name,
     event_handlers_map_[iface_name] = handlers;
 }
 
-void WifiIfaceUtil::unregisterIfaceEventHandlers(
-    const std::string& iface_name) {
+void WifiIfaceUtil::unregisterIfaceEventHandlers(const std::string& iface_name) {
     event_handlers_map_.erase(iface_name);
 }
 
@@ -104,9 +98,8 @@ std::array<uint8_t, 6> WifiIfaceUtil::createRandomMacAddress() {
     std::array<uint8_t, 6> address = {};
     std::random_device rd;
     std::default_random_engine engine(rd());
-    std::uniform_int_distribution<uint8_t> dist(
-        std::numeric_limits<uint8_t>::min(),
-        std::numeric_limits<uint8_t>::max());
+    std::uniform_int_distribution<uint8_t> dist(std::numeric_limits<uint8_t>::min(),
+                                                std::numeric_limits<uint8_t>::max());
     for (size_t i = 0; i < address.size(); i++) {
         address[i] = dist(engine);
     }

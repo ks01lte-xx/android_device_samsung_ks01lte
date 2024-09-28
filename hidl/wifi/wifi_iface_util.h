@@ -39,14 +39,12 @@ struct IfaceEventHandlers {
  * Util class for common iface operations.
  */
 class WifiIfaceUtil {
-   public:
+  public:
     WifiIfaceUtil(const std::weak_ptr<wifi_system::InterfaceTool> iface_tool);
     virtual ~WifiIfaceUtil() = default;
 
-    virtual std::array<uint8_t, 6> getFactoryMacAddress(
-        const std::string& iface_name);
-    virtual bool setMacAddress(const std::string& iface_name,
-                               const std::array<uint8_t, 6>& mac);
+    virtual std::array<uint8_t, 6> getFactoryMacAddress(const std::string& iface_name);
+    virtual bool setMacAddress(const std::string& iface_name, const std::array<uint8_t, 6>& mac);
     // Get or create a random MAC address. The MAC address returned from
     // this method will remain the same throughout the lifetime of the HAL
     // daemon. (So, changes on every reboot)
@@ -59,7 +57,7 @@ class WifiIfaceUtil {
     virtual bool setUpState(const std::string& iface_name, bool request_up);
     virtual unsigned ifNameToIndex(const std::string& iface_name);
 
-   private:
+  private:
     std::array<uint8_t, 6> createRandomMacAddress();
 
     std::weak_ptr<wifi_system::InterfaceTool> iface_tool_;

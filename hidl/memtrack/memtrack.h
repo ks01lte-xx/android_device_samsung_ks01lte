@@ -29,7 +29,6 @@
 #include <aidl/android/hardware/memtrack/MemtrackType.h>
 #include <log/log.h>
 
-
 using aidl::android::hardware::memtrack::BnMemtrack;
 using aidl::android::hardware::memtrack::DeviceInfo;
 using aidl::android::hardware::memtrack::MemtrackRecord;

@@ -25,11 +25,11 @@
 #include "DisplayModes.h"
 #include "SunlightEnhancement.h"
 
-using android::hardware::configureRpcThreadpool;
-using android::hardware::joinRpcThreadpool;
+using android::OK;
 using android::sp;
 using android::status_t;
-using android::OK;
+using android::hardware::configureRpcThreadpool;
+using android::hardware::joinRpcThreadpool;
 
 using vendor::lineage::livedisplay::V2_0::samsung::AdaptiveBacklight;
 using vendor::lineage::livedisplay::V2_0::samsung::DisplayColorCalibration;
@@ -47,8 +47,8 @@ int main() {
 
     adaptiveBacklight = new AdaptiveBacklight();
     if (adaptiveBacklight == nullptr) {
-        LOG(ERROR)
-            << "Can not create an instance of LiveDisplay HAL AdaptiveBacklight Iface, exiting.";
+        LOG(ERROR) << "Can not create an instance of LiveDisplay HAL AdaptiveBacklight Iface, "
+                      "exiting.";
         goto shutdown;
     }
 
@@ -67,8 +67,8 @@ int main() {
 
     sunlightEnhancement = new SunlightEnhancement();
     if (sunlightEnhancement == nullptr) {
-        LOG(ERROR)
-            << "Can not create an instance of LiveDisplay HAL SunlightEnhancement Iface, exiting.";
+        LOG(ERROR) << "Can not create an instance of LiveDisplay HAL SunlightEnhancement Iface, "
+                      "exiting.";
         goto shutdown;
     }
 
@@ -86,9 +86,9 @@ int main() {
     if (displayColorCalibration->isSupported()) {
         status = displayColorCalibration->registerAsService();
         if (status != OK) {
-            LOG(ERROR)
-                << "Could not register service for LiveDisplay HAL DisplayColorCalibration Iface ("
-                << status << ")";
+            LOG(ERROR) << "Could not register service for LiveDisplay HAL DisplayColorCalibration "
+                          "Iface ("
+                       << status << ")";
             goto shutdown;
         }
     }
@@ -106,15 +106,15 @@ int main() {
         status = sunlightEnhancement->registerAsService();
         if (status != OK) {
             LOG(ERROR)
-                << "Could not register service for LiveDisplay HAL SunlightEnhancement Iface ("
-                << status << ")";
+                    << "Could not register service for LiveDisplay HAL SunlightEnhancement Iface ("
+                    << status << ")";
             goto shutdown;
         }
     }
 
     LOG(INFO) << "LiveDisplay HAL service is ready.";
     joinRpcThreadpool();
-// Should not pass this line
+    // Should not pass this line
 
 shutdown:
     // In normal operation, we don't expect the thread pool to shutdown

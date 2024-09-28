@@ -139,7 +139,7 @@ Return<Result> Sensors::setOperationMode(OperationMode mode) {
 
 Return<Result> Sensors::activate(int32_t sensor_handle, bool enabled) {
     return ResultFromStatus(mSensorDevice->activate(
-        reinterpret_cast<sensors_poll_device_t*>(mSensorDevice), sensor_handle, enabled));
+            reinterpret_cast<sensors_poll_device_t*>(mSensorDevice), sensor_handle, enabled));
 }
 
 Return<void> Sensors::poll(int32_t maxCount, poll_cb _hidl_cb) {
@@ -163,7 +163,7 @@ Return<void> Sensors::poll(int32_t maxCount, poll_cb _hidl_cb) {
             // cannot get the lock, hidl service will go into deadlock if it is not restarted.
             // This is guaranteed to not trigger in passthrough mode.
             LOG(ERROR)
-                << "ISensors::poll() re-entry. I do not know what to do except killing myself.";
+                    << "ISensors::poll() re-entry. I do not know what to do except killing myself.";
             ::exit(-1);
         }
 

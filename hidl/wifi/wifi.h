@@ -39,34 +39,30 @@ namespace implementation {
  * Root HIDL interface object used to control the Wifi HAL.
  */
 class Wifi : public V1_4::IWifi {
-   public:
+  public:
     Wifi(const std::shared_ptr<wifi_system::InterfaceTool> iface_tool,
          const std::shared_ptr<legacy_hal::WifiLegacyHal> legacy_hal,
-         const std::shared_ptr<mode_controller::WifiModeController>
-             mode_controller,
+         const std::shared_ptr<mode_controller::WifiModeController> mode_controller,
          const std::shared_ptr<iface_util::WifiIfaceUtil> iface_util,
          const std::shared_ptr<feature_flags::WifiFeatureFlags> feature_flags);
 
     bool isValid();
 
     // HIDL methods exposed.
-    Return<void> registerEventCallback(
-        const sp<IWifiEventCallback>& event_callback,
-        registerEventCallback_cb hidl_status_cb) override;
+    Return<void> registerEventCallback(const sp<IWifiEventCallback>& event_callback,
+                                       registerEventCallback_cb hidl_status_cb) override;
     Return<bool> isStarted() override;
     Return<void> start(start_cb hidl_status_cb) override;
     Return<void> stop(stop_cb hidl_status_cb) override;
     Return<void> getChipIds(getChipIds_cb hidl_status_cb) override;
     Return<void> getChip(ChipId chip_id, getChip_cb hidl_status_cb) override;
-    Return<void> debug(const hidl_handle& handle,
-                       const hidl_vec<hidl_string>& options) override;
+    Return<void> debug(const hidl_handle& handle, const hidl_vec<hidl_string>& options) override;
 
-   private:
+  private:
     enum class RunState { STOPPED, STARTED, STOPPING };
 
     // Corresponding worker functions for the HIDL methods.
-    WifiStatus registerEventCallbackInternal(
-        const sp<IWifiEventCallback>& event_callback);
+    WifiStatus registerEventCallbackInternal(const sp<IWifiEventCallback>& event_callback);
     WifiStatus startInternal();
     WifiStatus stopInternal(std::unique_lock<std::recursive_mutex>* lock);
     std::pair<WifiStatus, std::vector<ChipId>> getChipIdsInternal();
@@ -74,7 +70,7 @@ class Wifi : public V1_4::IWifi {
 
     WifiStatus initializeModeControllerAndLegacyHal();
     WifiStatus stopLegacyHalAndDeinitializeModeController(
-        std::unique_lock<std::recursive_mutex>* lock);
+            std::unique_lock<std::recursive_mutex>* lock);
 
     // Instance is created in this root level |IWifi| HIDL interface object
     // and shared with all the child HIDL interface objects.
@@ -85,8 +81,7 @@ class Wifi : public V1_4::IWifi {
     std::shared_ptr<feature_flags::WifiFeatureFlags> feature_flags_;
     RunState run_state_;
     sp<WifiChip> chip_;
-    hidl_callback_util::HidlCallbackHandler<IWifiEventCallback>
-        event_cb_handler_;
+    hidl_callback_util::HidlCallbackHandler<IWifiEventCallback> event_cb_handler_;
 
     DISALLOW_COPY_AND_ASSIGN(Wifi);
 };

@@ -33,8 +33,7 @@ namespace qti {
 namespace hardware {
 namespace memtrack {
 
-int getKgslMemory(int pid, MemtrackType type,
-                  std::vector<MemtrackRecord> *records);
+int getKgslMemory(int pid, MemtrackType type, std::vector<MemtrackRecord>* records);
 
 }  // namespace memtrack
 }  // namespace hardware

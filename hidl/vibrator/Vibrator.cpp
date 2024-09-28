@@ -28,8 +28,7 @@ namespace vibrator {
 namespace V1_0 {
 namespace implementation {
 
-Vibrator::Vibrator(std::ofstream&& enable) :
-        mEnable(std::move(enable)) {}
+Vibrator::Vibrator(std::ofstream&& enable) : mEnable(std::move(enable)) {}
 
 // Methods from ::android::hardware::vibrator::V1_0::IVibrator follow.
 Return<Status> Vibrator::on(uint32_t timeout_ms) {
@@ -41,7 +40,7 @@ Return<Status> Vibrator::on(uint32_t timeout_ms) {
     return Status::OK;
 }
 
-Return<Status> Vibrator::off()  {
+Return<Status> Vibrator::off() {
     mEnable << 0 << std::endl;
     if (!mEnable) {
         ALOGE("Failed to turn vibrator off (%d): %s", errno, strerror(errno));
@@ -50,7 +49,7 @@ Return<Status> Vibrator::off()  {
     return Status::OK;
 }
 
-Return<bool> Vibrator::supportsAmplitudeControl()  {
+Return<bool> Vibrator::supportsAmplitudeControl() {
     return false;
 }
 

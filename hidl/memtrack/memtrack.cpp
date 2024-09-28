@@ -51,7 +51,7 @@ ndk::ScopedAStatus Memtrack::getMemory(int pid, MemtrackType type,
 
     _aidl_return->clear();
 
-    if(type == MemtrackType::GL || type == MemtrackType::GRAPHICS) {
+    if (type == MemtrackType::GL || type == MemtrackType::GRAPHICS) {
         getKgslMemory(pid, type, _aidl_return);
     }
     return ndk::ScopedAStatus::ok();

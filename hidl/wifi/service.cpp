@@ -21,8 +21,8 @@
 #include <utils/StrongPointer.h>
 
 #ifdef ARCH_ARM_32
-#include <hwbinder/ProcessState.h>
 #include <cutils/properties.h>
+#include <hwbinder/ProcessState.h>
 #endif
 #include <signal.h>
 
@@ -34,19 +34,18 @@
 using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
 using android::hardware::LazyServiceRegistrar;
-using android::hardware::wifi::V1_4::implementation::feature_flags::
-    WifiFeatureFlags;
+using android::hardware::wifi::V1_4::implementation::feature_flags::WifiFeatureFlags;
 using android::hardware::wifi::V1_4::implementation::iface_util::WifiIfaceUtil;
 using android::hardware::wifi::V1_4::implementation::legacy_hal::WifiLegacyHal;
-using android::hardware::wifi::V1_4::implementation::mode_controller::
-    WifiModeController;
+using android::hardware::wifi::V1_4::implementation::mode_controller::WifiModeController;
 
 #ifdef ARCH_ARM_32
 #define DEFAULT_WIFIHAL_HW_BINDER_SIZE_KB 16
 size_t getHWBinderMmapSize() {
     size_t value = 0;
-    value = property_get_int32("persist.vendor.wifi.wifihal.hw.binder.size", DEFAULT_WIFIHAL_HW_BINDER_SIZE_KB);
-    if (!value) value = DEFAULT_WIFIHAL_HW_BINDER_SIZE_KB; // deafult to 1 page of 4 Kb
+    value = property_get_int32("persist.vendor.wifi.wifihal.hw.binder.size",
+                               DEFAULT_WIFIHAL_HW_BINDER_SIZE_KB);
+    if (!value) value = DEFAULT_WIFIHAL_HW_BINDER_SIZE_KB;  // deafult to 1 page of 4 Kb
 
     return 1024 * value;
 }
@@ -64,28 +63,25 @@ int main(int /*argc*/, char** argv) {
 #endif /* ARCH_ARM_32 */
 
     signal(SIGPIPE, SIG_IGN);
-    android::base::InitLogging(
-        argv, android::base::LogdLogger(android::base::SYSTEM));
+    android::base::InitLogging(argv, android::base::LogdLogger(android::base::SYSTEM));
     LOG(INFO) << "Wifi Hal is booting up...";
 
     configureRpcThreadpool(1, true /* callerWillJoin */);
 
-    const auto iface_tool =
-        std::make_shared<android::wifi_system::InterfaceTool>();
+    const auto iface_tool = std::make_shared<android::wifi_system::InterfaceTool>();
     // Setup hwbinder service
     android::sp<android::hardware::wifi::V1_4::IWifi> service =
-        new android::hardware::wifi::V1_4::implementation::Wifi(
-            iface_tool, std::make_shared<WifiLegacyHal>(iface_tool),
-            std::make_shared<WifiModeController>(),
-            std::make_shared<WifiIfaceUtil>(iface_tool),
-            std::make_shared<WifiFeatureFlags>());
+            new android::hardware::wifi::V1_4::implementation::Wifi(
+                    iface_tool, std::make_shared<WifiLegacyHal>(iface_tool),
+                    std::make_shared<WifiModeController>(),
+                    std::make_shared<WifiIfaceUtil>(iface_tool),
+                    std::make_shared<WifiFeatureFlags>());
     if (kLazyService) {
         auto registrar = LazyServiceRegistrar::getInstance();
         CHECK_EQ(registrar.registerService(service), android::NO_ERROR)
-            << "Failed to register wifi HAL";
+                << "Failed to register wifi HAL";
     } else {
-        CHECK_EQ(service->registerAsService(), android::NO_ERROR)
-            << "Failed to register wifi HAL";
+        CHECK_EQ(service->registerAsService(), android::NO_ERROR) << "Failed to register wifi HAL";
     }
 
     joinRpcThreadpool();

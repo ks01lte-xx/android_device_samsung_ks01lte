@@ -24,14 +24,14 @@
 
 #include "Vibrator.h"
 
+using android::status_t;
 using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
 using android::hardware::vibrator::V1_0::IVibrator;
 using android::hardware::vibrator::V1_0::implementation::Vibrator;
-using android::status_t;
 using namespace android;
 
-static const char *ENABLE_PATH = "/sys/class/timed_output/vibrator/enable";
+static const char* ENABLE_PATH = "/sys/class/timed_output/vibrator/enable";
 
 int main() {
     android::hardware::ProcessState::initWithMmapSize((size_t)8192);

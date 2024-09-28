@@ -35,7 +35,8 @@ int main() {
     ALOGI("Starting memtrack service");
     std::shared_ptr<Memtrack> memtrack = ndk::SharedRefBase::make<Memtrack>();
     const std::string instance = std::string() + Memtrack::descriptor + "/default";
-    binder_status_t status = AServiceManager_addService(memtrack->asBinder().get(), instance.c_str());
+    binder_status_t status =
+            AServiceManager_addService(memtrack->asBinder().get(), instance.c_str());
     CHECK(status == STATUS_OK);
     ABinderProcess_joinThreadPool();
     return EXIT_FAILURE;

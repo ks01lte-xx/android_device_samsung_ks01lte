@@ -38,7 +38,7 @@ constexpr V1_0::ChipModeId kV3 = 3;
 }  // namespace chip_mode_ids
 
 class WifiFeatureFlags {
-   public:
+  public:
     WifiFeatureFlags();
     virtual ~WifiFeatureFlags() = default;
 

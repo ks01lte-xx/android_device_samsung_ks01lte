@@ -446,7 +446,7 @@ static int open_sensors(const struct hw_module_t* module, const char* name,
  */
 static void get_so_paths(std::vector<std::string>* so_paths) {
     const std::vector<const char*> config_path_list(
-        {MULTI_HAL_CONFIG_FILE_PATH, DEPRECATED_MULTI_HAL_CONFIG_FILE_PATH});
+            {MULTI_HAL_CONFIG_FILE_PATH, DEPRECATED_MULTI_HAL_CONFIG_FILE_PATH});
 
     std::ifstream stream;
     const char* path = nullptr;
@@ -630,30 +630,30 @@ static int module__get_sensors_list(__unused struct sensors_module_t* module,
     return global_sensors_count;
 }
 
-static int module__set_operation_mode(unsigned int mode)
-{
-	return mode;
+static int module__set_operation_mode(unsigned int mode) {
+    return mode;
 }
 
 static struct hw_module_methods_t sensors_module_methods = {.open = open_sensors};
 
-struct sensors_module_t HAL_MODULE_INFO_SYM = {.common =
-                                                   {
-                                                       .tag = HARDWARE_MODULE_TAG,
-                                                       .version_major = 1,
-                                                       .version_minor = 1,
-                                                       .id = SENSORS_HARDWARE_MODULE_ID,
-                                                       .name = "MultiHal Sensor Module",
-                                                       .author = "Google, Inc",
-                                                       .methods = &sensors_module_methods,
-                                                       .dso = NULL,
-                                                       .reserved = {0},
-                                                   },
-                                               .get_sensors_list = module__get_sensors_list,
-                                               .set_operation_mode = module__set_operation_mode
+struct sensors_module_t HAL_MODULE_INFO_SYM = {
+        .common =
+                {
+                        .tag = HARDWARE_MODULE_TAG,
+                        .version_major = 1,
+                        .version_minor = 1,
+                        .id = SENSORS_HARDWARE_MODULE_ID,
+                        .name = "MultiHal Sensor Module",
+                        .author = "Google, Inc",
+                        .methods = &sensors_module_methods,
+                        .dso = NULL,
+                        .reserved = {0},
+                },
+        .get_sensors_list = module__get_sensors_list,
+        .set_operation_mode = module__set_operation_mode
 
-struct sensors_module_t* get_multi_hal_module_info() {
-    return (&HAL_MODULE_INFO_SYM);
+                              struct sensors_module_t *
+                              get_multi_hal_module_info(){return (&HAL_MODULE_INFO_SYM);
 }
 
 static int open_sensors(const struct hw_module_t* hw_module, const char* name,

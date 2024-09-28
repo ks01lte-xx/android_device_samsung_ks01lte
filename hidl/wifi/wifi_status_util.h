@@ -29,8 +29,7 @@ namespace implementation {
 using namespace android::hardware::wifi::V1_0;
 
 std::string legacyErrorToString(legacy_hal::wifi_error error);
-WifiStatus createWifiStatus(WifiStatusCode code,
-                            const std::string& description);
+WifiStatus createWifiStatus(WifiStatusCode code, const std::string& description);
 WifiStatus createWifiStatus(WifiStatusCode code);
 WifiStatus createWifiStatusFromLegacyError(legacy_hal::wifi_error error,
                                            const std::string& description);

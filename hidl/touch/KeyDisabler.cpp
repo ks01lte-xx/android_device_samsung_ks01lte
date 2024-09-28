@@ -35,8 +35,8 @@ Return<bool> KeyDisabler::isEnabled() {
 
     std::ifstream file(kControlPath);
     if (!file.is_open()) {
-        LOG(ERROR) << "Failed to open " << kControlPath << ", error=" << errno
-                   << " (" << strerror(errno) << ")";
+        LOG(ERROR) << "Failed to open " << kControlPath << ", error=" << errno << " ("
+                   << strerror(errno) << ")";
         return false;
     }
     file >> value;
@@ -46,8 +46,8 @@ Return<bool> KeyDisabler::isEnabled() {
 Return<bool> KeyDisabler::setEnabled(bool enabled) {
     std::ofstream file(kControlPath);
     if (!file.is_open()) {
-        LOG(ERROR) << "Failed to open " << kControlPath << ", error=" << errno
-                   << " (" << strerror(errno) << ")";
+        LOG(ERROR) << "Failed to open " << kControlPath << ", error=" << errno << " ("
+                   << strerror(errno) << ")";
         return false;
     }
     file << (enabled ? "0" : "1");

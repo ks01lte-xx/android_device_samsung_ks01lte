@@ -34,7 +34,7 @@ using namespace android::hardware::wifi::V1_0;
  * HIDL interface object used to control a AP Iface instance.
  */
 class WifiApIface : public V1_0::IWifiApIface {
-   public:
+  public:
     WifiApIface(const std::string& ifname,
                 const std::weak_ptr<legacy_hal::WifiLegacyHal> legacy_hal,
                 const std::weak_ptr<iface_util::WifiIfaceUtil> iface_util);
@@ -48,17 +48,16 @@ class WifiApIface : public V1_0::IWifiApIface {
     Return<void> getType(getType_cb hidl_status_cb) override;
     Return<void> setCountryCode(const hidl_array<int8_t, 2>& code,
                                 setCountryCode_cb hidl_status_cb) override;
-    Return<void> getValidFrequenciesForBand(
-        V1_0::WifiBand band,
-        getValidFrequenciesForBand_cb hidl_status_cb) override;
+    Return<void> getValidFrequenciesForBand(V1_0::WifiBand band,
+                                            getValidFrequenciesForBand_cb hidl_status_cb) override;
 
-   private:
+  private:
     // Corresponding worker functions for the HIDL methods.
     std::pair<WifiStatus, std::string> getNameInternal();
     std::pair<WifiStatus, IfaceType> getTypeInternal();
     WifiStatus setCountryCodeInternal(const std::array<int8_t, 2>& code);
-    std::pair<WifiStatus, std::vector<WifiChannelInMhz>>
-    getValidFrequenciesForBandInternal(V1_0::WifiBand band);
+    std::pair<WifiStatus, std::vector<WifiChannelInMhz>> getValidFrequenciesForBandInternal(
+            V1_0::WifiBand band);
 
     std::string ifname_;
     std::weak_ptr<legacy_hal::WifiLegacyHal> legacy_hal_;

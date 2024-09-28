@@ -28,18 +28,18 @@ namespace V1_0 {
 namespace implementation {
 
 class Vibrator : public IVibrator {
-public:
-  Vibrator(std::ofstream&& enable);
+  public:
+    Vibrator(std::ofstream&& enable);
 
-  // Methods from ::android::hardware::vibrator::V1_0::IVibrator follow.
-  Return<Status> on(uint32_t timeoutMs)  override;
-  Return<Status> off()  override;
-  Return<bool> supportsAmplitudeControl() override;
-  Return<Status> setAmplitude(uint8_t) override;
-  Return<void> perform(Effect effect, EffectStrength strength, perform_cb _hidl_cb) override;
+    // Methods from ::android::hardware::vibrator::V1_0::IVibrator follow.
+    Return<Status> on(uint32_t timeoutMs) override;
+    Return<Status> off() override;
+    Return<bool> supportsAmplitudeControl() override;
+    Return<Status> setAmplitude(uint8_t) override;
+    Return<void> perform(Effect effect, EffectStrength strength, perform_cb _hidl_cb) override;
 
-private:
-  std::ofstream mEnable;
+  private:
+    std::ofstream mEnable;
 };
 
 }  // namespace implementation
@@ -47,4 +47,3 @@ private:
 }  // namespace vibrator
 }  // namespace hardware
 }  // namespace android
-

@@ -35,7 +35,7 @@ using namespace android::hardware::wifi::V1_0;
  * required state (essentially a wrapper over DriverTool).
  */
 class WifiModeController {
-   public:
+  public:
     WifiModeController();
     virtual ~WifiModeController() = default;
 
@@ -49,7 +49,7 @@ class WifiModeController {
     // invoked.
     virtual bool deinitialize();
 
-   private:
+  private:
     std::unique_ptr<wifi_hal::DriverTool> driver_tool_;
 };
 

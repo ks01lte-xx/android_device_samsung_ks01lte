@@ -44,150 +44,125 @@ namespace hidl_struct_util {
 using namespace android::hardware::wifi::V1_0;
 
 // Chip conversion methods.
-bool convertLegacyFeaturesToHidlChipCapabilities(
-    uint32_t legacy_feature_set, uint32_t legacy_logger_feature_set,
-    uint32_t* hidl_caps);
+bool convertLegacyFeaturesToHidlChipCapabilities(uint32_t legacy_feature_set,
+                                                 uint32_t legacy_logger_feature_set,
+                                                 uint32_t* hidl_caps);
 bool convertLegacyDebugRingBufferStatusToHidl(
-    const legacy_hal::wifi_ring_buffer_status& legacy_status,
-    WifiDebugRingBufferStatus* hidl_status);
+        const legacy_hal::wifi_ring_buffer_status& legacy_status,
+        WifiDebugRingBufferStatus* hidl_status);
 bool convertLegacyVectorOfDebugRingBufferStatusToHidl(
-    const std::vector<legacy_hal::wifi_ring_buffer_status>& legacy_status_vec,
-    std::vector<WifiDebugRingBufferStatus>* hidl_status_vec);
-bool convertLegacyWakeReasonStatsToHidl(
-    const legacy_hal::WakeReasonStats& legacy_stats,
-    WifiDebugHostWakeReasonStats* hidl_stats);
+        const std::vector<legacy_hal::wifi_ring_buffer_status>& legacy_status_vec,
+        std::vector<WifiDebugRingBufferStatus>* hidl_status_vec);
+bool convertLegacyWakeReasonStatsToHidl(const legacy_hal::WakeReasonStats& legacy_stats,
+                                        WifiDebugHostWakeReasonStats* hidl_stats);
 legacy_hal::wifi_power_scenario convertHidlTxPowerScenarioToLegacy(
-    V1_1::IWifiChip::TxPowerScenario hidl_scenario);
+        V1_1::IWifiChip::TxPowerScenario hidl_scenario);
 legacy_hal::wifi_latency_mode convertHidlLatencyModeToLegacy(
-    V1_3::IWifiChip::LatencyMode hidl_latency_mode);
+        V1_3::IWifiChip::LatencyMode hidl_latency_mode);
 legacy_hal::wifi_power_scenario convertHidlTxPowerScenarioToLegacy_1_2(
-    V1_2::IWifiChip::TxPowerScenario hidl_scenario);
+        V1_2::IWifiChip::TxPowerScenario hidl_scenario);
 bool convertLegacyWifiMacInfosToHidl(
-    const std::vector<legacy_hal::WifiMacInfo>& legacy_mac_infos,
-    std::vector<IWifiChipEventCallback::RadioModeInfo>* hidl_radio_mode_infos);
-legacy_hal::wifi_interface_type convertHidlIfaceTypeToLegacy(
-    IfaceType hidl_interface_type);
+        const std::vector<legacy_hal::WifiMacInfo>& legacy_mac_infos,
+        std::vector<IWifiChipEventCallback::RadioModeInfo>* hidl_radio_mode_infos);
+legacy_hal::wifi_interface_type convertHidlIfaceTypeToLegacy(IfaceType hidl_interface_type);
 
 // STA iface conversion methods.
-bool convertLegacyFeaturesToHidlStaCapabilities(
-    uint64_t legacy_feature_set, uint32_t legacy_logger_feature_set,
-    uint32_t* hidl_caps);
-bool convertLegacyApfCapabilitiesToHidl(
-    const legacy_hal::PacketFilterCapabilities& legacy_caps,
-    StaApfPacketFilterCapabilities* hidl_caps);
-bool convertLegacyGscanCapabilitiesToHidl(
-    const legacy_hal::wifi_gscan_capabilities& legacy_caps,
-    StaBackgroundScanCapabilities* hidl_caps);
+bool convertLegacyFeaturesToHidlStaCapabilities(uint64_t legacy_feature_set,
+                                                uint32_t legacy_logger_feature_set,
+                                                uint32_t* hidl_caps);
+bool convertLegacyApfCapabilitiesToHidl(const legacy_hal::PacketFilterCapabilities& legacy_caps,
+                                        StaApfPacketFilterCapabilities* hidl_caps);
+bool convertLegacyGscanCapabilitiesToHidl(const legacy_hal::wifi_gscan_capabilities& legacy_caps,
+                                          StaBackgroundScanCapabilities* hidl_caps);
 legacy_hal::wifi_band convertHidlWifiBandToLegacy(V1_0::WifiBand band);
-bool convertHidlGscanParamsToLegacy(
-    const StaBackgroundScanParameters& hidl_scan_params,
-    legacy_hal::wifi_scan_cmd_params* legacy_scan_params);
+bool convertHidlGscanParamsToLegacy(const StaBackgroundScanParameters& hidl_scan_params,
+                                    legacy_hal::wifi_scan_cmd_params* legacy_scan_params);
 // |has_ie_data| indicates whether or not the wifi_scan_result includes 802.11
 // Information Elements (IEs)
-bool convertLegacyGscanResultToHidl(
-    const legacy_hal::wifi_scan_result& legacy_scan_result, bool has_ie_data,
-    StaScanResult* hidl_scan_result);
+bool convertLegacyGscanResultToHidl(const legacy_hal::wifi_scan_result& legacy_scan_result,
+                                    bool has_ie_data, StaScanResult* hidl_scan_result);
 // |cached_results| is assumed to not include IEs.
 bool convertLegacyVectorOfCachedGscanResultsToHidl(
-    const std::vector<legacy_hal::wifi_cached_scan_results>&
-        legacy_cached_scan_results,
-    std::vector<StaScanData>* hidl_scan_datas);
-bool convertLegacyLinkLayerStatsToHidl(
-    const legacy_hal::LinkLayerStats& legacy_stats,
-    V1_3::StaLinkLayerStats* hidl_stats);
+        const std::vector<legacy_hal::wifi_cached_scan_results>& legacy_cached_scan_results,
+        std::vector<StaScanData>* hidl_scan_datas);
+bool convertLegacyLinkLayerStatsToHidl(const legacy_hal::LinkLayerStats& legacy_stats,
+                                       V1_3::StaLinkLayerStats* hidl_stats);
 bool convertLegacyRoamingCapabilitiesToHidl(
-    const legacy_hal::wifi_roaming_capabilities& legacy_caps,
-    StaRoamingCapabilities* hidl_caps);
-bool convertHidlRoamingConfigToLegacy(
-    const StaRoamingConfig& hidl_config,
-    legacy_hal::wifi_roaming_config* legacy_config);
-legacy_hal::fw_roaming_state_t convertHidlRoamingStateToLegacy(
-    StaRoamingState state);
+        const legacy_hal::wifi_roaming_capabilities& legacy_caps,
+        StaRoamingCapabilities* hidl_caps);
+bool convertHidlRoamingConfigToLegacy(const StaRoamingConfig& hidl_config,
+                                      legacy_hal::wifi_roaming_config* legacy_config);
+legacy_hal::fw_roaming_state_t convertHidlRoamingStateToLegacy(StaRoamingState state);
 bool convertLegacyVectorOfDebugTxPacketFateToHidl(
-    const std::vector<legacy_hal::wifi_tx_report>& legacy_fates,
-    std::vector<WifiDebugTxPacketFateReport>* hidl_fates);
+        const std::vector<legacy_hal::wifi_tx_report>& legacy_fates,
+        std::vector<WifiDebugTxPacketFateReport>* hidl_fates);
 bool convertLegacyVectorOfDebugRxPacketFateToHidl(
-    const std::vector<legacy_hal::wifi_rx_report>& legacy_fates,
-    std::vector<WifiDebugRxPacketFateReport>* hidl_fates);
+        const std::vector<legacy_hal::wifi_rx_report>& legacy_fates,
+        std::vector<WifiDebugRxPacketFateReport>* hidl_fates);
 
 // NAN iface conversion methods.
-void convertToWifiNanStatus(legacy_hal::NanStatusType type, const char* str,
-                            size_t max_len, WifiNanStatus* wifiNanStatus);
-bool convertHidlNanEnableRequestToLegacy(
-    const NanEnableRequest& hidl_request,
-    legacy_hal::NanEnableRequest* legacy_request);
-bool convertHidlNanConfigRequestToLegacy(
-    const NanConfigRequest& hidl_request,
-    legacy_hal::NanConfigRequest* legacy_request);
+void convertToWifiNanStatus(legacy_hal::NanStatusType type, const char* str, size_t max_len,
+                            WifiNanStatus* wifiNanStatus);
+bool convertHidlNanEnableRequestToLegacy(const NanEnableRequest& hidl_request,
+                                         legacy_hal::NanEnableRequest* legacy_request);
+bool convertHidlNanConfigRequestToLegacy(const NanConfigRequest& hidl_request,
+                                         legacy_hal::NanConfigRequest* legacy_request);
 bool convertHidlNanEnableRequest_1_4ToLegacy(
-    const NanEnableRequest& hidl_request1,
-    const V1_2::NanConfigRequestSupplemental& hidl_request2,
-    legacy_hal::NanEnableRequest* legacy_request);
+        const NanEnableRequest& hidl_request1,
+        const V1_2::NanConfigRequestSupplemental& hidl_request2,
+        legacy_hal::NanEnableRequest* legacy_request);
 bool convertHidlNanConfigRequest_1_4ToLegacy(
-    const NanConfigRequest& hidl_request1,
-    const V1_2::NanConfigRequestSupplemental& hidl_request2,
-    legacy_hal::NanConfigRequest* legacy_request);
-bool convertHidlNanPublishRequestToLegacy(
-    const NanPublishRequest& hidl_request,
-    legacy_hal::NanPublishRequest* legacy_request);
-bool convertHidlNanSubscribeRequestToLegacy(
-    const NanSubscribeRequest& hidl_request,
-    legacy_hal::NanSubscribeRequest* legacy_request);
+        const NanConfigRequest& hidl_request1,
+        const V1_2::NanConfigRequestSupplemental& hidl_request2,
+        legacy_hal::NanConfigRequest* legacy_request);
+bool convertHidlNanPublishRequestToLegacy(const NanPublishRequest& hidl_request,
+                                          legacy_hal::NanPublishRequest* legacy_request);
+bool convertHidlNanSubscribeRequestToLegacy(const NanSubscribeRequest& hidl_request,
+                                            legacy_hal::NanSubscribeRequest* legacy_request);
 bool convertHidlNanTransmitFollowupRequestToLegacy(
-    const NanTransmitFollowupRequest& hidl_request,
-    legacy_hal::NanTransmitFollowupRequest* legacy_request);
+        const NanTransmitFollowupRequest& hidl_request,
+        legacy_hal::NanTransmitFollowupRequest* legacy_request);
 bool convertHidlNanDataPathInitiatorRequestToLegacy(
-    const NanInitiateDataPathRequest& hidl_request,
-    legacy_hal::NanDataPathInitiatorRequest* legacy_request);
+        const NanInitiateDataPathRequest& hidl_request,
+        legacy_hal::NanDataPathInitiatorRequest* legacy_request);
 bool convertHidlNanDataPathIndicationResponseToLegacy(
-    const NanRespondToDataPathIndicationRequest& hidl_response,
-    legacy_hal::NanDataPathIndicationResponse* legacy_response);
-bool convertLegacyNanResponseHeaderToHidl(
-    const legacy_hal::NanResponseMsg& legacy_response,
-    WifiNanStatus* wifiNanStatus);
-bool convertLegacyNanCapabilitiesResponseToHidl(
-    const legacy_hal::NanCapabilities& legacy_response,
-    NanCapabilities* hidl_response);
+        const NanRespondToDataPathIndicationRequest& hidl_response,
+        legacy_hal::NanDataPathIndicationResponse* legacy_response);
+bool convertLegacyNanResponseHeaderToHidl(const legacy_hal::NanResponseMsg& legacy_response,
+                                          WifiNanStatus* wifiNanStatus);
+bool convertLegacyNanCapabilitiesResponseToHidl(const legacy_hal::NanCapabilities& legacy_response,
+                                                NanCapabilities* hidl_response);
 bool convertLegacyNanMatchIndToHidl(const legacy_hal::NanMatchInd& legacy_ind,
                                     NanMatchInd* hidl_ind);
-bool convertLegacyNanFollowupIndToHidl(
-    const legacy_hal::NanFollowupInd& legacy_ind,
-    NanFollowupReceivedInd* hidl_ind);
-bool convertLegacyNanDataPathRequestIndToHidl(
-    const legacy_hal::NanDataPathRequestInd& legacy_ind,
-    NanDataPathRequestInd* hidl_ind);
-bool convertLegacyNanDataPathConfirmIndToHidl(
-    const legacy_hal::NanDataPathConfirmInd& legacy_ind,
-    V1_2::NanDataPathConfirmInd* hidl_ind);
+bool convertLegacyNanFollowupIndToHidl(const legacy_hal::NanFollowupInd& legacy_ind,
+                                       NanFollowupReceivedInd* hidl_ind);
+bool convertLegacyNanDataPathRequestIndToHidl(const legacy_hal::NanDataPathRequestInd& legacy_ind,
+                                              NanDataPathRequestInd* hidl_ind);
+bool convertLegacyNanDataPathConfirmIndToHidl(const legacy_hal::NanDataPathConfirmInd& legacy_ind,
+                                              V1_2::NanDataPathConfirmInd* hidl_ind);
 bool convertLegacyNanDataPathScheduleUpdateIndToHidl(
-    const legacy_hal::NanDataPathScheduleUpdateInd& legacy_ind,
-    V1_2::NanDataPathScheduleUpdateInd* hidl_ind);
+        const legacy_hal::NanDataPathScheduleUpdateInd& legacy_ind,
+        V1_2::NanDataPathScheduleUpdateInd* hidl_ind);
 
 // RTT controller conversion methods.
-bool convertHidlVectorOfRttConfigToLegacy(
-    const std::vector<RttConfig>& hidl_configs,
-    std::vector<legacy_hal::wifi_rtt_config>* legacy_configs);
-bool convertHidlRttLciInformationToLegacy(
-    const RttLciInformation& hidl_info,
-    legacy_hal::wifi_lci_information* legacy_info);
-bool convertHidlRttLcrInformationToLegacy(
-    const RttLcrInformation& hidl_info,
-    legacy_hal::wifi_lcr_information* legacy_info);
-bool convertHidlRttResponderToLegacy(
-    const RttResponder& hidl_responder,
-    legacy_hal::wifi_rtt_responder* legacy_responder);
-bool convertHidlWifiChannelInfoToLegacy(
-    const WifiChannelInfo& hidl_info,
-    legacy_hal::wifi_channel_info* legacy_info);
-bool convertLegacyRttResponderToHidl(
-    const legacy_hal::wifi_rtt_responder& legacy_responder,
-    RttResponder* hidl_responder);
+bool convertHidlVectorOfRttConfigToLegacy(const std::vector<RttConfig>& hidl_configs,
+                                          std::vector<legacy_hal::wifi_rtt_config>* legacy_configs);
+bool convertHidlRttLciInformationToLegacy(const RttLciInformation& hidl_info,
+                                          legacy_hal::wifi_lci_information* legacy_info);
+bool convertHidlRttLcrInformationToLegacy(const RttLcrInformation& hidl_info,
+                                          legacy_hal::wifi_lcr_information* legacy_info);
+bool convertHidlRttResponderToLegacy(const RttResponder& hidl_responder,
+                                     legacy_hal::wifi_rtt_responder* legacy_responder);
+bool convertHidlWifiChannelInfoToLegacy(const WifiChannelInfo& hidl_info,
+                                        legacy_hal::wifi_channel_info* legacy_info);
+bool convertLegacyRttResponderToHidl(const legacy_hal::wifi_rtt_responder& legacy_responder,
+                                     RttResponder* hidl_responder);
 bool convertLegacyRttCapabilitiesToHidl(
-    const legacy_hal::wifi_rtt_capabilities& legacy_capabilities,
-    RttCapabilities* hidl_capabilities);
+        const legacy_hal::wifi_rtt_capabilities& legacy_capabilities,
+        RttCapabilities* hidl_capabilities);
 bool convertLegacyVectorOfRttResultToHidl(
-    const std::vector<const legacy_hal::wifi_rtt_result*>& legacy_results,
-    std::vector<RttResult>* hidl_results);
+        const std::vector<const legacy_hal::wifi_rtt_result*>& legacy_results,
+        std::vector<RttResult>* hidl_results);
 }  // namespace hidl_struct_util
 }  // namespace implementation
 }  // namespace V1_4

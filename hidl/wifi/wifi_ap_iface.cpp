@@ -28,23 +28,23 @@ namespace V1_4 {
 namespace implementation {
 using hidl_return_util::validateAndCall;
 
-WifiApIface::WifiApIface(
-    const std::string& ifname,
-    const std::weak_ptr<legacy_hal::WifiLegacyHal> legacy_hal,
-    const std::weak_ptr<iface_util::WifiIfaceUtil> iface_util)
-    : ifname_(ifname),
-      legacy_hal_(legacy_hal),
-      iface_util_(iface_util),
-      is_valid_(true) {}
+WifiApIface::WifiApIface(const std::string& ifname,
+                         const std::weak_ptr<legacy_hal::WifiLegacyHal> legacy_hal,
+                         const std::weak_ptr<iface_util::WifiIfaceUtil> iface_util)
+    : ifname_(ifname), legacy_hal_(legacy_hal), iface_util_(iface_util), is_valid_(true) {}
 
 void WifiApIface::invalidate() {
     legacy_hal_.reset();
     is_valid_ = false;
 }
 
-bool WifiApIface::isValid() { return is_valid_; }
+bool WifiApIface::isValid() {
+    return is_valid_;
+}
 
-std::string WifiApIface::getName() { return ifname_; }
+std::string WifiApIface::getName() {
+    return ifname_;
+}
 
 Return<void> WifiApIface::getName(getName_cb hidl_status_cb) {
     return validateAndCall(this, WifiStatusCode::ERROR_WIFI_IFACE_INVALID,
@@ -59,15 +59,13 @@ Return<void> WifiApIface::getType(getType_cb hidl_status_cb) {
 Return<void> WifiApIface::setCountryCode(const hidl_array<int8_t, 2>& code,
                                          setCountryCode_cb hidl_status_cb) {
     return validateAndCall(this, WifiStatusCode::ERROR_WIFI_IFACE_INVALID,
-                           &WifiApIface::setCountryCodeInternal, hidl_status_cb,
-                           code);
+                           &WifiApIface::setCountryCodeInternal, hidl_status_cb, code);
 }
 
-Return<void> WifiApIface::getValidFrequenciesForBand(
-    V1_0::WifiBand band, getValidFrequenciesForBand_cb hidl_status_cb) {
+Return<void> WifiApIface::getValidFrequenciesForBand(V1_0::WifiBand band,
+                                                     getValidFrequenciesForBand_cb hidl_status_cb) {
     return validateAndCall(this, WifiStatusCode::ERROR_WIFI_IFACE_INVALID,
-                           &WifiApIface::getValidFrequenciesForBandInternal,
-                           hidl_status_cb, band);
+                           &WifiApIface::getValidFrequenciesForBandInternal, hidl_status_cb, band);
 }
 
 std::pair<WifiStatus, std::string> WifiApIface::getNameInternal() {
@@ -78,21 +76,17 @@ std::pair<WifiStatus, IfaceType> WifiApIface::getTypeInternal() {
     return {createWifiStatus(WifiStatusCode::SUCCESS), IfaceType::AP};
 }
 
-WifiStatus WifiApIface::setCountryCodeInternal(
-    const std::array<int8_t, 2>& code) {
-    legacy_hal::wifi_error legacy_status =
-        legacy_hal_.lock()->setCountryCode(ifname_, code);
+WifiStatus WifiApIface::setCountryCodeInternal(const std::array<int8_t, 2>& code) {
+    legacy_hal::wifi_error legacy_status = legacy_hal_.lock()->setCountryCode(ifname_, code);
     return createWifiStatusFromLegacyError(legacy_status);
 }
 
 std::pair<WifiStatus, std::vector<WifiChannelInMhz>>
 WifiApIface::getValidFrequenciesForBandInternal(V1_0::WifiBand band) {
-    static_assert(sizeof(WifiChannelInMhz) == sizeof(uint32_t),
-                  "Size mismatch");
+    static_assert(sizeof(WifiChannelInMhz) == sizeof(uint32_t), "Size mismatch");
     legacy_hal::wifi_error legacy_status;
     std::vector<uint32_t> valid_frequencies;
-    std::tie(legacy_status, valid_frequencies) =
-        legacy_hal_.lock()->getValidFrequenciesForBand(
+    std::tie(legacy_status, valid_frequencies) = legacy_hal_.lock()->getValidFrequenciesForBand(
             ifname_, hidl_struct_util::convertHidlWifiBandToLegacy(band));
     return {createWifiStatusFromLegacyError(legacy_status), valid_frequencies};
 }
