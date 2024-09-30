@@ -320,9 +320,9 @@ service vendor.rmt_storage /vendor/bin/rmt_storage
 
 # QMUX must be in multiple groups to support external process connections
 service vendor.qmuxd /vendor/bin/qmuxd
-    class core
+    class main
     user radio
-    group radio audio bluetooth gps oem_2950 wakelock log
+    group radio audio bluetooth gps wakelock
 
 on property:sys.boot_completed=1
     # Symlink directories to access telephony.db and preferred-apn.xml required by libsec-ril
