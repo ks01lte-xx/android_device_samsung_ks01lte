@@ -50,12 +50,6 @@ function blob_fixup() {
                     s|/system/lib|/vendor/lib|g;
                     s|/system/cameradata|/vendor/cameradata|g' "${2}"
             ;;
-	vendor/bin/mm-qcamera-daemon)
-            sed -i 's|/data/cam_socket|/data/vendor/cam|g' "${2}"
-            ;;
-	vendor/lib/libmmcamera_interface.so)
-            sed -i 's|/data/cam_socket|/data/vendor/cam|g' "${2}"
-            ;;
 	vendor/lib/libarcsoft_nighthawk.so)
             "${PATCHELF}" --set-soname libarcsoft_nighthawk.so "${2}"
             ;;
