@@ -124,7 +124,7 @@ persist.vendor.recovery_update=false
 debug.sensors=1
 
 # SoC
-ro.soc.manufacturer=Qualcomm
+ro.soc.manufacturer=QTI
 ro.soc.model=MSM8974
 
 # System
