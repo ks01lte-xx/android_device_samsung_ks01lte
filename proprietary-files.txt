@@ -277,8 +277,8 @@ vendor/firmware/a330_pm4.fw|ae739ea812f9e4462d7bba8b9ead5782d4496618
 -vendor/lib/libsc-a3xx.so|231201bcfead5f930537d2fba22d89b00e673386
 -vendor/lib/libscale.so|b44f44c633fa404d10e76aaa23593b516e08e2b8
 
-# IPC router security
--bin/irsc_util:vendor/bin/irsc_util
+# IPC router security - Pinned blobs from bacon
+-bin/irsc_util:vendor/bin/irsc_util|aba0bc2531cf5cf55169b00e40a3132e8c64fbd8
 etc/sec_config:vendor/etc/sec_config
 
 # Media
@@ -289,7 +289,6 @@ etc/sec_config:vendor/etc/sec_config
 -vendor/lib/libOmxWmaDec.so
 
 # Qualcomm framework - Pinned blobs from bacon
-bin/irsc_util:vendor/bin/irsc_util|aba0bc2531cf5cf55169b00e40a3132e8c64fbd8
 vendor/lib/libdiag.so|7a59646f81f1d880929de08ce4dbbf863c674d52
 vendor/lib/libdsi_netctrl.so|6e832938764a46fa784e604782473c95088907ca
 vendor/lib/libdsutils.so|063d1c1edaff39c98ade040d68b444e1ca870c84
