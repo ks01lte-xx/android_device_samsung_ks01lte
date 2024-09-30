@@ -157,8 +157,7 @@
 /tombstones                                             u:object_r:rootfs:s0
 
 # sockets
-/data/cam_socket2                                       u:object_r:camera_socket:s0
-/data/cam_socket3                                       u:object_r:camera_socket:s0
+/data/cam_socket([0-9])*                                u:object_r:camera_socket:s0
 
 /sys/devices(/platform)?/soc(\.[0-9])?/[a-f0-9]+\.sdhci/mmc_host/mmc0/clk_scaling(/.*)? u:object_r:sysfs_mmc_host:s0
 /sys/devices(/platform)?/soc/[a-f0-9]+\.sdhci/mmc_host/mmc[0-9]/mmc0:[0-9]+/block/mmcblk[0-9]/bdi/read_ahead_kb u:object_r:sysfs_mmc_host:s0
