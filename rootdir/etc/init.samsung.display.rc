@@ -10,13 +10,12 @@ on init
     chmod 0664 /sys/class/backlight/panel/auto_brightness
 
     # LCD mdnie and panel work
-    # RW
-    chown system media_rw /sys/class/mdnie/mdnie/scenario
+    chown system system /sys/class/mdnie/mdnie/scenario
     chmod 0660 /sys/class/mdnie/mdnie/scenario
-    chown system media_rw /sys/class/mdnie/mdnie/outdoor
-    chown system media_rw /sys/class/mdnie/mdnie/accessibility
-    chown system media_rw /sys/class/mdnie/mdnie/mode
-    chown system media_rw /sys/class/mdnie/mdnie/playspeed
+    chown system system /sys/class/mdnie/mdnie/outdoor
+    chown system system /sys/class/mdnie/mdnie/accessibility
+    chown system system /sys/class/mdnie/mdnie/mode
+    chown system system /sys/class/mdnie/mdnie/playspeed
     chown system system /sys/class/lcd/panel/window_type
     chown radio system /sys/class/lcd/panel/power_reduce
     chown radio system /sys/class/lcd/panel/siop_enable
