@@ -43,6 +43,8 @@ type wlan_device, dev_type;
 
 type persist_block_device, dev_type;
 
+type mdm_device, dev_type;
+
 type bluetooth_device, dev_type;
 type efs_block_device, dev_type;
 
