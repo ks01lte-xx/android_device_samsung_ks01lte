@@ -13,19 +13,19 @@ user: AID_SYSTEM
 group: AID_SYSTEM
 caps: 0
 
-[mnt/vendor/efs/]
+[efs/]
 mode: 0771
 user: AID_SYSTEM
 group: AID_RADIO
 caps: 0
 
-[vendor/firmware_mnt/]
+[firmware/]
 mode: 0771
 user: AID_SYSTEM
 group: AID_SYSTEM
 caps: 0
 
-[vendor/firmware-modem/]
+[firmware-modem/]
 mode: 0771
 user: AID_SYSTEM
 group: AID_SYSTEM
