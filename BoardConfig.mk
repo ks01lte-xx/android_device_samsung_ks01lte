@@ -77,6 +77,10 @@ TARGET_HAS_MEMFD_BACKPORT := true
 # Netd
 TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE := true
 
+# Linaro GCC 5.2.1
+KERNEL_TOOLCHAIN := $(shell pwd)/arm-cortex_a15/bin
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-cortex_a15-linux-gnueabihf-
+
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 zcache.enabled=1 zcache.compressor=lz4
@@ -89,7 +93,6 @@ BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
 BOARD_RAMDISK_USE_XZ := true
 TARGET_KERNEL_CONFIG := lineage_ks01lte_defconfig
-TARGET_KERNEL_SOURCE := kernel/samsung/msm8974
 TARGET_KERNEL_ADDITIONAL_FLAGS := \
     HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument"
 
@@ -98,6 +101,7 @@ MALLOC_SVELTE := true
 
 # Legacy BLOB Support
 TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
+    /system/vendor/lib/libsensirion_ks01_eur.so=22 \
     /system/bin/mediaserver=22 \
     /system/vendor/bin/hw/android.hardware.sensors@1.0-service.samsung8974=22 \
     /system/vendor/bin/mm-qcamera-daemon=22 \
