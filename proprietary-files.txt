@@ -12,10 +12,6 @@
 -system_ext/lib/libaptX_encoder.so
 
 # Audio
--vendor/lib/libacdbloader.so|27ceba70917afc0e9b26877354c8404dae5af09c
--vendor/lib/libacdbrtac.so|f1a150ccd4bf0b5a2957532ec2690b52124d006d
--vendor/lib/libadiertac.so|e29a874dc3e6622fda4fc76032a7ea5dc44eb228
--vendor/lib/libaudcal.so|14e5ae8ba98d0d140e6bd824937e80cd4cc75f54
 etc/Bluetooth_cal.acdb:vendor/etc/acdbdata/Bluetooth_cal.acdb
 etc/General_cal.acdb:vendor/etc/acdbdata/General_cal.acdb
 etc/Global_cal.acdb:vendor/etc/acdbdata/Global_cal.acdb
@@ -23,6 +19,10 @@ etc/Handset_cal.acdb:vendor/etc/acdbdata/Handset_cal.acdb
 etc/Hdmi_cal.acdb:vendor/etc/acdbdata/Hdmi_cal.acdb
 etc/Headset_cal.acdb:vendor/etc/acdbdata/Headset_cal.acdb
 etc/Speaker_cal.acdb:vendor/etc/acdbdata/Speaker_cal.acdb
+-vendor/lib/libacdbloader.so|27ceba70917afc0e9b26877354c8404dae5af09c
+-vendor/lib/libacdbrtac.so|f1a150ccd4bf0b5a2957532ec2690b52124d006d
+-vendor/lib/libadiertac.so|e29a874dc3e6622fda4fc76032a7ea5dc44eb228
+-vendor/lib/libaudcal.so|14e5ae8ba98d0d140e6bd824937e80cd4cc75f54
 
 # Bluetooth firmware (g2-common)
 vendor/firmware/bcm4335B0_002.001.006.0191.0201_ORC.hcd
@@ -67,6 +67,10 @@ vendor/firmware/bcm4335B0_002.001.006.0191.0201_ORC.hcd
 -vendor/lib/liboemcamera.so
 
 # Camera chromatix
+etc/C13QL_s5k3l2xx_module_info.xml:vendor/etc/C13QL_s5k3l2xx_module_info.xml
+etc/C13QS_imx135_module_info.xml:vendor/etc/C13QS_imx135_module_info.xml
+etc/D13QL_s5k3l2xx_module_info.xml:vendor/etc/D13QL_s5k3l2xx_module_info.xml
+etc/D13QS_imx135_module_info.xml:vendor/etc/D13QS_imx135_module_info.xml
 -lib/C13QL_libTsAe.so:vendor/lib/C13QL_libTsAe.so
 -lib/C13QL_libTsAf.so:vendor/lib/C13QL_libTsAf.so
 -lib/C13QL_libTs_J_Accm.so:vendor/lib/C13QL_libTs_J_Accm.so
@@ -217,10 +221,6 @@ vendor/firmware/bcm4335B0_002.001.006.0191.0201_ORC.hcd
 -vendor/lib/libchromatix_imx135_vt_hd.so
 -vendor/lib/libchromatix_s5k3l2xx_vt.so
 -vendor/lib/libchromatix_s5k3l2xx_vt_hd.so
-etc/C13QL_s5k3l2xx_module_info.xml:vendor/etc/C13QL_s5k3l2xx_module_info.xml
-etc/C13QS_imx135_module_info.xml:vendor/etc/C13QS_imx135_module_info.xml
-etc/D13QL_s5k3l2xx_module_info.xml:vendor/etc/D13QL_s5k3l2xx_module_info.xml
-etc/D13QS_imx135_module_info.xml:vendor/etc/D13QS_imx135_module_info.xml
 
 # Camera firmware
 cameradata/datapattern_420sp.yuv:vendor/cameradata/datapattern_420sp.yuv
