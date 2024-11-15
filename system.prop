@@ -85,6 +85,9 @@ ro.telephony.call_ring.multiple=0
 # R
 ro.kernel.ebpf.supported=true
 
+# Hardware
+ro.hardware.egl=adreno
+
 # fastbootd
 ro.fastbootd.available=true
 
